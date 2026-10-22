@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bienestar Empresarial — Punto Medio</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body>
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --bg:#F9F9F6;
+    --surface:#D9C9A6;
+    --surface-2:#EAE2CC;
+    --ink:#252A28;
+    --ink-soft:#5B6259;
+    --line:#D3C6A3;
+    --verde:#596447;
+    --terracota:#C96342;
+    --rosa:#D98FA0;
+    --amarillo:#F5DFA3;
+    --azul:#829CAE;
+    --lavanda:#A89AB9;
+    --on-accent:#F7F4EE;
+    --shadow: 0 1px 2px rgba(37,42,40,.06);
+    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-body: "Jost", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1E1A;
+      --surface:#2C2A1E;
+      --surface-2:#242319;
+      --ink:#F1ECE1;
+      --ink-soft:#B7BDAF;
+      --line:#403D2C;
+      --verde:#8AA073;
+      --terracota:#E08862;
+      --rosa:#E7AEBC;
+      --amarillo:#E8CD8A;
+      --azul:#9FB7C7;
+      --lavanda:#C1B4CF;
+      --on-accent:#1B1E1A;
+      --shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1E1A;
+    --surface:#2C2A1E;
+    --surface-2:#242319;
+    --ink:#F1ECE1;
+    --ink-soft:#B7BDAF;
+    --line:#403D2C;
+    --verde:#8AA073;
+    --terracota:#E08862;
+    --rosa:#E7AEBC;
+    --amarillo:#E8CD8A;
+    --azul:#9FB7C7;
+    --lavanda:#C1B4CF;
+    --on-accent:#1B1E1A;
+    --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .container{max-width:1180px;margin:0 auto;padding:0 6vw;}
+  @media (min-width:1400px){.container{padding:0 120px;}}
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    line-height:1.12;
+    margin:0;
+    text-wrap:balance;
+    color:var(--ink);
+  }
+  h1{font-size:clamp(2.6rem,6vw,4.6rem);}
+  h2{font-size:clamp(1.9rem,3.6vw,3rem);}
+  h3{font-size:clamp(1.3rem,2vw,1.6rem);}
+  p{margin:0 0 1em;max-width:62ch;}
+  p:last-child{margin-bottom:0;}
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin:0 0 1.1rem;
+    display:flex;align-items:center;gap:.6em;
+    text-decoration:none;
+  }
+  a.eyebrow:hover{color:var(--verde);}
+  .lede{font-size:1.1rem;color:var(--ink-soft);max-width:56ch;}
+  em, .italic{font-family:var(--font-display);font-style:italic;color:var(--ink);}
+  .tagline{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:clamp(1.3rem,2.4vw,1.7rem);
+    color:var(--verde);
+  }
+
+  /* ---------- symbol (circle + heart) ---------- */
+  .sym{display:inline-block;color:currentColor;overflow:visible;}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.82rem;
+    letter-spacing:.05em;text-transform:uppercase;
+    padding:.95em 1.8em;border-radius:2px;border:1px solid transparent;
+    text-decoration:none;cursor:pointer;transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+    background:none;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--verde);color:var(--on-accent);}
+  .btn-primary:hover{background:var(--ink);}
+  .btn-primary .sym{width:14px;height:14px;}
+  .btn-secondary{border-color:var(--ink);color:var(--ink);}
+  .btn-secondary:hover{background:var(--ink);color:var(--bg);}
+  .btn-ghost{color:var(--verde);padding:.4em 0;border-bottom:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--verde);}
+  .btn:hover .sym{transform:rotate(90deg);}
+  .btn .sym{transition:transform .4s ease;}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 0 .8rem;}
+  .brand{display:flex;align-items:center;gap:.6em;font-family:var(--font-display);font-size:1.25rem;font-weight:600;text-decoration:none;color:var(--ink);}
+  .brand .sym{width:22px;height:22px;color:var(--verde);}
+
+  /* wordmark — echoes the real Punto Medio mark: the símbolo standing in for the "O" */
+  .wm{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink);
+    font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:.13em;text-transform:uppercase;}
+  .wm-o{display:inline-flex;width:.82em;height:.82em;margin:0 .02em;position:relative;top:.06em;}
+  .wm-o .sym{width:100%;height:100%;color:var(--verde);}
+
+  .brand-lockup{position:relative;display:inline-block;font-family:var(--font-display);text-transform:uppercase;
+    font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;letter-spacing:.04em;line-height:1.02;color:var(--ink);
+    text-decoration:none;}
+  .brand-lockup .wm-o{width:.88em;height:.88em;top:.07em;margin:0 .01em;}
+  .brand-lockup .wm-o .sym{color:var(--ink);}
+  nav.main-nav{display:flex;flex-wrap:wrap;align-items:center;column-gap:1.15rem;row-gap:.7rem;padding:.75rem 0 1.05rem;border-top:1px solid var(--line);}
+  nav.main-nav a{
+    font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;
+    text-decoration:none;color:var(--ink-soft);font-weight:600;
+    padding-bottom:2px;border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  nav.main-nav a:hover, nav.main-nav a.current{color:var(--ink);border-color:var(--verde);}
+  .nav-cta-link{
+    display:inline-flex;align-items:center;gap:.5em;margin-left:auto;white-space:nowrap;
+    font-family:var(--font-body);font-style:normal;font-weight:600;font-size:.92rem;
+    letter-spacing:.01em;text-transform:none;color:var(--terracota);
+    text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;
+    transition:border-color .2s ease,color .2s ease;
+  }
+  .nav-cta-link:hover{border-color:var(--terracota);color:var(--terracota);}
+  .nav-cta-link .sym{width:15px;height:15px;transition:transform .4s ease;}
+  .nav-cta-link:hover .sym{transform:rotate(90deg);}
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:.5em .7em;color:var(--ink);}
+  @media (max-width:900px){
+    nav.main-nav{position:fixed;inset:64px 0 0 0;background:var(--bg);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:2.2rem 6vw;gap:1.6rem;transform:translateX(100%);transition:transform .35s ease;overflow-y:auto;border-top:none;}
+    nav.main-nav.open{transform:translateX(0);}
+    nav.main-nav a{font-size:1rem;}
+    .nav-cta-link{margin-left:0;margin-top:.6rem;font-size:1.2rem;}
+    .menu-toggle{display:inline-flex;}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(2.8rem,5.5vw,4.6rem) 0;position:relative;}
+  section.pause{padding:clamp(2.6rem,5vw,4rem) 0;}
+  .dim-stack{display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:940px;margin:2.6rem auto 0;}
+.dim-card{width:100%;display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(1.4rem,4vw,3rem);border-radius:14px;padding:clamp(1.4rem,3vw,2.2rem) clamp(1.4rem,3.5vw,2.6rem) clamp(2.2rem,4vw,3rem);box-sizing:border-box;}
+.dim-card-2{grid-template-columns:.7fr 1.3fr;}
+.dim-card-1{background:#D3E0C6;}
+.dim-card-2{background:#CFE0EE;}
+.dim-card-photo{position:relative;width:min(100%,250px);aspect-ratio:1/1.12;justify-self:center;}
+.dim-card-text{text-align:left;}
+.dim-card .dim-title{font-size:clamp(1.3rem,2.2vw,1.6rem);margin:0 0 .45rem;}
+.dim-card .dim-underline{margin:0 0 .9rem;}
+.dim-card .dim-note{margin:0 0 1.1rem;max-width:none;font-size:.95rem;line-height:1.6;}
+.dim-card .italic{display:block;margin:0 0 .5rem;font-family:var(--font-display);font-style:italic;font-size:1.12rem;color:var(--ink);}
+.dim-card .dim-list{display:block;columns:2;column-gap:1.6rem;}
+.dim-card .dim-list li{font-size:1rem;line-height:1.4;margin:0 0 .3rem;break-inside:avoid;color:var(--ink);}
+.dim-stack .dim-link{transform:rotate(90deg);flex:none;}
+.section-head .pilares-intro{max-width:940px;}
+.trabajar-sec .section-head{max-width:940px;}
+@media (max-width:760px){.dim-card,.dim-card-2{grid-template-columns:1fr;}.dim-card-photo{order:-1;width:min(70%,240px);margin-bottom:.8rem;}.dim-card .dim-list{columns:1;}.dim-card-text{text-align:center;}.dim-card .dim-underline{margin-left:auto;margin-right:auto;}.dim-card .dim-list{display:inline-block;text-align:left;}}
+.divider-row{display:flex;align-items:center;gap:1rem;margin:0 auto;max-width:1180px;padding:0 6vw;}
+  .divider-row .rule{flex:1;height:1px;background:var(--line);}
+  .divider-row .sym{width:20px;height:20px;color:var(--verde);flex:none;}
+
+  /* tone blocks */
+  .tone-verde{background:var(--verde);color:var(--on-accent);}
+  .tone-verde h2,.tone-verde h3{color:var(--on-accent);}
+  .tone-verde .eyebrow{color:color-mix(in srgb, var(--on-accent) 70%, transparent);}
+  .tone-verde .tagline{color:var(--on-accent);}
+  .tone-arena{background:var(--surface);}
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:clamp(3.5rem,8vw,5.5rem);overflow:hidden;}
+  .hero-tight{padding-bottom:clamp(1.8rem,3.5vw,2.6rem);}
+  .intro-tight{padding-top:clamp(2.2rem,4vw,3rem);padding-bottom:clamp(2.2rem,4vw,3rem);}
+  .servicios-tight{padding-top:clamp(2.2rem,4vw,3rem);}
+  .hero-inner{position:relative;text-align:center;}
+  .hero-copy{max-width:760px;margin:0 auto;}
+  .hero-copy .eyebrow{justify-content:center;margin-bottom:1.6rem;}
+  .hero-copy h1{margin-bottom:1rem;}
+  .hero-copy .tagline{display:block;margin:0 auto;}
+  .hero-photo{aspect-ratio:1.8/1;margin-top:2.8rem;}
+
+  /* ---------- real photography ---------- */
+  .photo-frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface-2);}
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ---------- intro ---------- */
+  .intro-copy{max-width:640px;margin:0 auto;}
+  .intro-copy p{color:var(--ink-soft);}
+
+  /* ---------- servicios ---------- */
+  .servicios-head{max-width:640px;margin:0 auto 1rem;text-align:center;}
+  .servicios-head .eyebrow{margin-left:auto;margin-right:auto;}
+
+  /* placeholder image block — deliberately a shade off both --bg and --surface so it never blends into its section */
+  .placeholder-img{
+    background:
+      repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink) 10%, transparent) 0 10px, transparent 10px 20px),
+      color-mix(in srgb, var(--ink) 9%, var(--surface));
+    border:1px solid color-mix(in srgb, var(--ink) 28%, var(--line));
+    display:flex;align-items:flex-end;justify-content:flex-start;
+    padding:.7rem;
+  }
+  .placeholder-img span{
+    font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--ink-soft);background:var(--bg);padding:.35em .6em;border:1px solid var(--line);
+  }
+
+  .servicios-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:1.3rem;
+    margin-top:2.8rem;align-items:start;
+  }
+  .servicio-card{
+    display:flex;flex-direction:column;gap:.9rem;
+    text-decoration:none;color:inherit;
+    padding:1rem;border:1px solid var(--line);border-radius:6px;
+    background:var(--bg);
+    transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .servicio-card:hover{border-color:color-mix(in srgb, var(--terracota) 45%, var(--line));transform:translateY(-4px);box-shadow:var(--shadow);}
+  .servicio-card .photo-frame{aspect-ratio:1/1;}
+  .servicio-card .photo-frame img{transition:transform .5s ease;}
+  .servicio-card:hover .photo-frame img{transform:scale(1.07);}
+  .servicio-card h3{margin:0;font-size:1.02rem;line-height:1.25;}
+  .servicio-card p{margin:0;font-size:.82rem;line-height:1.5;color:var(--ink-soft);}
+  .servicio-card .card-cta{
+    margin-top:auto;padding-top:.2rem;font-size:.76rem;font-weight:600;letter-spacing:.01em;
+    color:var(--ink);display:inline-flex;align-items:center;gap:.35em;
+  }
+  .servicio-card .card-cta .arrow{transition:transform .3s ease;}
+  .servicio-card:hover .card-cta{color:var(--terracota);}
+  .servicio-card:hover .card-cta .arrow{transform:translateX(3px);}
+
+  @media (max-width:900px){
+    .servicios-grid{
+      display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+      margin:2.4rem -6vw 0;padding:.2rem 6vw .8rem;gap:1.1rem;
+      -webkit-overflow-scrolling:touch;
+    }
+    .servicio-card{flex:0 0 56vw;scroll-snap-align:start;}
+  }
+  @media (max-width:560px){
+    .servicio-card{flex:0 0 76vw;}
+  }
+
+  /* ---------- una misma mirada ---------- */
+  .mirada-copy{max-width:680px;margin:0 auto;text-align:center;}
+  .mirada-copy .eyebrow{justify-content:center;}
+  .mirada-copy .tagline{display:block;margin:1.4rem auto 1.6rem;}
+  .mirada-copy p{margin-left:auto;margin-right:auto;color:var(--ink-soft);}
+
+  /* ---------- cta final ---------- */
+  .cta-final{text-align:center;}
+  .cta-final .container{max-width:760px;}
+  .cta-final .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .cta-final h2{margin-bottom:1.2rem;}
+  .cta-final .lede{margin:0 auto 2.2rem;}
+
+  /* ---------- footer ---------- */
+  footer.site{border-top:1px solid var(--line);padding:3.5rem 0 2.4rem;}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.4rem;}
+  .footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap;}
+  .footer-col h4{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 .9rem;color:var(--ink-soft);}
+  .footer-col a, .footer-col p{display:block;font-size:.88rem;text-decoration:none;color:var(--ink);margin-bottom:.5rem;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.6rem;border-top:1px solid var(--line);font-size:.76rem;color:var(--ink-soft);}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{transform:translateY(14px);transition:transform .7s ease;}
+    .reveal.in-view{transform:translateY(0);}
+  }
+
+  /* ---------- proto tag ---------- */
+  .proto-tag{
+    position:fixed;left:14px;bottom:14px;z-index:50;
+    background:var(--ink);color:var(--bg);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:.55em .9em;border-radius:2px;opacity:.82;font-weight:600;
+  }
+  @media (max-width:700px){.proto-tag{display:none;}}
+
+  /* ---------- service sub-page additions ---------- */
+  .concept-block{max-width:660px;margin:0 auto;text-align:center;}
+  .concept-block .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .concept-block p{margin-left:auto;margin-right:auto;color:var(--ink-soft);}
+  .concept-questions{list-style:none;margin:1.8rem 0;padding:0;display:flex;flex-direction:column;gap:.55rem;}
+  .concept-questions li{font-family:var(--font-display);font-style:italic;font-size:clamp(1.05rem,2.2vw,1.35rem);color:var(--verde);}
+
+  .section-head{max-width:680px;margin:0 auto 1rem;text-align:center;}
+  .section-head .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .section-head p{color:var(--ink-soft);margin-left:auto;margin-right:auto;}
+
+  .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.2rem 2.6rem;margin-top:2.8rem;max-width:940px;margin-left:auto;margin-right:auto;}
+  .feature-grid.cols-3{grid-template-columns:repeat(3,1fr);max-width:1100px;}
+  @media(max-width:900px){.feature-grid.cols-3{grid-template-columns:1fr;}}
+  .feature-item{border-top:1px solid var(--line);padding-top:1.1rem;}
+  .feature-item h4{font-family:var(--font-body);font-weight:700;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--terracota);margin:0 0 .55rem;}
+  .feature-item p{margin:0;color:var(--ink-soft);font-size:.94rem;max-width:none;}
+  @media(max-width:700px){.feature-grid{grid-template-columns:1fr;}}
+
+  .process-steps{counter-reset:step;display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;margin-top:2.9rem;}
+  .process-steps.cols-4{grid-template-columns:repeat(4,1fr);}
+  .process-step{position:relative;padding-top:2.5rem;}
+  .process-step::before{counter-increment:step;content:counter(step,decimal-leading-zero);position:absolute;top:0;left:0;font-family:var(--font-display);font-size:1.25rem;color:var(--line);font-weight:600;}
+  .process-step h4{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 .5rem;}
+  .process-step p{margin:0;font-size:.86rem;color:var(--ink-soft);max-width:none;}
+  @media(max-width:900px){.process-steps,.process-steps.cols-4{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.process-steps,.process-steps.cols-4{grid-template-columns:1fr;}}
+
+  .checklist-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:2.4rem;margin-top:2.8rem;max-width:900px;margin-left:auto;margin-right:auto;}
+  .checklist-group h4{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:0 0 1rem;}
+  .checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem;}
+  .checklist li{position:relative;padding-left:1.3em;font-size:.92rem;color:var(--ink-soft);}
+  .checklist li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--terracota);}
+  .includes-note{max-width:640px;margin:2.2rem auto 0;text-align:center;font-size:.88rem;color:var(--ink-soft);font-style:italic;}
+  @media(max-width:700px){.checklist-groups{grid-template-columns:1fr;}}
+
+  .modalidad-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;margin-top:2.8rem;max-width:820px;margin-left:auto;margin-right:auto;}
+  .modalidad-card{border:1px solid var(--line);border-radius:6px;padding:1.7rem;background:var(--bg);}
+  .modalidad-card h4{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:1.2rem;margin:0 0 .6rem;color:var(--verde);}
+  .modalidad-card p{margin:0;font-size:.9rem;color:var(--ink-soft);max-width:none;}
+  @media(max-width:700px){.modalidad-grid{grid-template-columns:1fr;}}
+
+  .relacion-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:2.6rem;max-width:960px;margin-left:auto;margin-right:auto;}
+  .relacion-item{text-align:center;padding:1.2rem .8rem;border:1px solid var(--line);border-radius:6px;}
+  .relacion-item .from{font-size:.78rem;letter-spacing:.04em;color:var(--ink-soft);}
+  .relacion-item .arrow-down{display:block;margin:.5rem 0;color:var(--terracota);}
+  .relacion-item .to{font-family:var(--font-display);font-style:italic;font-size:1.02rem;color:var(--verde);}
+  @media(max-width:900px){.relacion-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.relacion-grid{grid-template-columns:1fr;}}
+
+  .cuando-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 2.2rem;margin-top:2.8rem;max-width:900px;margin-left:auto;margin-right:auto;}
+  .cuando-item{border-top:1px solid var(--line);padding-top:1rem;}
+  .cuando-item h4{font-family:var(--font-body);font-weight:700;font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--terracota);margin:0 0 .5rem;}
+  .cuando-item p{margin:0;color:var(--ink-soft);font-size:.92rem;max-width:none;}
+  @media(max-width:700px){.cuando-grid{grid-template-columns:1fr;}}
+
+  .pilares-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:2.8rem;}
+  .pilar{text-align:left;}
+  .pilar h4{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 .8rem;padding-bottom:.6rem;border-bottom:1px solid var(--line);}
+  .pilar ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem .5rem;}
+  .pilar li{font-size:.82rem;color:var(--ink-soft);background:var(--surface-2);border-radius:3px;padding:.3em .65em;}
+  .pilar .pilar-note{margin-top:.9rem;font-size:.86rem;color:var(--ink-soft);}
+  @media(max-width:900px){.pilares-grid{grid-template-columns:1fr;}}
+
+  .niveles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:2.8rem;}
+  .nivel-card{border:1px solid var(--line);border-radius:6px;padding:1.6rem;background:var(--bg);}
+  .nivel-card h4{font-family:var(--font-body);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--terracota);margin:0 0 .7rem;}
+  .nivel-card p{margin:0;font-size:.9rem;color:var(--ink-soft);max-width:none;}
+  @media(max-width:900px){.niveles-grid{grid-template-columns:1fr;}}
+
+  .hero-photo-wide{aspect-ratio:1.8/1;margin-top:2.8rem;}
+
+  .chips-row{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:1.8rem auto;max-width:640px;}
+  .chip{font-size:.8rem;color:var(--ink-soft);background:var(--surface-2);border-radius:3px;padding:.35em .75em;}
+  .tagline-block{font-family:var(--font-display);font-style:italic;font-size:clamp(1.05rem,2vw,1.25rem);color:var(--verde);max-width:620px;margin:1.6rem auto;display:block;line-height:1.5;}
+
+  /* ---------- proceso interactivo (stepper) ---------- */
+  .proceso-grid-bg{background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;background-position:0 0;}
+  .proceso-interactive{margin-top:3rem;max-width:800px;margin-left:auto;margin-right:auto;}
+  .proceso-track{display:flex;justify-content:space-between;position:relative;margin-bottom:2.8rem;padding:0 6px;}
+  .proceso-track::before{content:"";position:absolute;top:22px;left:6px;right:6px;height:1px;background:var(--line);z-index:0;}
+  .proceso-track::after{content:"";position:absolute;top:22px;left:6px;height:1px;background:var(--terracota);z-index:0;width:var(--proceso-progress,0%);transition:width .35s ease;}
+  .proceso-node{position:relative;z-index:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.65rem;padding:0;flex:1;font-family:var(--font-body);}
+  .proceso-num{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--ink-soft);transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s ease;}
+  .proceso-label{font-size:.88rem;letter-spacing:.04em;text-transform:uppercase;text-align:center;color:var(--ink-soft);transition:color .3s ease;}
+  .proceso-node:hover .proceso-num{border-color:var(--terracota);transform:translateY(-2px);}
+  .proceso-node.active .proceso-num{background:var(--terracota);border-color:var(--terracota);color:var(--on-accent);transform:scale(1.08);}
+  .proceso-node.active .proceso-label{color:var(--ink);font-weight:600;}
+  .proceso-panel{text-align:center;min-height:112px;transition:opacity .18s ease,transform .18s ease;}
+  .proceso-panel.fade-out{opacity:0;transform:translateY(4px);}
+  .proceso-panel-title{font-family:var(--font-display);font-style:italic;font-size:1.5rem;color:var(--verde);margin:0 0 .7rem;}
+  .proceso-panel-desc{color:var(--ink-soft);margin:0 auto;max-width:52ch;font-size:1.02rem;}
+  @media(max-width:640px){
+    .proceso-track{flex-wrap:wrap;gap:1.6rem 0;justify-content:space-around;}
+    .proceso-track::before,.proceso-track::after{display:none;}
+    .proceso-node{flex:0 0 44%;}
+  }
+
+
+  /* CTA del menú: arriba, a la altura del logo (escritorio) */
+  @media (min-width:901px){
+    nav.main-nav .nav-cta-link{display:none;}
+    .nav-cta-top{margin-left:auto;}
+  }
+  @media (max-width:900px){.nav-cta-top{display:none;}}
+
+  .volver-link{display:flex;width:fit-content;align-items:center;gap:.7em;margin:0 auto 1.6rem;font-family:var(--font-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);text-decoration:none;transition:color .25s ease;}
+  .volver-link svg{width:1.5em;height:1.5em;transition:transform .3s ease;}
+  .volver-link:hover,.volver-link:focus-visible{color:var(--verde);}
+  .volver-link:hover svg{transform:translateX(-4px);}
+
+.intro-foto{background-size:cover;background-position:center;padding:clamp(2.8rem,6vw,4.6rem) 0;}
+.intro-foto .intro-copy{max-width:760px;margin:0 auto;background:color-mix(in srgb, #fff 82%, transparent);border-radius:14px;padding:clamp(1.8rem,4vw,3rem) clamp(1.4rem,4vw,3rem);}
+.intro-foto .intro-copy p{margin-left:auto;margin-right:auto;max-width:none;color:var(--ink);}
+
+.pilar{background:#fff;border-radius:14px;padding:1.6rem clamp(1.1rem,2.4vw,1.7rem) 1.8rem;text-align:center;}
+.pilar-icon{width:72px;height:72px;margin:0 auto 1rem;}
+.pilar-icon svg{width:100%;height:100%;display:block;}
+.pilar h4{text-align:center;}
+.pilar ul{justify-content:center;}
+.pilar .pilar-note{text-align:center;}
+
+.proceso-grid-bg .section-head .eyebrow{display:flex;width:fit-content;max-width:100%;text-align:center;margin:0 auto 1.4rem;background:#fff;border-radius:12px;padding:.7em 1.4em;}
+.proceso-grid-bg .proceso-label{background:#fff;border-radius:8px;padding:.3em .7em;}
+.proceso-grid-bg .proceso-panel{background:#fff;border-radius:12px;padding:1.2rem clamp(1.1rem,3vw,2rem);max-width:640px;margin:0 auto;}
+.proceso-grid-bg .proceso-panel-title{margin-bottom:.6rem;}
+.proceso-grid-bg .proceso-panel-desc{color:var(--ink);}
+.pilares-grid{grid-template-columns:repeat(2,1fr);max-width:820px;margin-left:auto;margin-right:auto;}
+@media(max-width:900px){.pilares-grid{grid-template-columns:1fr;}}
+.section-head .pilares-intro{max-width:740px;margin:1.4rem auto 0;background:#fff;border-radius:14px;padding:1.3rem clamp(1.2rem,3vw,2rem);text-align:center;color:var(--ink);opacity:1;font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.7;}
+.trabajar-sec{padding-top:clamp(2.4rem,5vw,3.6rem);padding-bottom:clamp(2.4rem,5vw,3.6rem);}
+.dim-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:0 1rem;max-width:740px;margin:2.8rem auto 0;}
+.dim-tile{border-radius:14px;padding:1.1rem .9rem 1.25rem;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .35s ease,box-shadow .35s ease;outline:none;}
+.dim-tile:hover,.dim-tile:focus-visible{transform:translateY(-5px);box-shadow:0 16px 32px -18px rgba(37,42,40,.3);}
+.dim-tile-1{background:#D3E0C6;}
+.dim-tile-2{background:#CFE0EE;}
+.dim-arch-wrap{position:relative;width:84%;aspect-ratio:1/1.2;margin:0 auto 2rem;perspective:1300px;}
+.dim-arch-flip{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+.dim-tile:hover .dim-arch-flip,.dim-tile:focus-within .dim-arch-flip{transform:rotateY(180deg);}
+.dim-arch-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.dim-arch-photo{position:absolute;inset:0;padding:0;box-sizing:border-box;background:#FFFBF4;border:1.5px solid #B78A66;border-radius:50% 50% 6px 6px / 36% 36% 6px 6px;overflow:hidden;}
+.dim-arch-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.dim-badge{position:absolute;left:50%;bottom:-28px;width:58px;height:58px;transform:translateX(-50%);border-radius:50%;background:#fff;box-shadow:0 6px 14px -8px rgba(37,42,40,.4);z-index:2;overflow:hidden;}
+.dim-badge svg{width:100%;height:100%;display:block;}
+.dim-arch-back{transform:rotateY(180deg);background:#fff;border:1.5px solid #B78A66;border-radius:50% 50% 6px 6px / 36% 36% 6px 6px;display:flex;align-items:center;justify-content:center;padding:3.2rem 1.3rem 1.4rem;box-sizing:border-box;}
+.dim-arch-back-content .italic{display:block;margin:0 0 .6rem;font-family:var(--font-display);font-style:italic;font-size:.98rem;color:var(--ink);}
+.dim-arch-back-content p{margin:0;font-size:.8rem;line-height:1.6;color:var(--ink-soft);}
+.dim-title{font-family:var(--font-display);font-weight:600;font-size:1.2rem;line-height:1.25;margin:.4rem 0 .4rem;color:var(--ink);}
+.dim-underline{display:block;width:32px;height:2px;margin:0 auto .8rem;background:var(--terracota);}
+.dim-note + .dim-note{margin-top:.8rem;}
+.dim-note{margin:0 auto;max-width:280px;font-size:.84rem;line-height:1.55;color:var(--ink);}
+.dim-link{align-self:center;margin-top:0;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#fff;color:var(--terracota);box-shadow:0 6px 14px -8px rgba(37,42,40,.35);}
+.dim-link svg{width:30px;height:30px;}
+@media (max-width:760px){.dim-row{grid-template-columns:1fr;gap:1rem;max-width:380px;}.dim-link{margin:0 auto;transform:rotate(90deg);}}
+.dim-list{list-style:none;margin:0;padding:0;text-align:left;display:inline-block;}
+.dim-list li{position:relative;padding-left:.95rem;font-size:.78rem;line-height:1.4;color:var(--ink-soft);margin:.12rem 0;}
+.dim-list li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--terracota);}
+.dim-tile-1 .dim-arch-back{padding-top:3.1rem;padding-bottom:1rem;}
+.tone-arena.trabajar-sec{background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;background-position:0 0;}
+.trabajar-sec .section-head{max-width:740px;}
+.trabajar-sec .section-head .eyebrow{font-size:clamp(1.1rem,2vw,1.45rem);letter-spacing:.2em;font-weight:600;color:var(--ink);}
+.dim-arch-wrap{container-type:inline-size;}
+.dim-arch-back-content{max-width:100%;}
+.dim-arch-back-content .italic{font-size:clamp(.8rem,5.6cqw,.98rem);}
+.dim-list li{font-size:clamp(.6rem,4.1cqw,.76rem);line-height:1.35;margin:.08rem 0;}
+@media (max-width:980px){.dim-arch-wrap{aspect-ratio:1/1.3;}.dim-arch-back,.dim-tile-1 .dim-arch-back{padding:3rem .9rem 1rem;}}
+@media (max-width:760px){.dim-arch-wrap{width:94%;aspect-ratio:1/1.22;}.dim-arch-back,.dim-tile-1 .dim-arch-back{padding:2.8rem .9rem 1rem;}}
+@media (max-width:480px){.dim-arch-wrap{width:100%;aspect-ratio:1/1.5;}.dim-tile{padding-left:.6rem;padding-right:.6rem;}}
+.nivel-card{text-align:center;}
+.nivel-icon{width:80px;height:80px;margin:0 auto 1rem;}
+.nivel-icon svg{width:100%;height:100%;display:block;}
+.niveles-sec{background-color:#7fa3c7;background-image:url("/img/c988a9481daa.webp");background-size:cover;background-position:center;}
+.niveles-sec .section-head .eyebrow{display:flex;width:fit-content;max-width:100%;text-align:center;margin:0 auto 1.4rem;background:color-mix(in srgb, #fff 80%, transparent);border-radius:12px;padding:.7em 1.4em;color:var(--ink);}
+.niveles-sec .nivel-card{background:color-mix(in srgb, #fff 80%, transparent);border:none;border-radius:14px;}
+.niveles-sec .nivel-card p{color:var(--ink);}
+.tone-arena.porque-sec{background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;background-position:0 0;}
+.porque-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(1.4rem,4vw,3rem);align-items:center;max-width:980px;margin:0 auto;}
+.porque-photo{border-radius:14px;overflow:hidden;aspect-ratio:4/5;}
+.porque-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.porque-sec .porque-copy{max-width:none;margin:0;background:color-mix(in srgb, var(--amarillo) 62%, transparent);border-radius:14px;padding:clamp(1.6rem,3.4vw,2.6rem) clamp(1.3rem,3.4vw,2.4rem);}
+.porque-sec .porque-copy p{color:var(--ink);}
+.porque-sec .porque-copy .tagline-block{margin:1.3rem auto;color:var(--ink);}
+.porque-sec .porque-copy .tagline-block:last-child{margin-bottom:0;}
+@media (max-width:760px){.porque-grid{grid-template-columns:1fr;}.porque-photo{max-width:340px;margin:0 auto;width:100%;}}
+.niveles-sec .nivel-card{display:flex;flex-direction:column;}
+.niveles-sec .nivel-card p{margin-bottom:1.3rem;}
+.nivel-btn{margin:auto auto 0;display:inline-flex;align-items:center;gap:.6em;font-family:var(--font-body);font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--on-accent,#fff);background:var(--terracota);border-radius:999px;padding:.75em 1.5em;transition:background .25s ease,transform .25s ease;}
+.nivel-btn svg{width:1.3em;height:1.3em;transition:transform .3s ease;}
+.nivel-btn:hover,.nivel-btn:focus-visible{background:color-mix(in srgb, var(--terracota) 82%, #000);}
+.nivel-btn:hover svg,.nivel-btn:focus-visible svg{transform:translateX(4px);}
+.barra-trabajo{background:color-mix(in srgb, var(--lavanda) 55%, #fff);padding:clamp(.8rem,1.8vw,1.1rem) 0;}
+.barra-trabajo-txt{max-width:1000px;margin:0 auto;text-align:center;font-family:var(--font-body);font-style:normal;font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.6;color:var(--ink);}
+.proceso-grid-bg .section-head .eyebrow{font-size:clamp(1.1rem,2vw,1.45rem);letter-spacing:.2em;font-weight:600;color:var(--ink);}
+.cta-final .container{max-width:1000px;}
+.cta-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(1.6rem,4vw,3.5rem);align-items:center;margin:0 auto;}
+.cta-photo{border-radius:14px;overflow:hidden;aspect-ratio:9/10;justify-self:center;width:100%;}
+.cta-copy h2{font-size:clamp(1.7rem,3vw,2.4rem);}
+.cta-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.cta-copy{text-align:center;}
+.cta-sand{background:var(--surface);color:var(--ink);}
+.cta-sand h2{color:var(--ink);}
+.cta-final.cta-sand .lede{color:var(--ink);opacity:1;}
+.cta-final.cta-sand .btn-secondary{background:var(--terracota);color:#fff;border-color:var(--terracota);}
+.cta-final.cta-sand .btn-secondary:hover{background:color-mix(in srgb, var(--terracota) 82%, #000);border-color:color-mix(in srgb, var(--terracota) 82%, #000);color:#fff;}
+.divider-row{display:flex;align-items:center;gap:1rem;margin:0 auto;max-width:1180px;padding:0 6vw;}
+.divider-row .rule{flex:1;height:1px;background:var(--line);}
+.divider-row .sym{width:25px;height:25px;color:var(--verde);flex:none;}
+.divider-row{padding-top:clamp(1rem,2.5vw,1.8rem);}
+@media (max-width:760px){.cta-grid{grid-template-columns:1fr;}.cta-photo{max-width:320px;}}
+/* nav fix: vertical mobile menu */
+header.site{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:-1;pointer-events:none;}
+@media (max-width:900px){nav.main-nav{flex-wrap:nowrap !important;}}
+
+  /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
+  :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
+  body .btn, body .btn-ghost{
+    display:inline-flex !important;align-items:center;justify-content:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.8rem;line-height:1.2;
+    letter-spacing:.06em;text-transform:uppercase;text-align:center;
+    padding:.95em 2em !important;border-radius:999px !important;
+    background:var(--btn-bg) !important;border:1.5px solid var(--btn-bg) !important;color:var(--btn-ink) !important;
+    text-decoration:none !important;cursor:pointer;
+    box-shadow:0 8px 18px -12px rgba(37,42,40,.55);
+    transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  body .btn:hover, body .btn-ghost:hover{
+    background:var(--btn-hover) !important;border-color:var(--btn-hover) !important;color:var(--btn-hover-ink,#fff) !important;transform:translateY(-1px);
+  }
+
+  /* colores de botón de esta página */
+  .intro-foto{--btn-bg:#596447;}
+  .cta-sand{--btn-bg:var(--terracota);--btn-hover:#9A4A30;}
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="simbolo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M12 15.2 C9.8 13.6 8.3 12.2 8.3 10.6 C8.3 9.4 9.2 8.5 10.4 8.5 C11.1 8.5 11.7 8.9 12 9.5 C12.3 8.9 12.9 8.5 13.6 8.5 C14.8 8.5 15.7 9.4 15.7 10.6 C15.7 12.2 14.2 13.6 12 15.2 Z" fill="var(--terracota)"></path>
+  </symbol>
+</svg>
+
+<header class="site">
+  <div class="container">
+    <div class="nav-row">
+      <a href="/" class="wm">PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span>MEDIO</a>
+      <a class="nav-cta-link nav-cta-top" href="/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Comenzar un proceso</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="/">Inicio</a>
+      <a href="/espacio-exterior/">Espacio Exterior</a>
+      <a href="/espacio-interior/">Espacio Interior</a>
+      <a href="/espacio-exterior/bienestar-empresarial/" class="current">Bienestar Empresarial</a>
+      <a href="/universo/">Universo Punto Medio</a>
+      <a href="/sobre-mi/">Sobre mí</a>
+      <a href="#datos-contacto">Contacto</a>
+      <a class="nav-cta-link" href="/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Comenzar un proceso</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <!-- HERO -->
+  <section class="hero hero-tight">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-copy reveal">
+          <a class="volver-link" href="/espacio-exterior/#servicios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Volver a Espacio Exterior</a>
+          <h1>Bienestar Empresarial</h1>
+          <p class="tagline">El bienestar también se diseña.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro-tight intro-foto" style="background-image:url(/img/b51944bed596.webp);">
+    <div class="container">
+      <div class="intro-copy reveal" style="text-align:center;">
+          <p>Pasamos gran parte de nuestra vida en nuestros lugares de trabajo. Por eso, las oficinas, consultorios y espacios laborales pueden ser mucho más que lugares donde cumplir una jornada.</p>
+          <p><strong>Pueden ser espacios que favorezcan la concentración, el bienestar, la comodidad y los vínculos entre las personas.</strong></p>
+          <p>Desde Punto Medio integramos diseño del espacio, herramientas de bienestar y pequeñas prácticas cotidianas para crear entornos laborales más saludables y humanos.</p>
+          <p style="margin-top:1.6rem;"><a class="btn btn-primary" href="/comenzar/bienestar-empresarial/"><svg class="sym"><use href="#simbolo"/></svg>Quiero mejorar mi espacio de trabajo</a></p>
+      </div>
+      
+    </div>
+  </section>
+  <section class="tone-arena trabajar-sec">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">¿Qué podemos trabajar?</p>
+        <p class="pilares-intro">El servicio de Bienestar Empresarial propone trabajar sobre dos dimensiones que se complementan: <strong>el espacio y las personas.</strong></p>
+      </div>
+      <div class="dim-stack">
+        <div class="dim-card dim-card-1 reveal">
+          <div class="dim-card-text">
+            <h3 class="dim-title">El espacio</h3>
+            <span class="dim-underline"></span>
+            <p class="dim-note">Analizamos las condiciones físicas del lugar y proponemos mejoras que puedan favorecer el confort, la concentración y el bienestar.</p>
+            <span class="italic">Podemos trabajar sobre:</span>
+            <ul class="dim-list"><li>Distribución y organización.</li><li>Iluminación.</li><li>Ventilación.</li><li>Acústica.</li><li>Ergonomía.</li><li>Vegetación y conexión con la naturaleza.</li><li>Materiales y colores.</li><li>Espacios de descanso.</li><li>Áreas de encuentro y desconexión.</li></ul>
+          </div>
+          <div class="dim-card-photo"><div class="dim-arch-photo"><img src="/img/6b1f7b29751a.webp" alt=""></div><div class="dim-badge"><svg viewBox="0 0 64 64" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="color-mix(in srgb, var(--amarillo) 55%, #fff)" stroke="none"/><rect x="16" y="17" width="24" height="33" rx="2" fill="#fff"/><rect x="21" y="23" width="6" height="6" rx="1"/><rect x="29" y="23" width="6" height="6" rx="1"/><rect x="21" y="33" width="6" height="6" rx="1"/><path d="M30 50V43a3 3 0 0 1 3 -3h0a3 3 0 0 1 3 3v7"/><path d="M48 50V37" stroke="var(--verde)"/><path d="M48 42c-5 0-7-3-7-7 5 0 7 3 7 7z" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><path d="M48 38c4 0 6-3 6-6-4 0-6 3-6 6z" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><path d="M12 50h40"/></svg></div></div>
+        </div>
+        <div class="dim-link" aria-label="El espacio y las personas están interrelacionados" role="img">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 17h30M31 10l7 7-7 7"/><path d="M40 31H10M17 24l-7 7 7 7"/></svg>
+        </div>
+        <div class="dim-card dim-card-2 reveal">
+          <div class="dim-card-photo"><div class="dim-arch-photo"><img src="/img/ed92630accc4.webp" alt=""></div><div class="dim-badge"><svg viewBox="0 0 64 64" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="color-mix(in srgb, var(--rosa) 40%, #fff)" stroke="none"/><circle cx="24" cy="29" r="6" fill="#fff"/><path d="M13 49c0-8 4-13 11-13s11 5 11 13" fill="#fff"/><circle cx="41" cy="31" r="5" fill="#fff"/><path d="M33 49c.5-6 3.5-10 8-10s7.5 4 8 10" fill="#fff"/><path d="M12 15.2 C9.8 13.6 8.3 12.2 8.3 10.6 C8.3 9.4 9.2 8.5 10.4 8.5 C11.1 8.5 11.7 8.9 12 9.5 C12.3 8.9 12.9 8.5 13.6 8.5 C14.8 8.5 15.7 9.4 15.7 10.6 C15.7 12.2 14.2 13.6 12 15.2 Z" transform="translate(14.0 -1.0) scale(1.50)" fill="var(--terracota)" stroke="none"/></svg></div></div>
+          <div class="dim-card-text">
+            <h3 class="dim-title">Las personas</h3>
+            <span class="dim-underline"></span>
+            <p class="dim-note">El bienestar también puede incorporarse a través de pequeñas prácticas dentro de la jornada.</p>
+            <span class="italic">Proponemos herramientas como:</span>
+            <ul class="dim-list"><li>Pausas activas.</li><li>Movilidad.</li><li>Respiraciones.</li><li>Conciencia corporal.</li><li>Momentos de pausa y desconexión.</li><li>Prácticas adaptadas a las características de cada equipo.</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="niveles-sec">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Tres niveles de acompañamiento</p>
+      </div>
+      <div class="niveles-grid reveal">
+        <div class="nivel-card"><div class="nivel-icon"><svg viewBox="0 0 64 64" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="color-mix(in srgb, var(--amarillo) 55%, #fff)" stroke="none"/><path d="M32 46V32" stroke="var(--verde)"/><path d="M32 38c-7 0-10-4-10-9 7 0 10 4 10 9z" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><path d="M32 33c6 0 9-4 9-8-6 0-9 4-9 8z" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><path d="M23 46h18l-2 9H25z" fill="#fff"/><path d="M14 20v6M11 23h6" stroke="var(--terracota)"/></svg></div><h4>Bienestar esencial</h4><p>Análisis de las problemáticas + asesoramiento de pequeñas mejoras espaciales y prácticas sencillas que puedan incorporarse al día a día.</p><a class="nivel-btn" href="/comenzar/bienestar-esencial/">Consultar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        <div class="nivel-card"><div class="nivel-icon"><svg viewBox="0 0 64 64" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="color-mix(in srgb, var(--azul) 45%, #fff)" stroke="none"/><rect x="15" y="17" width="34" height="30" rx="2" fill="#fff"/><path d="M15 33h14M29 33v14"/><path d="M29 47a8 8 0 0 0-8-8" stroke-dasharray="2 2.4"/><path d="M42 41v-9" stroke="var(--verde)"/><path d="M42 37c-4 0-6-2-6-5 4 0 6 2 6 5z" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><path d="M42 34c3 0 5-2 5-4-3 0-5 2-5 4z" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><path d="M32 29.6 C29.8 28 28.3 26.6 28.3 25 C28.3 23.8 29.2 22.9 30.4 22.9 C31.1 22.9 31.7 23.3 32 23.9 C32.3 23.3 32.9 22.9 33.6 22.9 C34.8 22.9 35.7 23.8 35.7 25 C35.7 26.6 34.2 28 32 29.6 Z" transform="translate(-5.5 1)" fill="var(--terracota)" stroke="none"/></svg></div><h4>Bienestar integral</h4><p>Análisis del espacio, propuesta de transformación y programa de prácticas de bienestar para el equipo.</p><a class="nivel-btn" href="/comenzar/bienestar-integral/">Consultar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        <div class="nivel-card"><div class="nivel-icon"><svg viewBox="0 0 64 64" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="color-mix(in srgb, var(--lavanda) 45%, #fff)" stroke="none"/><path d="M32 52V34" stroke="var(--verde)"/><circle cx="32" cy="25" r="10" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><circle cx="25" cy="31" r="6" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><circle cx="39" cy="31" r="6" fill="color-mix(in srgb, var(--verde) 30%, #fff)" stroke="var(--verde)"/><path d="M32 40l-5-4M32 44l5-4" stroke="var(--verde)"/><path d="M20 52h24"/><path d="M50 14l1.4 3.6L55 19l-3.6 1.4L50 24l-1.4-3.6L45 19l3.6-1.4z" fill="var(--amarillo)" stroke="var(--ink)" stroke-width="1.2"/><path d="M13 18l.9 2.1L16 21l-2.1.9L13 24l-.9-2.1L10 21l2.1-.9z" fill="#fff" stroke="var(--ink)" stroke-width="1.1"/></svg></div><h4>Bienestar premium</h4><p>Una experiencia integral que combina análisis, diseño e intervención espacial, y elementos de confort, junto con un programa personalizado de prácticas y acompañamiento.</p><a class="nivel-btn" href="/comenzar/bienestar-premium/">Consultar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+  <section class="tone-arena porque-sec">
+    <div class="container">
+      <div class="porque-grid">
+        <div class="porque-photo reveal"><img src="/img/ad439752d016.webp" alt="Sombra de una persona con los brazos en alto sobre el tronco de un árbol"></div>
+        <div class="mirada-copy porque-copy reveal">
+          <p class="eyebrow">¿Por qué hacerlo?</p>
+          <p>Un entorno de trabajo saludable no solo mejora la experiencia de quienes lo habitan, también beneficia a la organización. Los espacios que promueven el bienestar, el movimiento, las pausas y los vínculos saludables pueden contribuir a reducir el estrés, prevenir problemas de salud y favorecer la motivación, la concentración y el desempeño de los equipos.</p>
+          <p>Invertir en bienestar es apostar por personas que se sienten mejor, trabajan mejor y pueden desarrollar su potencial. Porque cuidar a quienes forman parte de una organización también es una forma de construir empresas más saludables, eficientes y sostenibles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="barra-trabajo">
+    <div class="container">
+      <p class="barra-trabajo-txt reveal">Desde Punto Medio buscamos resignificar la idea de trabajo, para que sea mucho más que una obligación. Queremos transformarlo en un espacio que nos inspire, nos cuide y nos invite a desarrollar nuestra mejor versión.</p>
+    </div>
+  </section>
+  <section class="proceso-grid-bg">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">¿Cómo trabajamos?</p>
+      </div>
+            <div class="proceso-interactive reveal">
+        <div class="proceso-track" role="tablist" aria-label="Etapas del proceso">
+          <button type="button" class="proceso-node active" role="tab" aria-selected="true" data-title="Conocer" data-desc="Conversamos con tu empresa para entender su actividad, su equipo y lo que hoy necesitan del espacio de trabajo.">
+            <span class="proceso-num">01</span><span class="proceso-label">Conocer</span>
+          </button>
+          <button type="button" class="proceso-node" role="tab" aria-selected="false" data-title="Observar" data-desc="Analizamos las condiciones del lugar y cómo se vive el día a día: luz, ventilación, acústica, circulación y dinámicas de trabajo y descanso.">
+            <span class="proceso-num">02</span><span class="proceso-label">Observar</span>
+          </button>
+          <button type="button" class="proceso-node" role="tab" aria-selected="false" data-title="Proponer" data-desc="Presentamos mejoras concretas y prácticas de bienestar, adaptadas al nivel de acompañamiento elegido.">
+            <span class="proceso-num">03</span><span class="proceso-label">Proponer</span>
+          </button>
+          <button type="button" class="proceso-node" role="tab" aria-selected="false" data-title="Implementar" data-desc="Acompañamos los cambios en el espacio y ponemos en marcha las prácticas junto al equipo.">
+            <span class="proceso-num">04</span><span class="proceso-label">Implementar</span>
+          </button>
+          <button type="button" class="proceso-node" role="tab" aria-selected="false" data-title="Evaluar" data-desc="Revisamos juntos cómo se sienten las personas y qué ajustes hacen falta para sostener los resultados.">
+            <span class="proceso-num">05</span><span class="proceso-label">Evaluar</span>
+          </button>
+        </div>
+        <div class="proceso-panel" style="min-height:132px;">
+          <h4 class="proceso-panel-title">Conocer</h4>
+          <p class="proceso-panel-desc">Conversamos con tu empresa para entender su actividad, su equipo y lo que hoy necesitan del espacio de trabajo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- CIERRE -->
+  <section class="cta-final cta-sand">
+    <div class="container">
+      <div class="cta-grid">
+        <div class="cta-photo reveal"><img src="/img/ba5421d47ce7.webp" alt="Manos de distintos tonos de piel apoyadas unas sobre otras"></div>
+        <div class="cta-copy">
+          <h2 class="reveal">Para empresas que quieren cuidar a quienes las hacen posibles.</h2>
+          <p class="lede reveal" style="margin-left:auto;margin-right:auto;">No se trata solamente de trabajar mejor. Se trata de construir lugares donde trabajar también pueda ser una experiencia más saludable, agradable y humana.</p>
+          <a class="btn btn-secondary reveal" href="/comenzar/">Quiero mejorar mi espacio de trabajo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider-row"><span class="rule"></span><svg class="sym" width="25" height="25"><use href="#simbolo"/></svg><span class="rule"></span></div>
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Investigación y recursos</p>
+      </div>
+      <div class="chips-row reveal">
+        <span class="chip">Estrés y salud mental</span>
+        <span class="chip">Sedentarismo y movimiento</span>
+        <span class="chip">El entorno físico</span>
+        <span class="chip">Naturaleza y bienestar</span>
+        <span class="chip">Pausas y prácticas de bienestar</span>
+        <span class="chip">Diseño de espacios de trabajo</span>
+      </div>
+      <p class="includes-note reveal">Esta sección quedará preparada para incorporar artículos, investigaciones y recursos externos de fuentes confiables.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site" id="datos-contacto">
+  <div class="container">
+    <div class="footer-top">
+      <a href="/" class="brand-lockup">
+        PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span><br>MEDIO
+      </a>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Recorrer</h4>
+          <a href="/espacio-exterior/">Espacio Exterior</a>
+          <a href="/espacio-interior/">Espacio Interior</a>
+          <a href="/universo/">Universo Punto Medio</a>
+          <a href="/sobre-mi/">Sobre mí</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="mailto:sofia.puntomedio@gmail.com">sofia.puntomedio@gmail.com</a>
+          <a href="tel:+541150601481">+54 11 50601481</a>
+          <a href="https://wa.me/5491150601481" target="_blank" rel="noopener">Escribime por WhatsApp →</a>
+          <p style="color:var(--ink-soft);">Bahía Blanca, Argentina</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Punto Medio</span>
+      <span>Diseñar espacios para habitar(se).</span>
+    </div>
+  </div>
+</footer>
+
+<div class="proto-tag">Prototipo · Bienestar Empresarial</div>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var nav = document.getElementById('mainNav');
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true':'false');
+      });
+      nav.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+      });
+    }
+    var procesoNodes = document.querySelectorAll('.proceso-node');
+    var procesoTrack = document.querySelector('.proceso-track');
+    var procesoPanel = document.querySelector('.proceso-panel');
+    if(procesoNodes.length && procesoPanel){
+      var procesoTitleEl = procesoPanel.querySelector('.proceso-panel-title');
+      var procesoDescEl = procesoPanel.querySelector('.proceso-panel-desc');
+      var setProgress = function(node){
+        var idx = Array.prototype.indexOf.call(procesoNodes, node);
+        var pct = procesoNodes.length > 1 ? (idx / (procesoNodes.length - 1)) * 100 : 0;
+        procesoTrack.style.setProperty('--proceso-progress', pct + '%');
+      };
+      setProgress(procesoNodes[0]);
+      procesoNodes.forEach(function(node){
+        node.addEventListener('click', function(){
+          if(node.classList.contains('active')) return;
+          procesoNodes.forEach(function(n){ n.classList.remove('active'); n.setAttribute('aria-selected','false'); });
+          node.classList.add('active');
+          node.setAttribute('aria-selected','true');
+          setProgress(node);
+          procesoPanel.classList.add('fade-out');
+          setTimeout(function(){
+            if(procesoTitleEl) procesoTitleEl.textContent = node.dataset.title;
+            if(procesoDescEl) procesoDescEl.textContent = node.dataset.desc || '';
+            procesoPanel.classList.remove('fade-out');
+          }, 160);
+        });
+      });
+    }
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && 'IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+    }
+  })();
+</script>
+
+
+<script>
+/* botones "Volver": recordar a qué sección volver (funciona aunque la app no pase el #) */
+(function(){
+  document.querySelectorAll('a.volver-link[href*="#"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      try{ window.name='pm-goto:'+a.getAttribute('href').split('#')[1]; }catch(e){}
+    });
+  });
+})();
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1813 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Punto Medio</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body>
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --bg:#F9F9F6;
+    --surface:#DED0BC;
+    --surface-2:#EFE9DD;
+    --verde-pastel:#E3EAD8;
+    --ink:#252A28;
+    --ink-soft:#5B6259;
+    --line:#D9CFBC;
+    --verde:#596447;
+    --terracota:#C96342;
+    --rosa:#D98FA0;
+    --amarillo:#F5DFA3;
+    --azul:#829CAE;
+    --lavanda:#A89AB9;
+    --on-accent:#F7F4EE;
+    --shadow: 0 1px 2px rgba(37,42,40,.06);
+    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-body: "Jost", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1E1A;
+      --surface:#262B24;
+      --surface-2:#20241F;
+      --verde-pastel:#2C3628;
+      --ink:#F1ECE1;
+      --ink-soft:#B7BDAF;
+      --line:#3A4038;
+      --verde:#8AA073;
+      --terracota:#E08862;
+      --rosa:#E7AEBC;
+      --amarillo:#E8CD8A;
+      --azul:#9FB7C7;
+      --lavanda:#C1B4CF;
+      --on-accent:#1B1E1A;
+      --shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1E1A;
+    --surface:#262B24;
+    --surface-2:#20241F;
+      --verde-pastel:#2C3628;
+    --ink:#F1ECE1;
+    --ink-soft:#B7BDAF;
+    --line:#3A4038;
+    --verde:#8AA073;
+    --terracota:#E08862;
+    --rosa:#E7AEBC;
+    --amarillo:#E8CD8A;
+    --azul:#9FB7C7;
+    --lavanda:#C1B4CF;
+    --on-accent:#1B1E1A;
+    --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      linear-gradient(to right, transparent calc(68.333% - .5px), color-mix(in srgb, var(--line) 65%, transparent) calc(68.333% - .5px), color-mix(in srgb, var(--line) 65%, transparent) calc(68.333% + .5px), transparent calc(68.333% + .5px)),
+      linear-gradient(to right, transparent calc(87.5% - .5px), color-mix(in srgb, var(--line) 65%, transparent) calc(87.5% - .5px), color-mix(in srgb, var(--line) 65%, transparent) calc(87.5% + .5px), transparent calc(87.5% + .5px));
+    background-repeat:no-repeat, no-repeat;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .container{max-width:1180px;margin:0 auto;padding:0 6vw;}
+  @media (min-width:1400px){.container{padding:0 120px;}}
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    line-height:1.12;
+    margin:0;
+    text-wrap:balance;
+    color:var(--ink);
+  }
+  h1{font-size:clamp(2.6rem,6vw,4.6rem);}
+  h2{font-size:clamp(1.9rem,3.6vw,3rem);}
+  h3{font-size:clamp(1.3rem,2vw,1.6rem);}
+  p{margin:0 0 1em;max-width:62ch;}
+  p:last-child{margin-bottom:0;}
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin:0 0 1.1rem;
+    display:flex;align-items:center;gap:.6em;
+  }
+  .lede{font-size:1.1rem;color:var(--ink-soft);max-width:56ch;}
+  em, .italic{font-family:var(--font-display);font-style:italic;color:var(--ink);}
+  .tagline{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:clamp(1.3rem,2.4vw,1.7rem);
+    color:var(--verde);
+  }
+
+  /* ---------- symbol (circle + heart) ---------- */
+  .sym{display:inline-block;color:currentColor;overflow:visible;}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.82rem;
+    letter-spacing:.05em;text-transform:uppercase;
+    padding:.95em 1.8em;border-radius:2px;border:1px solid transparent;
+    text-decoration:none;cursor:pointer;transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+    background:none;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--verde);color:var(--on-accent);}
+  .btn-primary:hover{background:var(--ink);}
+  .btn-primary .sym{width:14px;height:14px;}
+  .btn-secondary{border-color:var(--ink);color:var(--ink);}
+  .btn-secondary:hover{background:var(--ink);color:var(--bg);}
+  .btn-ghost{color:var(--verde);padding:.4em 0;border-bottom:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--verde);}
+  .btn:hover .sym{transform:rotate(90deg);}
+  .btn .sym{transition:transform .4s ease;}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  header.site::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    backdrop-filter:blur(6px);
+    z-index:-1;
+    pointer-events:none;
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 0 .8rem;}
+  .brand{display:flex;align-items:center;gap:.6em;font-family:var(--font-display);font-size:1.25rem;font-weight:600;text-decoration:none;color:var(--ink);}
+  .brand .sym{width:22px;height:22px;color:var(--verde);}
+
+  /* wordmark — echoes the real Punto Medio mark: the símbolo standing in for the "O" */
+  .wm{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink);
+    font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:.13em;text-transform:uppercase;}
+  .wm-o{display:inline-flex;width:.82em;height:.82em;margin:0 .02em;position:relative;top:.06em;}
+  .wm-o .sym{width:100%;height:100%;color:var(--verde);}
+
+  .brand-lockup{position:relative;display:inline-block;font-family:var(--font-display);text-transform:uppercase;
+    font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;letter-spacing:.04em;line-height:1.02;color:var(--ink);
+    text-decoration:none;}
+  .brand-lockup .wm-o{width:.88em;height:.88em;top:.07em;margin:0 .01em;}
+  .brand-lockup .wm-o .sym{color:var(--ink);}
+  nav.main-nav{display:flex;flex-wrap:wrap;align-items:center;column-gap:1.15rem;row-gap:.7rem;padding:.75rem 0 1.05rem;border-top:1px solid var(--line);}
+  nav.main-nav a{
+    font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;
+    text-decoration:none;color:var(--ink-soft);font-weight:600;
+    padding-bottom:2px;border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  nav.main-nav a:hover, nav.main-nav a.current{color:var(--ink);border-color:var(--verde);}
+  .nav-cta-link{
+    display:inline-flex;align-items:center;gap:.5em;margin-left:auto;white-space:nowrap;
+    font-family:var(--font-body);font-style:normal;font-weight:600;font-size:.92rem;
+    letter-spacing:.01em;text-transform:none;color:var(--terracota);
+    text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;
+    transition:border-color .2s ease,color .2s ease;
+  }
+  .nav-cta-link:hover{border-color:var(--terracota);color:var(--terracota);}
+  .nav-cta-link .sym{width:15px;height:15px;transition:transform .4s ease;}
+  .nav-cta-link:hover .sym{transform:rotate(90deg);}
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:.5em .7em;color:var(--ink);}
+  @media (max-width:900px){
+    nav.main-nav{position:fixed;inset:64px 0 0 0;background:var(--bg);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:2.2rem 6vw;gap:1.6rem;transform:translateX(100%);transition:transform .35s ease;overflow-y:auto;border-top:none;}
+    nav.main-nav.open{transform:translateX(0);}
+    nav.main-nav a{font-size:1rem;}
+    .nav-cta-link{margin-left:0;margin-top:.6rem;font-size:1.2rem;}
+    .menu-toggle{display:inline-flex;}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(4.5rem,9vw,8rem) 0;position:relative;}
+  section.pause{padding:clamp(4rem,8vw,6.5rem) 0;}
+  .divider-row{display:flex;align-items:center;gap:1rem;margin:0 auto;max-width:1180px;padding:0 6vw;}
+  .divider-row .rule{flex:1;height:1px;background:var(--line);}
+  .divider-row .sym{width:25px;height:25px;color:var(--verde);flex:none;}
+
+  /* tone blocks */
+  .tone-verde{background:var(--verde);color:var(--on-accent);}
+  .tone-verde h2,.tone-verde h3{color:var(--on-accent);}
+  .tone-verde .eyebrow{color:color-mix(in srgb, var(--on-accent) 70%, transparent);}
+  .tone-verde .tagline{color:var(--on-accent);}
+
+  .tone-amarillo{background:var(--amarillo);color:var(--ink);}
+  .tone-amarillo .eyebrow{color:color-mix(in srgb, var(--ink) 70%, transparent);}
+  .tone-amarillo .proceso-step .num{color:color-mix(in srgb, var(--ink) 42%, transparent);}
+  .tone-amarillo .proceso-step:not(:last-child)::after{background:color-mix(in srgb, var(--ink) 30%, transparent);}
+  .tone-amarillo .trabajo-photos .photo-frame{border-color:color-mix(in srgb, var(--ink) 25%, transparent);}
+  .tone-lavanda{background:var(--lavanda);color:var(--ink);}
+  .tone-azul{background:var(--azul);color:var(--ink);}
+  .tone-arena{background:var(--surface);}
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:clamp(4rem,10vw,7rem);overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;pointer-events:none;opacity:.5;}
+  .hero-grid svg{width:100%;height:100%;}
+  .hero-inner{position:relative;text-align:center;}
+  .hero-copy{max-width:760px;margin:0 auto;}
+  .hero-copy .eyebrow{justify-content:center;margin-bottom:1.6rem;}
+  .hero-copy h1{margin-bottom:1.3rem;}
+  .hero-copy .lede{margin:0 auto 2.2rem;}
+  .hero-caption-below{margin-top:1.6rem;padding:.6rem 2rem;text-align:center;}
+  .hero-caption-below p{
+    margin:0 auto;max-width:52ch;
+    font-family:var(--font-display);font-style:italic;font-weight:500;
+    font-size:1.3rem;line-height:1.45;text-align:center;color:var(--ink);
+    cursor:default;transition:color .4s ease,transform .4s ease;
+  }
+  .hero-caption-below p:hover{color:var(--verde);transform:scale(1.015);}
+  @media (min-width:861px){.hero-caption-below p{max-width:none;white-space:nowrap;}}
+  @media (max-width:860px){.hero-caption-below p{font-size:1.05rem;}}
+
+  /* ---------- centered copy utility (hero aside / por qué / universo) ---------- */
+  .centered-copy{text-align:center;}
+  .centered-copy .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .centered-copy .universo-labels{justify-content:center;}
+  .centered-copy .lede{margin-left:auto;margin-right:auto;}
+  /* ---------- por qué punto medio ---------- */
+  .porque-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:3.5rem;align-items:center;}
+  .porque-copy{grid-column:1;}
+  .porque-grid .porque-photo{grid-column:2;margin:0;max-width:none;}
+  @media (max-width:860px){
+    .porque-grid{grid-template-columns:1fr;row-gap:2.2rem;}
+    .porque-copy,.porque-grid .porque-photo{grid-column:1;}
+  }
+
+  /* ---------- nuestra mirada ---------- */
+  #nuestra-mirada{
+    position:relative;
+    background-image:url(/img/54dc540f2576.webp
+);
+    background-size:cover;
+    background-position:right center;
+  }
+  .mirada-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:4rem;row-gap:0;align-items:center;}
+  .mirada-title-group{
+    grid-column:1;grid-row:1;
+    background:color-mix(in srgb, var(--bg) 58%, transparent);
+    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+    border-radius:18px;
+    padding:clamp(1.8rem,4vw,2.6rem) clamp(1.8rem,4.5vw,2.6rem);
+    box-shadow:0 24px 60px -30px rgba(20,24,20,.4);
+  }
+  .mirada-image-group{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;}
+  .mirada-cta{grid-column:1;margin-top:1.4rem;align-self:start;display:inline-block;}
+  @media (min-width:861px){
+    .mirada-image-group{align-self:stretch;align-items:flex-end;padding-bottom:0;}
+    .mirada-image-group .mirada-photo-caption{margin-bottom:0;transform:translateY(clamp(4rem,7.3vw,7.2rem));}
+  }
+  @media (max-width:860px){
+    #nuestra-mirada{padding-bottom:1.4rem;}
+    .mirada-image-group{min-height:16.5rem;align-items:flex-end;}
+    .mirada-image-group .mirada-photo-caption{margin-top:0;}
+    .mirada-grid{grid-template-columns:1fr;row-gap:2.2rem;}
+    .mirada-title-group,.mirada-image-group{grid-column:1;grid-row:auto;}
+    .mirada-title-group .mirada-sub-lede{text-align:left;margin-left:0;}
+  }
+
+  /* ---------- tres dimensiones: arch cards ---------- */
+  .dim3-section{
+    position:relative;overflow:hidden;
+    background-color:#fff;
+    background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);
+    background-size:28px 28px;
+    background-position:0 0;
+    padding-top:clamp(2rem,5vw,3.4rem);padding-bottom:clamp(3rem,7vw,5rem);
+  }
+  .dim3-head{max-width:700px;margin:0 auto;text-align:center;}
+  .dim3-heading{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,4.2vw,3.1rem);line-height:1.1;margin:0;color:var(--ink);}
+  .dim3-subtitle{margin:.65rem auto 0;max-width:62ch;font-size:.98rem;line-height:1.65;color:var(--ink-soft);}
+
+  .dim3-row{
+    position:relative;display:grid;
+    grid-template-columns:1fr auto 1fr auto 1fr;
+    align-items:start;gap:0 1.4rem;
+    margin-top:clamp(2.6rem,6vw,4rem);
+  }
+  .dim3-connector{display:flex;align-items:center;justify-content:center;height:24px;margin-top:118px;}
+  .dim3-connector .rule{width:20px;height:1px;background:var(--line);}
+  .dim3-connector .sym{width:20px;height:20px;color:var(--verde);flex:none;margin:0 .35em;}
+
+  .dim3-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;color:inherit;padding:0 .6rem;transition:transform .4s ease;}
+  .dim3-card:hover{transform:translateY(-7px);}
+
+  .dim3-photo-wrap{position:relative;width:100%;max-width:220px;margin:0 auto;}
+  .dim3-photo-wrap::before,
+  .dim3-photo-wrap::after{
+    content:'';position:absolute;left:50%;top:50%;
+    aspect-ratio:3/4;
+    border:1px solid color-mix(in srgb, var(--ink-soft) 32%, transparent);
+    border-radius:999px 999px 10px 10px;
+    transition:transform .4s ease;
+    pointer-events:none;
+    z-index:0;
+  }
+  .dim3-photo-wrap::before{width:calc(100% + 18px);transform:translate(-50%,-50%);}
+  .dim3-photo-wrap::after{width:calc(100% + 34px);transform:translate(-50%,-50%);}
+  .dim3-card:hover .dim3-photo-wrap::before{transform:translate(-50%,-50%) scale(1.03);}
+  .dim3-card:hover .dim3-photo-wrap::after{transform:translate(-50%,-50%) scale(1.03);}
+
+  .dim3-arch{
+    position:relative;z-index:1;width:100%;
+    aspect-ratio:3/4;border-radius:999px 999px 8px 8px;overflow:hidden;
+    background:var(--surface-2);
+    box-shadow:0 0 0 rgba(37,42,40,0);transition:box-shadow .4s ease;
+  }
+  .dim3-card:hover .dim3-arch{box-shadow:0 14px 28px -14px rgba(37,42,40,.35);}
+  .dim3-arch img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.3,1);}
+  .dim3-card:hover .dim3-arch img{transform:scale(1.08);}
+  .dim3-arch.placeholder-img{display:flex;align-items:center;justify-content:center;padding:1rem;}
+  .dim3-arch.placeholder-img span{font-size:.7rem;letter-spacing:.05em;color:var(--ink-soft);text-align:center;}
+
+  .dim3-title{width:100%;max-width:220px;margin:2.6rem auto 0;font-family:var(--font-display);font-size:1.05rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);position:relative;z-index:1;}
+  .dim3-underline{display:block;width:34px;height:2px;margin:.6rem auto 0;background:var(--dim3-line,var(--terracota));}
+  .dim3-card:nth-child(1) .dim3-underline{--dim3-line:color-mix(in srgb, var(--verde) 45%, var(--ink-soft) 55%);}
+  .dim3-desc{margin-top:.8rem;max-width:230px;}
+  .dim3-desc .italic{display:block;margin:0 0 .4rem;font-size:.98rem;}
+  .dim3-desc p{margin:0;font-size:.86rem;line-height:1.55;color:var(--ink-soft);}
+  .dim3-goto{margin-top:.6rem;font-size:.68rem;font-weight:600;letter-spacing:.03em;color:var(--terracota);display:inline-flex;align-items:center;gap:.35em;}
+  .dim3-goto .arrow{display:inline-block;transition:transform .3s ease;}
+  .dim3-card:hover .dim3-goto .arrow{transform:translateX(3px);}
+  .dim3-badge{display:inline-flex;margin-top:.7rem;font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);padding:.3em .7em;border-radius:20px;}
+
+  .dim3-cta{display:flex;justify-content:center;margin-top:clamp(2.6rem,5vw,3.6rem);}
+
+  .dim3-wave{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;pointer-events:none;z-index:0;}
+
+  .porque-section{
+    overflow:hidden;
+    background-color:#fff;
+    background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);
+    background-size:28px 28px;
+    background-position:0 0;
+  }
+  .porque-wave-top{position:absolute;left:0;right:0;top:0;width:100%;height:auto;pointer-events:none;z-index:0;}
+  .porque-section .container{position:relative;z-index:1;}
+
+  @media (max-width:860px){
+    .dim3-row{grid-template-columns:1fr;gap:3.2rem;margin-top:2.4rem;}
+    .dim3-connector{display:none;}
+    .dim3-card{padding:0 1.4rem;}
+    .dim3-photo-wrap{max-width:200px;}
+  }
+
+  /* ---------- tres dimensiones: menú deslizable ---------- */
+  .dim3-slider{position:relative;margin-top:clamp(1.5rem,3.2vw,2.2rem);}
+  .dim3-tiles-grid{
+    display:flex;gap:1.2rem;min-width:0;
+    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    max-width:860px;margin:0 auto;
+    padding:.2rem .1rem 1rem;
+  }
+  .dim3-tiles-grid::-webkit-scrollbar{display:none;}
+  .dim3-tiles-grid .camino-tile{flex:0 0 clamp(230px,26vw,272px);scroll-snap-align:start;}
+  .dim3-tiles-grid .camino-tile:nth-child(3){--camino-bg:color-mix(in srgb, var(--verde) 10%, var(--bg));}
+  .camino-arrow-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;margin:.4rem auto 0;flex:none;transition:background .3s ease;}
+  .camino-arrow-btn svg{width:15px;height:15px;stroke:var(--ink);fill:none;stroke-width:1.8;transition:stroke .3s ease;}
+  .camino-tile:hover .camino-arrow-btn{background:var(--ink);}
+  .camino-tile:hover .camino-arrow-btn svg{stroke:var(--bg);}
+
+  /* ---------- shared overlay slide-arrows (tres dimensiones + elegir un proceso) ---------- */
+  .slide-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+    width:38px;height:38px;border-radius:50%;border:none;flex:none;
+    background:color-mix(in srgb, var(--ink) 58%, transparent);color:var(--on-accent);
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+    box-shadow:0 4px 14px -5px rgba(0,0,0,.45);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    transition:background .25s ease,transform .25s ease;
+  }
+  .slide-arrow:hover{background:var(--terracota);}
+  .slide-arrow svg{width:16px;height:16px;}
+  .slide-arrow[hidden]{display:none;}
+  .slide-arrow-prev{left:4px;}
+  .slide-arrow-next{right:4px;}
+
+  @media (max-width:860px){
+    .dim3-slider{margin-left:-6vw;margin-right:-6vw;padding:0 6vw;}
+    .dim3-slider .slide-arrow-prev{left:calc(6vw + 4px);}
+    .dim3-slider .slide-arrow-next{right:calc(6vw + 4px);}
+    .dim3-tiles-grid{margin:0;padding:.2rem .1rem 1rem;}
+    .dim3-tiles-grid .camino-tile{flex:0 0 64%;padding:1.7rem 1rem 1.4rem;}
+  }
+  @media (max-width:560px){.dim3-tiles-grid .camino-tile{flex:0 0 72%;}}
+  /* tres dimensiones (celular/tablet): cada dimensión se ve centrada, con la flecha indicando que hay otra al costado */
+  @media (max-width:860px){
+    .dim3-tiles-grid{padding-left:calc(50% - 28vw);padding-right:calc(50% - 28vw);scroll-padding:0;}
+    .dim3-tiles-grid .camino-tile{flex:0 0 56vw;scroll-snap-align:center;}
+  }
+  @media (max-width:560px){
+    .dim3-tiles-grid{padding-left:calc(50% - 31.5vw);padding-right:calc(50% - 31.5vw);}
+    .dim3-tiles-grid .camino-tile{flex:0 0 63vw;}
+  }
+  /* tres dimensiones: al tocar la imagen se da vuelta (y al volver a tocar, vuelve); solo la flechita abre la sección */
+  .dim3-tiles-grid .camino-arch-wrap{cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  @media (max-width:560px){
+    .dim3-tiles-grid .camino-arch-back{padding:2.5rem 1.35rem 1.1rem;}
+    .dim3-tiles-grid .camino-arch-back-content .italic{font-size:.84rem;margin-bottom:.35rem;line-height:1.3;}
+    .dim3-tiles-grid .camino-arch-back-content p{font-size:.7rem;line-height:1.42;}
+  }
+  @media (hover:none){
+    .dim3-tiles-grid .camino-tile:hover .camino-arch-flip,
+    .dim3-tiles-grid .camino-tile:focus-within .camino-arch-flip{transform:none;}
+    .dim3-tiles-grid .camino-tile.is-flipped .camino-arch-flip{transform:rotateY(180deg);}
+  }
+
+  /* ---------- proceso ---------- */
+  /* ---------- proceso ---------- */
+  .proceso-step{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:1.4rem 0 0;border-top:1px solid color-mix(in srgb, var(--ink) 22%, transparent);}
+  .proceso-step .num{font-family:var(--font-display);font-size:1.6rem;color:color-mix(in srgb, var(--ink) 45%, transparent);}
+  .proceso-step .label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+  @media (max-width:500px){
+    .proceso-steps-grid{grid-template-columns:1fr;gap:1.2rem;}
+  }
+
+  /* ---------- por que ---------- */
+  .principios-band{background:var(--amarillo);margin-top:3rem;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);}
+  .principios{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1180px;margin:0 auto;padding:2.6rem 6vw;}
+  @media (min-width:1400px){.principios{padding:2.6rem 120px;}}
+  .principio{padding:0 1.6rem;border-right:1px solid color-mix(in srgb, var(--ink) 16%, transparent);}
+  .principio:first-child{padding-left:0;}
+  .principio:nth-child(2){margin-top:1.8rem;}
+  .principio:nth-child(4){margin-top:1.8rem;}
+  .principio:last-child{border-right:none;padding-right:0;}
+  .principio .label{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--verde);margin-bottom:.7rem;}
+  .principio p{font-size:.93rem;color:var(--ink-soft);}
+  @media (max-width:900px){
+    .principios{grid-template-columns:1fr 1fr;row-gap:1.8rem;padding:2.2rem 6vw;}
+    .principio:nth-child(2),.principio:nth-child(4){margin-top:0;}
+    .principio:nth-child(odd){border-right:1px solid color-mix(in srgb, var(--ink) 16%, transparent);padding-right:1.6rem;padding-left:0;}
+  }
+  @media (max-width:560px){
+    .principios{grid-template-columns:1fr;padding:1.8rem 6vw;}
+    .principio{border-right:none !important;padding-right:0 !important;padding-left:0 !important;border-bottom:1px solid color-mix(in srgb, var(--ink) 16%, transparent);padding-bottom:1.6rem;}
+    .principio:last-child{border-bottom:none;padding-bottom:0;}
+  }
+
+  /* ---------- bienestar empresarial ---------- */
+  .bienestar-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:3.5rem;align-items:start;}
+  .bienestar-photos{grid-column:1;display:grid;grid-template-columns:1fr 1fr;gap:.7rem;max-width:400px;}
+  .bienestar-photos .photo-frame:first-child{grid-column:1/3;aspect-ratio:16/9;}
+  .bienestar-photos .photo-frame{aspect-ratio:1/1;}
+  .bienestar-content{grid-column:2;display:flex;flex-direction:column;}
+  .bienestar-content h2{font-size:clamp(1.4rem,2.4vw,1.85rem);margin:.5rem 0 1.3rem;}
+  .bienestar-content .btn-ghost{margin-top:.4rem;align-self:flex-start;}
+  @media (max-width:900px){
+    .bienestar-grid{grid-template-columns:1fr;gap:2rem;}
+    .bienestar-photos,.bienestar-content{grid-column:1;}
+    .bienestar-photos{max-width:none;}
+    .bienestar-content .btn-ghost{margin-top:1.6rem;}
+    .bienestar-eyebrow-top{display:flex;grid-column:1;margin:0 0 -.9rem;}
+    .bienestar-content .eyebrow{display:none;}
+  }
+  @media (min-width:901px){.bienestar-eyebrow-top{display:none;}}
+
+  /* placeholder image block — deliberately a shade off both --bg and --surface so it never blends into its section */
+  .placeholder-img{
+    background:
+      repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink) 10%, transparent) 0 10px, transparent 10px 20px),
+      color-mix(in srgb, var(--ink) 9%, var(--surface));
+    border:1px solid color-mix(in srgb, var(--ink) 28%, var(--line));
+    display:flex;align-items:flex-end;justify-content:flex-start;
+    padding:1rem;
+    min-height:220px;
+  }
+  .placeholder-img span{
+    font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-soft);background:var(--bg);padding:.4em .7em;border:1px solid var(--line);
+  }
+
+  /* ---------- real photography ---------- */
+  .photo-frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface-2);}
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .hero-photo{aspect-ratio:2.4/1;position:relative;}
+  .hero-photo img{object-position:50% 62%;}
+
+  .mirada-photo-caption{margin:1.2rem auto 0;max-width:380px;text-align:center;font-family:var(--font-display);font-style:italic;font-weight:600;font-size:1.45rem;line-height:1.4;color:#fff;}
+  .mirada-sub-lede{margin:1rem auto 0;max-width:400px;text-align:center;font-size:1.02rem;line-height:1.6;color:var(--ink-soft);}
+  .mirada-title-group .mirada-sub-lede{margin:1.2rem 0 0;max-width:340px;text-align:left;}
+
+  .dim-card .dim-photo{aspect-ratio:1.3/1;margin-bottom:1.6rem;}
+
+
+  /* ---------- como trabajamos: stepper interactivo ---------- */
+  .comoint-bg{background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;background-position:0 0;}
+  .como-intro{background:#fff;border-radius:12px;padding:clamp(1.4rem,3vw,2.2rem) clamp(1.2rem,3vw,2.4rem);}
+  .comoint{background:#fff;border-radius:12px;padding:clamp(1.6rem,3vw,2.4rem) clamp(1rem,3vw,2rem);}
+  .comoint{margin-top:1.4rem;max-width:900px;margin-left:auto;margin-right:auto;}
+  .comoint-track{display:flex;justify-content:space-between;position:relative;margin-bottom:2.8rem;padding:0 6px;}
+  .comoint-track::before{content:"";position:absolute;top:22px;left:6px;right:6px;height:1px;background:var(--line);z-index:0;}
+  .comoint-track::after{content:"";position:absolute;top:22px;left:6px;height:1px;background:var(--terracota);z-index:0;width:var(--comoint-progress,0%);transition:width .35s ease;}
+  .comoint-node{position:relative;z-index:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.65rem;padding:0;flex:1;font-family:var(--font-body);}
+  .comoint-num{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--ink-soft);transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s ease;}
+  .comoint-label{font-size:.88rem;letter-spacing:.04em;text-transform:uppercase;text-align:center;color:var(--ink-soft);transition:color .3s ease;}
+  .comoint-node:hover .comoint-num{border-color:var(--terracota);transform:translateY(-2px);}
+  .comoint-node.active .comoint-num{background:var(--terracota);border-color:var(--terracota);color:var(--on-accent);transform:scale(1.08);}
+  .comoint-node.active .comoint-label{color:var(--ink);font-weight:600;}
+  .comoint-node:focus-visible .comoint-num{outline:2px solid var(--terracota);outline-offset:3px;}
+  .comoint-panel{text-align:center;min-height:112px;transition:opacity .18s ease,transform .18s ease;}
+  .comoint-panel.fade-out{opacity:0;transform:translateY(4px);}
+  .comoint-panel-title{font-family:var(--font-display);font-style:italic;font-size:1.5rem;color:var(--verde);margin:0 0 .7rem;font-weight:600;}
+  .comoint-panel-desc{color:var(--ink-soft);margin:0 auto;max-width:52ch;font-size:1.02rem;}
+  @media(max-width:640px){
+    .comoint-track{flex-wrap:wrap;gap:1.6rem 0;justify-content:space-around;}
+    .comoint-track::before,.comoint-track::after{display:none;}
+    .comoint-node{flex:0 0 44%;}
+  }
+  .como-intro{max-width:640px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;}
+  .como-intro .eyebrow{justify-content:center;}
+  .como-title-oneline{white-space:nowrap;text-wrap:nowrap;max-width:none;}
+  @media (max-width:640px){.como-title-oneline{white-space:normal;text-wrap:wrap;}}
+  .btn-compact{padding:.7em 1.4em;font-size:.74rem;}
+  .como-illustration-big{margin:2.6rem auto 0;max-width:1040px;overflow:hidden;border-radius:6px;}
+  .como-illustration-big img{width:100%;height:auto;display:block;transition:transform .5s ease;}
+  .como-illustration-big:hover img{transform:scale(1.03);}
+  .proceso-steps-grid-wide{display:grid;grid-template-columns:repeat(6,1fr);gap:1.4rem;margin:2.2rem auto 0;max-width:1040px;}
+  .proceso-steps-grid-wide .proceso-step{align-items:center;text-align:center;padding-top:1rem;gap:.4rem;transition:transform .3s ease,border-color .3s ease;}
+  .proceso-steps-grid-wide .proceso-step:hover{transform:translateY(-5px);border-top-color:var(--terracota);}
+  .proceso-steps-grid-wide .proceso-step .num{font-size:1.15rem;transition:color .3s ease;}
+  .proceso-steps-grid-wide .proceso-step:hover .num{color:var(--terracota);}
+  .proceso-steps-grid-wide .proceso-step .label{font-size:.62rem;letter-spacing:.06em;}
+  @media (max-width:820px){
+    .proceso-steps-grid-wide{grid-template-columns:repeat(3,1fr);gap:1.2rem .9rem;}
+  }
+  @media (max-width:480px){
+    .proceso-steps-grid-wide{grid-template-columns:repeat(2,1fr);}
+  }
+
+  .porque-photo{max-width:760px;margin:2.2rem auto 2.6rem;}
+  .porque-photo img{height:auto;object-fit:contain;}
+
+  .universo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:2.6rem;}
+  .universo-grid .photo-frame{aspect-ratio:1/1;border-color:color-mix(in srgb, var(--ink) 22%, transparent);}
+  @media (max-width:700px){.universo-grid{grid-template-columns:1fr 1fr;}}
+
+  .sobremi-grid .photo-frame{aspect-ratio:3/4;}
+
+  /* ---------- universo ---------- */
+  .universo-labels{display:flex;gap:2.2rem;margin-top:2.2rem;flex-wrap:wrap;}
+  .universo-labels span{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;}
+
+  /* ---------- sobre mi ---------- */
+  .sobremi-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:3.5rem;align-items:start;}
+  .sobremi-grid .placeholder-img{aspect-ratio:3/4;}
+  @media (max-width:900px){.sobremi-grid{grid-template-columns:1fr;gap:2rem;}}
+
+  /* ---------- testimonios ---------- */
+  #experiencias-huella{overflow:hidden;position:relative;background-image:url(/img/af7012b6d10c.webp);background-size:cover;background-position:center 42%;}
+  #experiencias-huella::before{content:"";position:absolute;inset:0;background:color-mix(in srgb, var(--surface) 55%, transparent);z-index:0;}
+  .huella-side-photo{
+    position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:150px;height:auto;
+    aspect-ratio:480/853;
+    z-index:0;
+  }
+  #experiencias-huella .container{position:relative;z-index:1;}
+  @media (max-width:1280px){.huella-side-photo{display:none;}}
+  @media (min-width:1281px) and (max-width:1399px){
+    .huella-side-photo{width:min(260px, calc((100vw - 1180px)/2 + 6vw - 24px));}
+  }
+  @media (min-width:1400px){
+    .huella-side-photo{width:min(260px, calc((100vw - 1180px)/2 + 120px - 24px));}
+  }
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.8rem;}
+  .testi-card{border:1px dashed var(--line);padding:2rem 1.6rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.9rem;color:var(--ink-soft);}
+  .testi-card .sym{width:20px;height:20px;color:var(--line);}
+  .testi-card p{font-size:.85rem;margin:0;}
+  .testi-card.is-real{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);}
+  .testi-card.is-real .sym{width:22px;height:22px;color:var(--testi-tint,var(--terracota));}
+  .testi-card.is-real p.testi-quote{font-family:var(--font-display);font-style:italic;font-size:1.02rem;line-height:1.55;color:var(--ink);}
+  .testi-card .testi-author{display:flex;flex-direction:column;gap:.2rem;margin-top:-.2rem;}
+  .testi-card .testi-name{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--ink);}
+  .testi-card .testi-service{font-size:.7rem;color:var(--ink-soft);}
+  @media (max-width:760px){.testi-grid{grid-template-columns:1fr;}}
+
+  /* ---------- por donde comenzar ---------- */
+  /* ---------- procesos: línea de opciones ---------- */
+  .procesos-slider{position:relative;margin-top:clamp(2.5rem,6vw,4rem);}
+  .procesos-row{
+    display:flex;flex-wrap:nowrap;
+    justify-content:center;
+    justify-content:safe center;
+    gap:clamp(1.8rem,4vw,3.4rem);
+    position:relative;z-index:0;
+    overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .procesos-row::-webkit-scrollbar{display:none;}
+  .procesos-thread{position:absolute;top:0;left:0;pointer-events:none;z-index:-1;overflow:visible;}
+  .procesos-thread path{
+    fill:none;
+    stroke:var(--ink);
+    stroke-width:1.25;
+    stroke-linecap:round;
+    opacity:.3;
+  }
+  @media (max-width:640px){.procesos-thread{display:none;}}
+  .proceso-item{
+    display:flex;flex:0 0 auto;flex-direction:column;align-items:center;gap:1.1rem;
+    width:176px;text-align:center;text-decoration:none;color:var(--ink);
+    position:relative;z-index:1;
+  }
+  .proceso-photo{
+    width:166px;height:166px;display:flex;align-items:center;justify-content:center;
+    transition:transform .35s ease;
+  }
+  .proceso-photo img{width:100%;height:100%;object-fit:contain;display:block;}
+  .proceso-item:hover .proceso-photo{
+    transform:scale(1.05);
+  }
+  .proceso-label{
+    font-family:var(--font-body);font-weight:600;
+    font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;
+    line-height:1.4;color:var(--ink);transition:color .3s ease;
+  }
+  .proceso-item:hover .proceso-label{color:var(--terracota);}
+
+  @media (max-width:900px){
+    .procesos-row{gap:1.6rem 2.2rem;}
+    .proceso-photo{width:132px;height:132px;}
+    .proceso-item{width:148px;}
+  }
+  @media (max-width:640px){
+    .procesos-slider{margin-left:-6vw;margin-right:-6vw;}
+    .procesos-slider .slide-arrow-prev{left:calc(6vw + 4px);}
+    .procesos-slider .slide-arrow-next{right:calc(6vw + 4px);}
+    .procesos-row{
+      justify-content:flex-start;
+      gap:1.6rem;padding:0 6vw .6rem;
+      scroll-snap-type:x mandatory;
+    }
+    .proceso-item{width:132px;scroll-snap-align:start;}
+    .proceso-photo{width:114px;height:114px;}
+    .proceso-label{font-size:.7rem;}
+  }
+
+  .caminos-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;margin-top:3rem;}
+  .camino-tile{background:var(--camino-bg,color-mix(in srgb, var(--ink-soft) 5%, var(--bg)));border-radius:14px;padding:1.4rem .7rem 1.3rem;display:flex;flex-direction:column;transition:transform .35s ease,box-shadow .35s ease;}
+  .camino-tile:hover{transform:translateY(-5px);box-shadow:0 16px 32px -18px rgba(37,42,40,.28);}
+  .camino-tile:nth-child(2){--camino-bg:color-mix(in srgb, var(--terracota) 10%, var(--bg));}
+  .camino-tile:nth-child(3){--camino-bg:color-mix(in srgb, var(--azul) 12%, var(--bg));}
+  .camino-tile:nth-child(4){--camino-bg:color-mix(in srgb, var(--verde) 10%, var(--bg));}
+  .camino-tile:nth-child(5){--camino-bg:color-mix(in srgb, var(--amarillo) 12%, var(--bg));}
+  @media (max-width:1180px){.caminos-grid{grid-template-columns:repeat(3,1fr);}}
+  .camino-arch-wrap{position:relative;width:100%;max-width:230px;aspect-ratio:2/3;margin:0 auto -1rem;perspective:1300px;}
+  .camino-arch-flip{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+  .camino-tile:hover .camino-arch-flip,
+  .camino-tile:focus-within .camino-arch-flip{transform:rotateY(180deg);}
+  .camino-arch-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+  .camino-arch-front img{width:100%;height:100%;object-fit:contain;display:block;}
+  .camino-arch-back{
+    transform:rotateY(180deg);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    inset:3.6% 9.6% 6.4% 9.4%;
+    background:#fff;
+    box-shadow:0 0 0 1px #D2BDA6;
+    border-radius:999px 999px 8px 8px;
+    padding:2.2rem 1.1rem 1.2rem;
+  }
+  .camino-arch-back-content .italic{display:block;margin:0 0 .5rem;font-size:.94rem;}
+  .camino-arch-back-content p{margin:0;font-size:.8rem;line-height:1.55;color:var(--ink-soft);}
+  .camino-arch.placeholder-img{display:flex;align-items:center;justify-content:center;padding:.8rem;background-image:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 8px,color-mix(in srgb, var(--ink-soft) 14%, var(--surface-2)) 8px,color-mix(in srgb, var(--ink-soft) 14%, var(--surface-2)) 16px);}
+  .camino-arch.placeholder-img span{font-size:.65rem;letter-spacing:.05em;color:var(--ink-soft);text-align:center;background:var(--bg);padding:.4em .7em;border-radius:20px;}
+  .camino-icon{position:absolute;bottom:0;left:50%;transform:translate(-50%,15%);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--camino-icon,var(--verde));box-shadow:0 8px 18px -8px rgba(37,42,40,.35);z-index:2;}
+  .camino-tile:nth-child(2) .camino-icon{--camino-icon:var(--terracota);}
+  .camino-tile:nth-child(3) .camino-icon{--camino-icon:var(--azul);}
+  .camino-tile:nth-child(4) .camino-icon{--camino-icon:var(--verde);}
+  .camino-tile:nth-child(5) .camino-icon{--camino-icon:color-mix(in srgb, var(--amarillo) 65%, var(--terracota));}
+  .camino-icon svg{width:26px;height:26px;stroke:var(--on-accent,#fff);fill:none;stroke-width:1.6;}
+  .camino-title{text-align:center;font-family:var(--font-display);font-weight:600;font-size:1.28rem;line-height:1.25;margin:0 0 .4rem;color:var(--ink);position:relative;z-index:1;}
+  .camino-underline{display:block;width:32px;height:2px;margin:0 auto .7rem;background:var(--camino-icon,var(--terracota));}
+  .camino-desc{text-align:center;font-size:.85rem;color:var(--ink-soft);line-height:1.55;margin:0 auto 1.2rem;max-width:220px;flex:1;}
+  .camino-link{display:block;text-align:center;font-size:.66rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-top:1px solid color-mix(in srgb, var(--ink) 15%, transparent);padding-top:.9rem;}
+  .camino-link .arrow{color:var(--camino-icon,var(--terracota));margin-left:.3em;transition:transform .3s ease;display:inline-block;}
+  .camino-tile:hover .camino-link .arrow{transform:translateX(3px);}
+  @media (max-width:860px){
+    .caminos-grid{
+      display:flex;
+      grid-template-columns:none;
+      gap:1.1rem;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      margin-left:-6vw;margin-right:-6vw;
+      padding:.2rem 6vw 1rem;
+    }
+    .caminos-grid::-webkit-scrollbar{display:none;}
+    .caminos-grid .camino-tile{flex:0 0 60%;scroll-snap-align:start;padding:1.7rem 1rem 1.4rem;}
+  }
+  @media (max-width:560px){.caminos-grid .camino-tile{flex:0 0 70%;}}
+  @media (max-width:860px){
+    .caminos-grid .camino-icon,.dim3-tiles-grid .camino-icon{width:50px;height:50px;}
+    .caminos-grid .camino-icon svg,.dim3-tiles-grid .camino-icon svg{width:22px;height:22px;}
+    .caminos-grid .camino-title,.dim3-tiles-grid .camino-title{font-size:1.1rem;}
+    .caminos-grid .camino-desc,.dim3-tiles-grid .camino-desc,.dim3-tiles-grid .dim3-desc{font-size:.8rem;}
+  }
+
+  /* ---------- faq ---------- */
+  .faq-groups{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;}
+  .faq-group h3{margin-bottom:.3rem;}
+  .faq-group .group-note{font-size:.85rem;color:var(--ink-soft);margin-bottom:1.4rem;}
+  details{border-bottom:1px solid var(--line);padding:1.1rem 0;}
+  details summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    font-weight:600;font-size:.98rem;gap:1rem;
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary .sym{width:16px;height:16px;flex:none;color:var(--verde);transition:transform .3s ease;}
+  details[open] summary .sym{transform:rotate(45deg);}
+  details .answer{padding-top:.8rem;font-size:.92rem;color:var(--ink-soft);}
+  details .answer p{line-height:1.65;}
+  .faq-general{margin-top:2.6rem;}
+  @media (max-width:800px){.faq-groups{grid-template-columns:1fr;gap:2.2rem;}}
+
+  /* ---------- cta final ---------- */
+  .cta-final{
+    text-align:center;
+    position:relative;
+    background-image:url(/img/e1b3fda78f1f.webp);
+    background-size:cover;
+    background-position:center 62%;
+    padding-top:clamp(5rem,11vw,8.5rem);
+    padding-bottom:clamp(5rem,11vw,8.5rem);
+  }
+  .cta-final .container{max-width:1040px;}
+  .cta-final-inner{
+    position:relative;
+    margin:0 auto;
+    max-width:860px;
+    background:color-mix(in srgb, var(--bg) 58%, transparent);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+    border-radius:18px;
+    padding:clamp(2rem,4.5vw,2.8rem) clamp(2.2rem,7vw,5rem);
+    box-shadow:0 24px 60px -28px rgba(20,24,20,.4);
+  }
+  .cta-final .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .cta-final h2{margin-bottom:1.2rem;}
+  .cta-final .lede{margin:0 auto 2.2rem;max-width:64ch;}
+  .cta-final .tagline{display:block;margin-top:2.6rem;font-size:clamp(1.15rem,2vw,1.45rem);}
+  .cta-final .tagline.cta-final-tagline-outer{
+    color:var(--on-accent);
+    text-shadow:0 2px 20px rgba(20,24,20,.5), 0 1px 5px rgba(20,24,20,.4);
+  }
+
+  /* ---------- footer ---------- */
+  footer.site{border-top:1px solid var(--line);padding:3.5rem 0 2.4rem;}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.4rem;}
+  .footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap;}
+  .footer-col h4{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 .9rem;color:var(--ink-soft);}
+  .footer-col a, .footer-col p{display:block;font-size:.88rem;text-decoration:none;color:var(--ink);margin-bottom:.5rem;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.6rem;border-top:1px solid var(--line);font-size:.76rem;color:var(--ink-soft);}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{transform:translateY(14px);transition:transform .7s ease;}
+    .reveal.in-view{transform:translateY(0);}
+  }
+
+  /* ---------- proto tag ---------- */
+  .proto-tag{
+    position:fixed;left:14px;bottom:14px;z-index:50;
+    background:var(--ink);color:var(--bg);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:.55em .9em;border-radius:2px;opacity:.82;font-weight:600;
+  }
+  @media (max-width:700px){.proto-tag{display:none;}}
+
+  /* tres dimensiones: colores de tarjetas */
+  .dim3-tiles-grid .camino-tile:nth-child(1){--camino-bg:#D3E0C6;}
+  .dim3-tiles-grid .camino-tile:nth-child(2){--camino-bg:#CFD9EC;}
+  .dim3-tiles-grid .camino-tile:nth-child(3){--camino-bg:color-mix(in srgb, var(--amarillo) 60%, #fff);}
+
+  /* textos sobre grilla de puntos: fondo blanco */
+  .dim3-head{background:#fff;border-radius:12px;padding:clamp(1.2rem,2.6vw,1.8rem) clamp(1.2rem,3vw,2rem);}
+  .porque-copy{background:#fff;border-radius:12px;padding:clamp(1.4rem,3vw,2.2rem) clamp(1.2rem,3vw,2.2rem);}
+  .porque-grid{background:#fff;border-radius:14px;padding:clamp(1rem,2.4vw,1.6rem);column-gap:1.5rem;}
+  .porque-grid .porque-copy{background:none;}
+  .porque-section .tagline{display:table;margin-left:auto;margin-right:auto;text-align:center;background:#fff;border-radius:12px;padding:.8rem 1.6rem;}
+  .divider-on-pink{max-width:none;margin:0;padding-left:max(6vw, calc((100% - 1180px)/2 + 6vw));padding-right:max(6vw, calc((100% - 1180px)/2 + 6vw));background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;background-position:0 0;}
+
+  /* por que punto medio: todo amarillo, textos en blanco */
+  .porque-section{background-color:var(--amarillo);background-image:none;}
+  .porque-wave-top{display:none;}
+  .principios-band{background:transparent;margin-top:2.2rem;}
+  .principios{gap:1rem;padding-top:0;padding-bottom:2.6rem;}
+  .principios .principio,.principios .principio:first-child,.principios .principio:last-child{background:#fff;border:none !important;border-radius:12px;padding:1.3rem 1.4rem !important;margin-top:0 !important;}
+  .porque-section{padding-bottom:clamp(1.8rem,3.5vw,2.6rem);}
+  .principios{padding-bottom:1.4rem;}
+  .porque-section .tagline{margin-top:1rem !important;font-size:clamp(.95rem,1.35vw,1.12rem);letter-spacing:.07em;word-spacing:.12em;line-height:1.5;padding:.7rem 1.5rem;}
+  @media (min-width:700px){.porque-section .tagline{white-space:nowrap;max-width:none;}}
+
+  /* tres dimensiones: tarjetas mas anchas, arcos recreados */
+  .camino-arch-front .arch-photo{position:absolute;inset:0;padding:6px;box-sizing:border-box;background:#FFFBF4;border:1.5px solid #B78A66;border-radius:50% 50% 6px 6px / 40% 40% 6px 6px;}
+  .camino-arch-front .arch-photo img{width:100%;height:100%;object-fit:cover;border-radius:50% 50% 3px 3px / 40% 40% 3px 3px;display:block;}
+  .camino-arch-front .arch-badge{position:absolute;left:50%;bottom:-26px;width:58px;height:58px;transform:translateX(-50%);border-radius:50%;object-fit:cover;z-index:2;box-shadow:0 6px 14px -8px rgba(37,42,40,.4);}
+  .dim3-tiles-grid .camino-arch-wrap{max-width:none;width:90%;aspect-ratio:1/1.08;margin:0 auto 2.3rem;}
+  .dim3-tiles-grid .camino-arch-back{inset:0 !important;border-radius:50% 50% 6px 6px / 40% 40% 6px 6px;box-shadow:none;border:1.5px solid #B78A66;background:#fff;padding:3.2rem 1.4rem 1.4rem;}
+  @media (min-width:861px){
+    .dim3-tiles-grid{max-width:1080px;}
+    .dim3-tiles-grid .camino-tile{flex:1 1 0;min-width:0;}
+  }
+
+  /* ---------- universo carousel ---------- */
+  #universo.tone-lavanda{background:color-mix(in srgb, var(--lavanda) 48%, #fff);}
+  .universo-slider{position:relative;margin-top:2.6rem;}
+  .universo-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding:.3rem .1rem 1rem;cursor:grab;-webkit-overflow-scrolling:touch;}
+  .universo-track::-webkit-scrollbar{display:none;}
+  .universo-track.dragging{cursor:grabbing;scroll-snap-type:none;}
+  .universo-track.dragging .universo-item{pointer-events:none;}
+  .universo-item{flex:0 0 calc((100% - 3rem)/4);aspect-ratio:1/1;scroll-snap-align:start;border-radius:14px;overflow:hidden;position:relative;display:block;border:1px solid color-mix(in srgb, var(--ink) 18%, transparent);background:var(--surface-2);}
+  .universo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;-webkit-user-drag:none;user-select:none;}
+  .universo-item:hover img{transform:scale(1.05);}
+  .universo-item:focus-visible{outline:2px solid var(--ink);outline-offset:3px;}
+  @media (max-width:980px){.universo-item{flex-basis:calc((100% - 2rem)/3);}}
+  @media (max-width:700px){
+    .universo-slider{margin-left:-6vw;margin-right:-6vw;}
+    .universo-track{padding:.3rem 6vw 1rem;scroll-padding-left:6vw;gap:.8rem;}
+    .universo-item{flex-basis:62%;aspect-ratio:4/5;}
+    .universo-slider .slide-arrow-prev{left:calc(6vw + 4px);}
+    .universo-slider .slide-arrow-next{right:calc(6vw + 4px);}
+  }
+
+  .br-desk{display:none;}
+  @media (min-width:700px){.br-desk{display:inline;}}
+
+  #universo .btn-universo{margin-top:2.4rem;background:#fff;color:var(--ink);border:1.5px solid #C9A24B;border-radius:999px;transition:background .25s ease,color .25s ease,border-color .25s ease;}
+  #universo .btn-universo:hover{background:#C9A24B;border-color:#C9A24B;color:#fff;}
+
+  /* ---------- testimonios: dejar el tuyo ---------- */
+  .testi-card.testi-cta{border:1.5px dashed var(--terracota);border-radius:14px;background:color-mix(in srgb, #fff 55%, transparent);color:var(--ink);justify-content:center;}
+  .testi-card.testi-cta .sym{color:var(--terracota);width:24px;height:24px;}
+  .testi-card.testi-cta p{font-size:.92rem;line-height:1.5;}
+  .testi-card.testi-cta p.testi-cta-title{font-family:var(--font-display);font-size:1.2rem;font-style:italic;color:var(--ink);}
+  .testi-open{background:var(--terracota);border:1.5px solid var(--terracota);color:var(--on-accent);border-radius:999px;margin-top:.4rem;cursor:pointer;}
+  .testi-open:hover{background:var(--ink);border-color:var(--ink);}
+  .testi-panel{margin:1.6rem auto 0;max-width:720px;}
+  .testi-panel[hidden]{display:none;}
+  .testi-form{background:#fff;border:1px solid var(--line);border-radius:14px;padding:clamp(1.4rem,3.4vw,2.2rem);display:flex;flex-direction:column;gap:1rem;text-align:left;}
+  .testi-form h3{margin:0;font-family:var(--font-display);font-size:1.5rem;}
+  .testi-note{margin:0;color:var(--ink-soft);font-size:.9rem;}
+  .testi-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .testi-form label{display:flex;flex-direction:column;gap:.35rem;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--ink);}
+  .testi-form input[type=text],.testi-form select,.testi-form textarea{font:inherit;font-size:.95rem;letter-spacing:normal;text-transform:none;font-weight:400;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem;width:100%;box-sizing:border-box;}
+  .testi-form textarea{resize:vertical;min-height:120px;line-height:1.55;}
+  .testi-form input:focus-visible,.testi-form select:focus-visible,.testi-form textarea:focus-visible{outline:2px solid var(--terracota);outline-offset:1px;}
+  .testi-form label.testi-check{flex-direction:row;align-items:flex-start;gap:.6rem;text-transform:none;letter-spacing:normal;font-weight:400;font-size:.88rem;color:var(--ink-soft);}
+  .testi-check input{margin-top:.2rem;accent-color:var(--terracota);}
+  .testi-error{margin:0;color:var(--terracota);font-size:.88rem;}
+  .testi-error[hidden]{display:none;}
+  .testi-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+  .testi-send{border-radius:999px;}
+  .testi-send-wa{background:var(--verde);border:1.5px solid var(--verde);color:var(--on-accent);}
+  .testi-send-wa:hover{background:var(--ink);border-color:var(--ink);}
+  @media (max-width:640px){.testi-row{grid-template-columns:1fr;}.testi-actions .btn{flex:1 1 100%;text-align:center;}}
+
+  /* ---------- procesos en celular: una opción por vez, grande ---------- */
+  .procesos-dots{display:none;}
+  @media (max-width:640px){
+    .procesos-slider .slide-arrow{display:none;}
+    .procesos-row{gap:1rem;padding:.6rem 14vw 1rem;scroll-snap-type:x mandatory;}
+    .proceso-item{flex:0 0 72vw;width:72vw;scroll-snap-align:center;gap:1.1rem;}
+    .proceso-photo{width:min(64vw,260px);height:min(64vw,260px);}
+    .proceso-label{font-size:.9rem;letter-spacing:.1em;}
+    .procesos-dots{display:flex;justify-content:center;gap:.5rem;margin-top:.4rem;}
+    .procesos-dots span{width:7px;height:7px;border-radius:50%;background:color-mix(in srgb, var(--ink) 22%, transparent);transition:background .25s ease,transform .25s ease;}
+    .procesos-dots span.on{background:var(--ink);transform:scale(1.25);}
+  }
+
+  /* CTA del menú: arriba, a la altura del logo (escritorio) */
+  @media (min-width:901px){
+    nav.main-nav .nav-cta-link{display:none;}
+    .nav-cta-top{margin-left:auto;}
+  }
+  @media (max-width:900px){.nav-cta-top{display:none;}}
+
+#como-trabajamos .como-intro .eyebrow{display:flex;width:fit-content;max-width:100%;text-align:center;margin:0 0 1.2rem;background:#fff;border-radius:12px;padding:.7em 1.4em;}
+#como-trabajamos .como-intro h2{display:block;width:fit-content;max-width:none;margin-left:0;margin-right:0;background:#fff;border-radius:14px;padding:.35em .9em;}
+#como-trabajamos .como-intro{background:none;padding:0;max-width:900px;}
+#como-trabajamos{padding-bottom:clamp(1.6rem,3vw,2.4rem);}
+#como-trabajamos .comoint-panel{min-height:0;}
+#como-trabajamos .como-intro .lede{display:block;width:fit-content;max-width:100%;margin-left:0!important;margin-right:0!important;background:#fff;border-radius:12px;padding:.6em 1.3em;}
+
+  /* línea de fondo hasta los bordes + fotos más grandes en compu */
+  .procesos-slider > .procesos-thread{position:absolute;z-index:0;}
+  .procesos-row{z-index:1;}
+  section:has(> .container > .procesos-slider){overflow-x:clip;}
+  @media (min-width:901px){
+    .proceso-photo{width:clamp(166px,15vw,206px);height:clamp(166px,15vw,206px);}
+    .proceso-item{width:clamp(176px,16vw,216px);}
+    .procesos-row{gap:clamp(1.6rem,3vw,2.6rem);}
+  }
+
+  /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
+  :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
+  body .btn, body .btn-ghost{
+    display:inline-flex !important;align-items:center;justify-content:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.8rem;line-height:1.2;
+    letter-spacing:.06em;text-transform:uppercase;text-align:center;
+    padding:.95em 2em !important;border-radius:999px !important;
+    background:var(--btn-bg) !important;border:1.5px solid var(--btn-bg) !important;color:var(--btn-ink) !important;
+    text-decoration:none !important;cursor:pointer;
+    box-shadow:0 8px 18px -12px rgba(37,42,40,.55);
+    transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  body .btn:hover, body .btn-ghost:hover{
+    background:var(--btn-hover) !important;border-color:var(--btn-hover) !important;color:#fff !important;transform:translateY(-1px);
+  }
+  /* colores de botón por sección (combinan con la imagen/fondo) */
+  #bienestar-empresarial{--btn-bg:#596447;}
+  #universo{--btn-bg:#8A79A6;--btn-hover:#5E4F78;}
+  #sobre-mi{--btn-bg:#A47551;--btn-hover:#6F4B33;}
+  #experiencias-huella{--btn-bg:var(--terracota);--btn-hover:#9A4A30;}
+  #experiencias-huella .testi-send-wa{--btn-bg:#596447;--btn-hover:var(--ink);}
+  #experiencias-huella #tfMail{--btn-bg:#B9A27F;--btn-hover:#8C7656;}
+  .cta-final{--btn-bg:var(--terracota);--btn-hover:#9A4A30;}
+  #universo .btn-universo{margin-top:2.4rem;}
+  .bienestar-content .btn-ghost{align-self:flex-start;}
+/* nav fix: vertical mobile menu */
+header.site{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:-1;pointer-events:none;}
+@media (max-width:900px){nav.main-nav{flex-wrap:nowrap !important;}}
+/* mobile: texto centrado en "Por qué Punto Medio" */
+@media (max-width:860px){
+  .porque-copy,.porque-copy .eyebrow,.porque-copy h2,.porque-copy p,.principios .principio,.principios .principio p{text-align:center;}
+  .porque-copy .eyebrow{justify-content:center;}
+  .porque-copy p{margin-left:auto;margin-right:auto;}
+  .principio .label{text-align:center;}
+}
+/* Testimonios: título y texto sobre fondo blanco semitransparente */
+#experiencias-huella .huella-head{display:block;width:fit-content;max-width:100%;background:rgba(255,255,255,.72);border-radius:12px;padding:1.2rem 1.6rem;margin-bottom:1.6rem;}
+#experiencias-huella .huella-head .lede{margin-bottom:0;}
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <!-- presentation attributes (not CSS class selectors) because <use> clones this into a
+       shadow tree that plain descendant selectors like ".sym circle" cannot reach —
+       only inherited properties like currentColor cross that boundary. -->
+  <symbol id="simbolo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M12 15.2 C9.8 13.6 8.3 12.2 8.3 10.6 C8.3 9.4 9.2 8.5 10.4 8.5 C11.1 8.5 11.7 8.9 12 9.5 C12.3 8.9 12.9 8.5 13.6 8.5 C14.8 8.5 15.7 9.4 15.7 10.6 C15.7 12.2 14.2 13.6 12 15.2 Z" fill="var(--terracota)"></path>
+  </symbol>
+</svg>
+
+<header class="site">
+  <div class="container">
+    <div class="nav-row">
+      <a href="#inicio" class="wm">PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span>MEDIO</a>
+      <a class="nav-cta-link nav-cta-top" href="/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Comenzar un proceso</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="#inicio" class="current">Inicio</a>
+      <a href="/espacio-exterior/">Espacio Exterior</a>
+      <a href="/espacio-interior/">Espacio Interior</a>
+      <a href="/espacio-exterior/bienestar-empresarial/">Bienestar Empresarial</a>
+      <a href="/universo/">Universo Punto Medio</a>
+      <a href="/sobre-mi/">Sobre mí</a>
+      <a href="#datos-contacto">Contacto</a>
+      <a class="nav-cta-link" href="/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Comenzar un proceso</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- 01 HERO -->
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true">
+      <svg viewBox="0 0 1200 700" preserveAspectRatio="none">
+        <g stroke="var(--line)" stroke-width="1">
+          <line x1="0" y1="120" x2="1200" y2="120"/>
+          <line x1="0" y1="560" x2="1200" y2="560"/>
+        </g>
+      </svg>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-copy reveal">
+        <h1 style="font-size:clamp(1.9rem,4.8vw,3.5rem);">Diseñar espacios para habitar(se).</h1>
+        <p class="lede" style="font-size:.98rem;">Arquitectura, bienestar y experiencias para transformar el espacio que habitamos y la manera en que nos habitamos.</p>
+      </div>
+    </div>
+    <div class="container" style="position:relative;margin-top:clamp(3.6rem,7vw,5.2rem);">
+      <div class="photo-frame hero-photo reveal"><img src="/img/bb1975ae57f0.webp" alt="Sofía sentada en un mirador de piedra frente a un paisaje de montaña, contemplando el horizonte.">
+      </div>
+      <div class="hero-caption-below reveal">
+        <p>“Nuestro espacio exterior es un reflejo de nuestro espacio interior y viceversa.”</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-row"><span class="rule"></span><svg class="sym" width="20" height="20"><use href="#simbolo"/></svg><span class="rule"></span></div>
+
+  <!-- 02 NUESTRA MIRADA -->
+  <section id="nuestra-mirada">
+    <div class="container mirada-grid">
+      <div class="reveal mirada-title-group">
+        <p class="eyebrow">Nuestra mirada</p>
+        <h2 style="font-size:clamp(1.6rem,2.6vw,2.2rem);">El espacio que habitamos también nos habita.</h2>
+        <p class="mirada-sub-lede">Nuestro entorno puede ser una extensión de quienes somos y una herramienta para acompañar nuestro bienestar.</p>
+      </div>
+      <div class="reveal mirada-image-group">
+        <p class="mirada-photo-caption reveal">Diseñar un espacio es también preguntarnos cómo queremos vivirlo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TRES DIMENSIONES -->
+  <section id="tres-dimensiones" class="dim3-section">
+    <div class="container">
+      <div class="dim3-head reveal">
+        <h2 class="dim3-heading">Tres dimensiones</h2>
+        <p class="dim3-subtitle">El espacio que habitamos puede ser observado desde diferentes lugares:<br>el entorno, la experiencia interior y la forma en que elegimos vivirlo.</p>
+      </div>
+
+      <div class="dim3-slider reveal">
+        <div class="dim3-tiles-grid" id="dim3Tiles">
+        <div class="camino-tile">
+          <div class="camino-arch-wrap">
+            <div class="camino-arch-flip">
+              <div class="camino-arch-face camino-arch-front">
+                <div class="arch-photo"><img src="/img/27b0f929badd.webp" alt=""></div>
+                <img class="arch-badge" src="/img/14ee3525f653.webp" alt="">
+              </div>
+              <div class="camino-arch-face camino-arch-back">
+                <div class="camino-arch-back-content">
+                  <span class="italic">Transformar lo que nos rodea.</span>
+                  <p>Arquitectura · Paisajismo · Interiorismo · Bienestar empresarial · Armonización de espacios</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="camino-title">Espacio Exterior</h3>
+          <span class="camino-underline"></span>
+          <a class="camino-arrow-btn" href="/espacio-exterior/" aria-label="Explorar Espacio Exterior" style="text-decoration:none;">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="camino-tile">
+          <div class="camino-arch-wrap">
+            <div class="camino-arch-flip">
+              <div class="camino-arch-face camino-arch-front">
+                <div class="arch-photo"><img src="/img/7a9d2d2a662f.webp" alt=""></div>
+                <img class="arch-badge" src="/img/c0ce74318894.webp" alt="">
+              </div>
+              <div class="camino-arch-face camino-arch-back">
+                <div class="camino-arch-back-content">
+                  <span class="italic">Explorar lo que somos.</span>
+                  <p>Reiki · Registros Akáshicos · Péndulo Hebreo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="camino-title">Espacio Interior</h3>
+          <span class="camino-underline"></span>
+          <a class="camino-arrow-btn" href="/espacio-interior/" aria-label="Explorar Espacio Interior" style="text-decoration:none;">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="camino-tile">
+          <div class="camino-arch-wrap">
+            <div class="camino-arch-flip">
+              <div class="camino-arch-face camino-arch-front">
+                <div class="arch-photo"><img src="/img/eb6b816f590a.webp" alt=""></div>
+                <img class="arch-badge" src="/img/ff8a4534a320.webp" alt="">
+              </div>
+              <div class="camino-arch-face camino-arch-back">
+                <div class="camino-arch-back-content">
+                  <p>Yoga · Respiración · Meditación · Consciencia — encontrar nuevas maneras de vivir, sentir y relacionarnos.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="camino-title">Habitar(se)</h3>
+          <span class="camino-underline"></span>
+          <span class="dim3-badge">En desarrollo</span>
+        </div>
+        </div>
+        <button class="slide-arrow slide-arrow-prev" id="dim3Prev" aria-label="Dimensión anterior" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="slide-arrow slide-arrow-next" id="dim3Next" aria-label="Siguiente dimensión" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="divider-row divider-on-pink"><span class="rule"></span><svg class="sym" width="25" height="25"><use href="#simbolo"/></svg><span class="rule"></span></div>
+
+  <!-- 05 POR QUE PUNTO MEDIO -->
+  <section class="porque-section">
+    <svg class="porque-wave-top" viewBox="0 0 1400 110" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,50 C160,0 340,100 560,65 C780,30 900,95 1120,60 C1260,38 1340,55 1400,70 L1400,0 L0,0 Z" fill="var(--bg)"></path>
+    </svg>
+    <div class="container">
+<div class="porque-grid">
+        <div class="reveal porque-copy">
+          <p class="eyebrow">Por qué Punto Medio</p>
+          <h2>Encontrar nuestro<br>propio punto medio.</h2>
+          <p class="lede" style="margin-top:1.2rem;">No creemos en fórmulas universales.<br>Cada persona, cada espacio y cada proceso necesitan algo diferente.</p>
+        </div>
+        <div class="photo-frame porque-photo reveal"><img src="/img/9156984d3a63.webp" alt="Silueta con los brazos elevados formando un corazón frente al atardecer sobre el mar."></div>
+      </div>
+    </div>
+    <div class="principios-band">
+      <div class="principios reveal">
+        <div class="principio"><p class="label">Integral</p><p>Observamos el conjunto y las conexiones entre espacio, cuerpo, emociones y entorno.</p></div>
+        <div class="principio"><p class="label">Personalizado</p><p>Cada propuesta parte de tus necesidades, tu contexto y tu propia manera de habitar.</p></div>
+        <div class="principio"><p class="label">Consciente</p><p>Buscamos crear espacios y procesos que tengan sentido y acompañen tu bienestar.</p></div>
+        <div class="principio"><p class="label">En transformación</p><p>Porque nosotros también cambiamos. Lo que necesitamos hoy puede ser diferente mañana.</p></div>
+      </div>
+    </div>
+    <div class="container">
+      <p class="tagline reveal centered-copy" style="margin-top:2.6rem;">El equilibrio entre lo que soñamos y lo que podemos construir.</p>
+    </div>
+  </section>
+
+  <div class="divider-row"><span class="rule"></span><svg class="sym" width="25" height="25"><use href="#simbolo"/></svg><span class="rule"></span></div>
+
+  <!-- 04 COMO TRABAJAMOS -->
+  <section id="como-trabajamos" class="comoint-bg">
+    <div class="container">
+      <div class="reveal como-intro">
+        <p class="eyebrow">Cómo trabajamos</p>
+        <h2 class="como-title-oneline">Una forma diferente de habitar el proceso.</h2>
+        <p class="lede" style="margin:.1rem auto 0;">Cada persona, cada espacio y cada proceso son diferentes.</p>
+      </div>
+      <div class="comoint reveal">
+        <div class="comoint-track" role="tablist" aria-label="Etapas del proceso">
+          <button type="button" class="comoint-node active" role="tab" aria-selected="true" data-title="Escuchar" data-desc="Conversación inicial para conocer tus necesidades, tus intereses y tu forma de habitar.">
+            <span class="comoint-num">01</span><span class="comoint-label">Escuchar</span>
+          </button>
+          <button type="button" class="comoint-node" role="tab" aria-selected="false" data-title="Observar" data-desc="Mirada atenta al lugar, a su entorno y a las posibilidades que ya existen.">
+            <span class="comoint-num">02</span><span class="comoint-label">Observar</span>
+          </button>
+          <button type="button" class="comoint-node" role="tab" aria-selected="false" data-title="Comprender" data-desc="Integrar lo que escuchamos y observamos para entender qué necesita realmente el espacio y quienes lo habitan.">
+            <span class="comoint-num">03</span><span class="comoint-label">Comprender</span>
+          </button>
+          <button type="button" class="comoint-node" role="tab" aria-selected="false" data-title="Diseñar" data-desc="Propuestas y decisiones sobre distribución, materialidad, estética y relación con el entorno.">
+            <span class="comoint-num">04</span><span class="comoint-label">Diseñar</span>
+          </button>
+          <button type="button" class="comoint-node" role="tab" aria-selected="false" data-title="Experimentar" data-desc="Recorrer y probar la propuesta con planos, imágenes y modelos, para sentir cómo será el espacio antes de construirlo.">
+            <span class="comoint-num">05</span><span class="comoint-label">Experimentar</span>
+          </button>
+          <button type="button" class="comoint-node" role="tab" aria-selected="false" data-title="Transformar" data-desc="Llevar el proyecto a la realidad y acompañar el cambio del espacio, y de quienes lo habitan.">
+            <span class="comoint-num">06</span><span class="comoint-label">Transformar</span>
+          </button>
+        </div>
+        <div class="comoint-panel">
+          <h4 class="comoint-panel-title">Escuchar</h4>
+          <p class="comoint-panel-desc">Conversación inicial para conocer tus necesidades, tus intereses y tu forma de habitar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 BIENESTAR EMPRESARIAL -->
+  <section id="bienestar-empresarial">
+    <div class="container bienestar-grid">
+      <p class="eyebrow bienestar-eyebrow-top reveal">Bienestar empresarial</p>
+      <div class="reveal bienestar-photos">
+        <div class="photo-frame"><img src="/img/b51944bed596.webp" alt="Equipo reunido trabajando junto a una mesa, en un ambiente luminoso."></div>
+        <div class="photo-frame"><img src="/img/e2f43a45dc1a.webp" alt="Espacio de trabajo con la frase Bienestar que se siente, equipos que florecen en la pared."></div>
+        <div class="photo-frame"><img src="/img/4da8c0d171e6.webp" alt="Equipo haciendo una pausa activa, estirándose junto a sus escritorios."></div>
+      </div>
+      <div class="reveal bienestar-content">
+        <p class="eyebrow">Bienestar empresarial</p>
+        <h2>¿Y si el trabajo también<br>pudiera ser un espacio de bienestar?</h2>
+        <p>Pasamos gran parte de nuestra vida trabajando. Por eso, los espacios laborales también pueden ser lugares que cuiden, acompañen y favorezcan nuestro bienestar.</p>
+        <p>Integramos diseño del espacio + herramientas de bienestar + prácticas para las personas, para crear ambientes de trabajo más saludables, agradables y humanos. Desde pequeñas mejoras hasta propuestas integrales para equipos y organizaciones.</p>
+        <p class="tagline" style="margin:1.4rem 0 1.6rem;">El bienestar también se diseña.</p>
+        <a class="btn-ghost" href="/espacio-exterior/bienestar-empresarial/" style="display:inline-block;">Conocer Bienestar Empresarial</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-row"><span class="rule"></span><svg class="sym" width="25" height="25"><use href="#simbolo"/></svg><span class="rule"></span></div>
+
+  <!-- 07 UNIVERSO PUNTO MEDIO -->
+  <section id="universo" class="tone-lavanda">
+    <div class="container centered-copy">
+      <p class="eyebrow reveal" style="color:color-mix(in srgb, var(--ink) 65%, transparent);">Universo Punto Medio</p>
+      <h2 class="reveal">Un espacio para conectar,<br>explorar y descubrir.</h2>
+      <p class="lede reveal" style="margin-top:1.2rem;color:var(--ink);max-width:70ch;">Punto Medio también es un lugar para compartir.<br>Reflexiones, herramientas, experiencias, encuentros y propuestas para conocernos,<br class="br-desk"> cuestionarnos, crear y conectar con otros.</p>
+      <div class="universo-slider reveal">
+        <button class="slide-arrow slide-arrow-prev" id="uniPrev" aria-label="Anteriores" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="universo-track" id="uniTrack">
+        <a class="universo-item" href="#" aria-label="Ver publicación 1"><img src="/img/afe20afaa0d4.webp" alt="" draggable="false"></a>
+        <a class="universo-item" href="#" aria-label="Ver publicación 2"><img src="/img/a6f01c1f42fd.webp" alt="" draggable="false"></a>
+        <a class="universo-item" href="#" aria-label="Ver publicación 3"><img src="/img/7448d8886678.webp" alt="" draggable="false"></a>
+        <a class="universo-item" href="#" aria-label="Ver publicación 4"><img src="/img/379beee0aece.webp" alt="" draggable="false"></a>
+        <a class="universo-item" href="#" aria-label="Ver publicación 5"><img src="/img/e232fa6f3faa.webp" alt="" draggable="false"></a>
+        <a class="universo-item" href="#" aria-label="Ver publicación 6"><img src="/img/78cdde97131f.webp" alt="" draggable="false"></a>
+        <a class="universo-item" href="#" aria-label="Ver publicación 7"><img src="/img/fc72bdf6f511.webp" alt="" draggable="false"></a>
+        <a class="universo-item" href="#" aria-label="Ver publicación 8"><img src="/img/6769c2050cf2.webp" alt="" draggable="false"></a>
+        </div>
+        <button class="slide-arrow slide-arrow-next" id="uniNext" aria-label="Siguientes" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <a class="btn btn-secondary btn-universo reveal" href="/universo/">Explorar el Universo</a>
+    </div>
+  </section>
+
+  <div class="divider-row"><span class="rule"></span><svg class="sym" width="25" height="25"><use href="#simbolo"/></svg><span class="rule"></span></div>
+
+  <!-- 08 SOBRE MI -->
+  <section id="sobre-mi">
+    <div class="container sobremi-grid">
+      <div class="reveal" style="order:1;">
+        <p class="eyebrow">Sobre mí</p>
+        <h2>Bienvenidx, soy Sofía</h2>
+        <p class="italic" style="margin:.9rem 0 1.4rem;font-size:1.15rem;">Exploradora del habitar en todos sus sentidos.</p>
+        <p>Hace un tiempo aprendí que no soy mi profesión, ni mi edad, ni tampoco mi vínculo con otro. Aprendí que soy hoy, en este momento: lo que hago con mi presente, con mis acciones y con las decisiones que tomo.</p>
+        <p>Aceptar que me encuentro en constante transformación me permite crecer y apostar por mis objetivos de la manera en que lo necesito, sin ataduras ni limitaciones.</p>
+        <p>Mi recorrido comenzó en la arquitectura y fue expandiéndose hacia el mundo de las prácticas holísticas, el cuerpo, las emociones y el autoconocimiento.</p>
+        <p>Punto Medio nació originalmente como un espacio de conexión y comunidad y fue transformándose conmigo hasta convertirse en un lugar donde hoy se encuentran arquitectura, bienestar y procesos de descubrimiento personal.</p>
+        <a class="btn-ghost" href="/sobre-mi/" style="display:inline-block;margin-top:.6rem;">Conocé mi historia →</a>
+      </div>
+      <div class="photo-frame reveal" style="order:2;align-self:end;"><img src="/img/f3e61fdde81e.webp" alt="Retrato de Sofía sonriendo."></div>
+    </div>
+  </section>
+
+  <!-- 09 TESTIMONIOS -->
+  <section class="tone-arena" id="experiencias-huella">
+    <div class="container">
+      <div class="huella-head reveal"><p class="eyebrow">Testimonios</p><h2>Experiencias que dejan huella.</h2>
+      <p class="lede" style="margin-top:1rem;">Palabras de quienes ya transitaron un proceso.</p></div>
+      <div class="testi-grid reveal">
+        <div class="testi-card is-real" style="--testi-tint:var(--rosa);">
+          <svg class="sym"><use href="#simbolo"/></svg>
+          <p class="testi-quote">"Me encontraba emocionalmente frágil y desanimada cuando acudí por las sesiones de Reiki y lo recomiendo porque salí aliviada y con energía renovada!!"</p>
+          <div class="testi-author">
+            <span class="testi-name">Edith</span>
+            <span class="testi-service">Sesión de Reiki</span>
+          </div>
+        </div>
+        <div class="testi-card is-real" style="--testi-tint:var(--azul);">
+          <svg class="sym"><use href="#simbolo"/></svg>
+          <p class="testi-quote">"Desde el principio se interesó por entender cómo vivimos la casa y cómo usamos cada espacio. Captó enseguida nuestra esencia y supo llevarla al proyecto de una forma muy natural. Sentimos que realmente nos escuchó y entendió lo que necesitábamos."</p>
+          <div class="testi-author">
+            <span class="testi-name">Juan y Gime</span>
+            <span class="testi-service">Diseño de Interiores Holístico</span>
+          </div>
+        </div>
+        <div class="testi-card testi-cta">
+          <svg class="sym"><use href="#simbolo"/></svg>
+          <p class="testi-cta-title">¿Transitaste un proceso conmigo?</p>
+          <p>Tus palabras pueden acompañar a quienes están por empezar el suyo.</p>
+          <button type="button" class="btn testi-open" id="testiOpen" aria-expanded="false" aria-controls="testiPanel">Dejar mi testimonio</button>
+        </div>
+      </div>
+      <div class="testi-panel" id="testiPanel" hidden>
+        <form class="testi-form" id="testiForm" novalidate>
+          <h3>Compartí tu experiencia</h3>
+          <p class="testi-note">Leo cada testimonio antes de publicarlo. Podés enviarlo por WhatsApp o por email.</p>
+          <div class="testi-row">
+            <label>Tu nombre<input type="text" id="tfNombre" autocomplete="given-name" placeholder="Como querés que aparezca"></label>
+            <label>Servicio<select id="tfServicio">
+              <option value="">Elegí una opción</option>
+              <option>Sesión de Reiki</option>
+              <option>Registros Akáshicos</option>
+              <option>Péndulo Hebreo</option>
+              <option>Limpieza energética</option>
+              <option>Diseño de Interiores Holístico</option>
+              <option>Paisajismo</option>
+              <option>Arquitectura Integral</option>
+              <option>Bienestar Empresarial</option>
+              <option>Otro</option>
+            </select></label>
+          </div>
+          <label>Tu testimonio<textarea id="tfTexto" rows="5" placeholder="Contanos cómo fue tu experiencia…"></textarea></label>
+          <label class="testi-check"><input type="checkbox" id="tfOk"> <span>Autorizo que mi testimonio se publique en el sitio con el nombre que indiqué.</span></label>
+          <p class="testi-error" id="tfError" role="alert" hidden></p>
+          <div class="testi-actions">
+            <a class="btn testi-send testi-send-wa" id="tfWa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+            <a class="btn btn-secondary testi-send" id="tfMail" href="#" target="_blank" rel="noopener">Enviar por email</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-row"><span class="rule"></span><svg class="sym" width="20" height="20"><use href="#simbolo"/></svg><span class="rule"></span></div>
+
+  <!-- 10 POR DONDE COMENZAR -->
+  <section>
+    <div class="container">
+      <p class="eyebrow reveal">Elegir un proceso</p>
+      <h2 class="reveal">¿Por dónde te gustaría comenzar?</h2>
+      <p class="lede reveal" style="margin-top:1.1rem;">Quizás ya sabés qué estás buscando. O quizás simplemente sentís que algo necesita transformarse y todavía no sabés por dónde empezar. No hace falta tener todas las respuestas.</p>
+      <div class="procesos-slider reveal">
+      <div class="procesos-row" id="procesosRow">
+    <svg class="procesos-thread" id="procesosThread" aria-hidden="true" focusable="false">
+      <path id="procesosThreadPath"></path>
+    </svg>
+    <a class="proceso-item" href="/espacio-exterior/">
+      <span class="proceso-photo"><img src="/img/c2e0aa6f413c.webp" alt=""></span>
+      <span class="proceso-label">Transformar<br>un espacio</span>
+    </a>
+
+    <a class="proceso-item" href="/espacio-interior/">
+      <span class="proceso-photo"><img src="/img/5c291e65a4c0.webp" alt=""></span>
+      <span class="proceso-label">Trabajar<br>sobre mí</span>
+    </a>
+
+    <a class="proceso-item" href="/espacio-exterior/bienestar-empresarial/">
+      <span class="proceso-photo"><img src="/img/6209512bf07f.webp" alt=""></span>
+      <span class="proceso-label">Bienestar<br>empresarial</span>
+    </a>
+
+    <a class="proceso-item" href="/comenzar/">
+      <span class="proceso-photo"><img src="/img/10f103105137.webp" alt=""></span>
+      <span class="proceso-label">Todavía<br>no lo sé</span>
+    </a>
+      </div>
+      <div class="procesos-dots" id="procesosDots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
+      <button class="slide-arrow slide-arrow-prev" id="procesosPrev" aria-label="Opción anterior" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="slide-arrow slide-arrow-next" id="procesosNext" aria-label="Siguiente opción" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      </div>
+  </div>
+</section>
+
+  <!-- 12 CTA FINAL -->
+  <section class="cta-final">
+    <div class="container">
+      <div class="cta-final-inner reveal">
+        <p class="eyebrow reveal">Comenzar</p>
+        <h2 class="reveal">Empezá por donde estés.</h2>
+        <p class="lede reveal">No necesitás tener todas las respuestas para comenzar a explorar. Quizás sea un espacio que te gustaría transformar. Quizás algo dentro tuyo pide ser escuchado. Quizás simplemente sentís curiosidad por descubrir algo nuevo. Podemos empezar por una conversación.</p>
+        <a id="contacto" class="btn btn-secondary reveal" href="/comenzar/">Comenzar una conversación</a>
+      </div>
+      <span class="tagline reveal cta-final-tagline-outer">Diseñar espacios para habitar(se).</span>
+    </div>
+  </section>
+
+  <!-- 11 FAQ -->
+  <section>
+    <div class="container">
+      <p class="eyebrow reveal">Preguntas frecuentes</p>
+      <h2 class="reveal">Preguntas frecuentes</h2>
+      <div class="faq-groups reveal">
+        <div class="faq-group">
+          <h3>Espacio Exterior</h3>
+          <p class="group-note">Arquitectura, paisajismo, interiorismo y bienestar empresarial.</p>
+          <details>
+            <summary>¿La arquitectura puede abordarse desde una mirada holística? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Sí. En Punto Medio entiendo el espacio como algo que influye en nuestra manera de habitar, sentir y relacionarnos. Por eso, además de los aspectos funcionales, técnicos y estéticos propios de la arquitectura, puedo incorporar herramientas como la neuroarquitectura, la biofilia y el Feng Shui, buscando crear espacios que acompañen el bienestar de quienes los habitan. La propuesta se adapta a cada proyecto y a las necesidades de cada persona.</p></div>
+          </details>
+          <details>
+            <summary>¿Los servicios pueden realizarse online? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Sí. Algunas etapas de los proyectos pueden desarrollarse completamente de manera online, especialmente cuando se trata de asesoramientos, diseño, interiorismo o acompañamiento sobre un espacio existente. En proyectos de arquitectura o paisajismo que requieren relevamiento físico, algunas instancias deberán realizarse presencialmente. Antes de comenzar, definimos juntos qué modalidad se adapta mejor a tu proyecto.</p></div>
+          </details>
+          <details>
+            <summary>¿Puedo combinar diferentes propuestas? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Sí. Punto Medio nace justamente desde la posibilidad de integrar diferentes formas de trabajar sobre el espacio y sobre nosotros mismos. Un proyecto puede combinar arquitectura, interiorismo, paisajismo, bienestar o herramientas energéticas, siempre que tenga sentido para la necesidad que estás atravesando. La propuesta se construye de manera personalizada, no a partir de paquetes predeterminados.</p></div>
+          </details>
+          <details>
+            <summary>¿Las propuestas son personalizadas? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Sí. Cada persona, espacio y proceso es diferente. Por eso, las propuestas de Punto Medio parten de una conversación inicial para comprender qué necesitás y adaptar el acompañamiento a tu situación, en lugar de aplicar una fórmula única.</p></div>
+          </details>
+          <details>
+            <summary>¿Cuánto dura un proyecto? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Depende del tipo de proyecto, su escala y sus necesidades particulares. Antes de comenzar definimos las diferentes etapas, modalidad de trabajo y tiempos estimados para cada proceso.</p></div>
+          </details>
+        </div>
+        <div class="faq-group">
+          <h3>Espacio Interior</h3>
+          <p class="group-note">Reiki, Registros Akáshicos y Péndulo Hebreo.</p>
+          <details>
+            <summary>¿Tengo que saber qué servicio necesito? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>No. Si sabés que querés trabajar sobre algo pero no tenés claro qué propuesta puede acompañarte, podemos conversarlo antes de comenzar. La primera instancia sirve justamente para entender qué estás buscando, conocer tu situación y encontrar la modalidad de trabajo más adecuada para vos. No necesitás llegar con una respuesta definida.</p></div>
+          </details>
+          <details>
+            <summary>¿Las prácticas reemplazan un tratamiento médico o psicológico? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>No. Las propuestas de Espacio Interior se plantean como herramientas de bienestar y acompañamiento personal y no sustituyen tratamientos médicos, psicológicos ni indicaciones profesionales de salud. Si existe una situación de salud, es importante continuar con el profesional correspondiente.</p></div>
+          </details>
+          <details>
+            <summary>¿Los talleres son presenciales u online? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Depende de cada propuesta. Algunas experiencias pueden realizarse online y otras están pensadas para compartir de manera presencial. La modalidad, duración y dinámica se especifican en la información de cada taller o encuentro.</p></div>
+          </details>
+          <details>
+            <summary>¿Cuánto dura una sesión? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Depende del servicio elegido. Cada propuesta tiene su propia duración y modalidad, que se informa antes de comenzar.</p></div>
+          </details>
+          <details>
+            <summary>¿Cómo comienzo? <svg class="sym"><use href="#simbolo"/></svg></summary>
+            <div class="answer"><p>Podés comenzar escribiéndome a través del formulario de contacto o por los canales disponibles en la web. Contame brevemente qué estás buscando, qué te gustaría trabajar o qué situación te trae hasta acá. A partir de ahí podemos conversar y definir juntos cuál es el próximo paso.</p></div>
+          </details>
+        </div>
+      </div>
+      <div class="faq-general reveal">
+        <details>
+          <summary>¿Qué pasa después de contactarme? <svg class="sym"><use href="#simbolo"/></svg></summary>
+          <div class="answer"><p>Después de recibir tu consulta, coordinamos una primera conversación para conocernos, entender qué estás buscando y aclarar las dudas que tengas. A partir de ahí definimos si Punto Medio puede acompañarte y cómo hacerlo.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+<footer class="site" id="datos-contacto">
+  <div class="container">
+    <div class="footer-top">
+      <a href="#inicio" class="brand-lockup">
+        PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span><br>MEDIO
+      </a>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Recorrer</h4>
+          <a href="/espacio-exterior/">Espacio Exterior</a>
+          <a href="/espacio-interior/">Espacio Interior</a>
+          <a href="/universo/">Universo Punto Medio</a>
+          <a href="/sobre-mi/">Sobre mí</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="mailto:sofia.puntomedio@gmail.com">sofia.puntomedio@gmail.com</a>
+          <a href="tel:+541150601481">+54 11 50601481</a>
+          <a href="https://wa.me/5491150601481" target="_blank" rel="noopener">Escribime por WhatsApp →</a>
+          <p style="color:var(--ink-soft);">Bahía Blanca, Argentina</p>
+          <a href="/comenzar/">Comenzar un proceso →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Punto Medio</span>
+      <span>Diseñar espacios para habitar(se).</span>
+    </div>
+  </div>
+</footer>
+
+<div class="proto-tag">Prototipo · Home</div>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var nav = document.getElementById('mainNav');
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true':'false');
+      });
+      nav.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+      });
+    }
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && 'IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+    }
+
+    (function(){
+      var tr=document.getElementById('uniTrack'), pv=document.getElementById('uniPrev'), nx=document.getElementById('uniNext');
+      if(!tr||!pv||!nx) return;
+      var slider=tr.parentNode;
+      function upd(){
+        var ov=tr.scrollWidth>tr.clientWidth+4;
+        pv.hidden=!ov; nx.hidden=!ov;
+        if(ov){
+          pv.disabled=tr.scrollLeft<=4; nx.disabled=tr.scrollLeft>=tr.scrollWidth-tr.clientWidth-4;
+          pv.style.opacity=pv.disabled?'.35':'1'; nx.style.opacity=nx.disabled?'.35':'1';
+          var it=tr.querySelector('.universo-item');
+          if(it){ var y=it.getBoundingClientRect().top-slider.getBoundingClientRect().top+it.getBoundingClientRect().height/2; pv.style.top=y+'px'; nx.style.top=y+'px'; }
+        }
+      }
+      function step(d){
+        var it=tr.querySelector('.universo-item'); var a=it?it.getBoundingClientRect().width+16:tr.clientWidth*.8;
+        tr.scrollBy({left:d*a,behavior:'smooth'});
+      }
+      pv.addEventListener('click',function(){step(-1);});
+      nx.addEventListener('click',function(){step(1);});
+      tr.addEventListener('scroll',upd,{passive:true});
+      window.addEventListener('resize',upd);
+      window.addEventListener('load',upd);
+      setTimeout(upd,300);
+      // drag con mouse
+      var down=false,sx=0,sl=0,moved=false;
+      tr.addEventListener('mousedown',function(e){down=true;moved=false;sx=e.pageX;sl=tr.scrollLeft;});
+      window.addEventListener('mousemove',function(e){
+        if(!down) return;
+        var dx=e.pageX-sx;
+        if(!moved&&Math.abs(dx)>5){moved=true;tr.classList.add('dragging');}
+        if(moved){tr.scrollLeft=sl-dx;e.preventDefault();}
+      });
+      window.addEventListener('mouseup',function(){
+        if(!down) return; down=false;
+        if(moved){ tr.classList.remove('dragging'); setTimeout(function(){moved=false;},0); }
+      });
+      tr.addEventListener('click',function(e){
+        var a=e.target.closest('.universo-item'); if(!a) return;
+        if(moved||a.getAttribute('href')==='#') e.preventDefault();
+      });
+    })();
+
+    (function(){
+      var open=document.getElementById('testiOpen'), panel=document.getElementById('testiPanel');
+      if(!open||!panel) return;
+      var nombre=document.getElementById('tfNombre'), serv=document.getElementById('tfServicio'), texto=document.getElementById('tfTexto'), ok=document.getElementById('tfOk');
+      var err=document.getElementById('tfError'), wa=document.getElementById('tfWa'), mail=document.getElementById('tfMail');
+      open.addEventListener('click',function(){
+        var show=panel.hidden; panel.hidden=!show;
+        open.setAttribute('aria-expanded',show?'true':'false');
+        if(show){ panel.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){nombre.focus({preventScroll:true});},400); }
+      });
+      function msg(){
+        return 'Hola Sofía, te dejo mi testimonio para Punto Medio:\n\n"'+texto.value.trim()+'"\n\nNombre: '+nombre.value.trim()+(serv.value?'\nServicio: '+serv.value:'')+'\n\nAutorizo la publicación de mi testimonio en el sitio.';
+      }
+      function valid(e){
+        var m='';
+        if(!nombre.value.trim()) m='Escribí tu nombre.';
+        else if(texto.value.trim().length<10) m='Escribí tu testimonio.';
+        else if(!ok.checked) m='Marcá la autorización para poder enviarlo.';
+        if(m){ e.preventDefault(); err.textContent=m; err.hidden=false; return false; }
+        err.hidden=true; return true;
+      }
+      wa.addEventListener('click',function(e){ if(valid(e)) wa.href='https://wa.me/5491150601481?text='+encodeURIComponent(msg()); });
+      mail.addEventListener('click',function(e){ if(valid(e)) mail.href='mailto:sofia.puntomedio@gmail.com?subject='+encodeURIComponent('Testimonio para Punto Medio')+'&body='+encodeURIComponent(msg()); });
+    })();
+
+    (function(){
+      var tr=document.getElementById('procesosRow'), dots=document.querySelectorAll('#procesosDots span');
+      if(!tr||!dots.length) return;
+      function upd(){
+        var items=tr.querySelectorAll('.proceso-item'), mid=tr.scrollLeft+tr.clientWidth/2, best=0, bd=1e9;
+        items.forEach(function(it,i){var c=it.offsetLeft+it.offsetWidth/2,d=Math.abs(c-mid);if(d<bd){bd=d;best=i;}});
+        dots.forEach(function(d,i){d.classList.toggle('on',i===best);});
+      }
+      tr.addEventListener('scroll',function(){window.requestAnimationFrame(upd);},{passive:true});
+      window.addEventListener('resize',upd);
+    })();
+
+    function centerSlideArrows(wrapperEl, imgSelector, prevBtn, nextBtn){
+      if(!wrapperEl || !prevBtn || !nextBtn) return;
+      var img = wrapperEl.querySelector(imgSelector);
+      if(!img) return;
+      var imgRect = img.getBoundingClientRect();
+      var wrapRect = wrapperEl.getBoundingClientRect();
+      if(!imgRect.height || !wrapRect.height) return;
+      var centerY = imgRect.top - wrapRect.top + imgRect.height / 2;
+      prevBtn.style.top = centerY + 'px';
+      nextBtn.style.top = centerY + 'px';
+    }
+
+    var dim3Slider = document.querySelector('.dim3-slider');
+    var dim3Tiles = document.getElementById('dim3Tiles');
+    var dim3Prev = document.getElementById('dim3Prev');
+    var dim3Next = document.getElementById('dim3Next');
+    if(dim3Tiles && dim3Prev && dim3Next){
+      function dim3UpdateArrows(){
+        var overflows = dim3Tiles.scrollWidth > dim3Tiles.clientWidth + 4;
+        dim3Prev.hidden = !overflows;
+        dim3Next.hidden = !overflows;
+        if(overflows){
+          dim3Prev.disabled = dim3Tiles.scrollLeft <= 4;
+          dim3Next.disabled = dim3Tiles.scrollLeft >= (dim3Tiles.scrollWidth - dim3Tiles.clientWidth - 4);
+          dim3Prev.style.opacity = dim3Prev.disabled ? '.35' : '1';
+          dim3Next.style.opacity = dim3Next.disabled ? '.35' : '1';
+        }
+        centerSlideArrows(dim3Slider, '.camino-arch-wrap', dim3Prev, dim3Next);
+      }
+      function dim3Step(dir){
+        var tile = dim3Tiles.querySelector('.camino-tile');
+        var amount = tile ? tile.getBoundingClientRect().width + 19 : dim3Tiles.clientWidth * 0.8;
+        dim3Tiles.scrollBy({left: dir * amount, behavior: 'smooth'});
+      }
+      dim3Prev.addEventListener('click', function(){ dim3Step(-1); });
+      dim3Next.addEventListener('click', function(){ dim3Step(1); });
+      dim3Tiles.addEventListener('scroll', dim3UpdateArrows, {passive:true});
+      window.addEventListener('load', dim3UpdateArrows);
+      window.addEventListener('resize', dim3UpdateArrows);
+      dim3UpdateArrows();
+      setTimeout(dim3UpdateArrows, 300);
+    }
+
+    var procesosSlider = document.querySelector('.procesos-slider');
+    var procesosScroller = document.getElementById('procesosRow');
+    var procesosPrev = document.getElementById('procesosPrev');
+    var procesosNext = document.getElementById('procesosNext');
+    if(procesosScroller && procesosPrev && procesosNext){
+      function procesosUpdateArrows(){
+        var overflows = procesosScroller.scrollWidth > procesosScroller.clientWidth + 4;
+        procesosPrev.hidden = !overflows;
+        procesosNext.hidden = !overflows;
+        if(overflows){
+          procesosPrev.disabled = procesosScroller.scrollLeft <= 4;
+          procesosNext.disabled = procesosScroller.scrollLeft >= (procesosScroller.scrollWidth - procesosScroller.clientWidth - 4);
+          procesosPrev.style.opacity = procesosPrev.disabled ? '.35' : '1';
+          procesosNext.style.opacity = procesosNext.disabled ? '.35' : '1';
+        }
+        centerSlideArrows(procesosSlider, '.proceso-photo', procesosPrev, procesosNext);
+      }
+      function procesosStep(dir){
+        var item = procesosScroller.querySelector('.proceso-item');
+        var amount = item ? item.getBoundingClientRect().width + 32 : procesosScroller.clientWidth * 0.8;
+        procesosScroller.scrollBy({left: dir * amount, behavior: 'smooth'});
+      }
+      procesosPrev.addEventListener('click', function(){ procesosStep(-1); });
+      procesosNext.addEventListener('click', function(){ procesosStep(1); });
+      procesosScroller.addEventListener('scroll', procesosUpdateArrows, {passive:true});
+      window.addEventListener('load', procesosUpdateArrows);
+      window.addEventListener('resize', procesosUpdateArrows);
+      procesosUpdateArrows();
+      setTimeout(procesosUpdateArrows, 300);
+    }
+
+    // ---------- procesos thread: one organic line running behind the 5 circular photos ----------
+    var procesosRow = document.querySelector('.procesos-row');
+    var procesosThread = document.getElementById('procesosThread');
+    var procesosThreadPath = document.getElementById('procesosThreadPath');
+    if(procesosRow && procesosThread && procesosThreadPath){
+      var crToBezier = function(points){
+        if(points.length < 2) return '';
+        var d = 'M' + points[0].x.toFixed(1) + ',' + points[0].y.toFixed(1);
+        for(var i=0;i<points.length-1;i++){
+          var p0 = points[i-1] || points[i];
+          var p1 = points[i];
+          var p2 = points[i+1];
+          var p3 = points[i+2] || p2;
+          var c1x = p1.x + (p2.x - p0.x)/6, c1y = p1.y + (p2.y - p0.y)/6;
+          var c2x = p2.x - (p3.x - p1.x)/6, c2y = p2.y - (p3.y - p1.y)/6;
+          d += ' C' + c1x.toFixed(1)+','+c1y.toFixed(1)+' '+c2x.toFixed(1)+','+c2y.toFixed(1)+' '+p2.x.toFixed(1)+','+p2.y.toFixed(1);
+        }
+        return d;
+      };
+      var procesosSliderEl = procesosRow.parentNode;
+      if(procesosSliderEl && procesosThread.parentNode !== procesosSliderEl){ procesosSliderEl.insertBefore(procesosThread, procesosRow); }
+      var drawProcesosThread = function(){
+        var firstPhoto = procesosRow.querySelector('.proceso-photo');
+        var vw = document.documentElement.clientWidth;
+        var sr = procesosSliderEl.getBoundingClientRect();
+        var pr = firstPhoto ? firstPhoto.getBoundingClientRect() : sr;
+        var W = vw;
+        var H = firstPhoto ? firstPhoto.offsetHeight : 166;
+        if(!W || !H) return;
+        procesosThread.style.left = (-sr.left) + 'px';
+        procesosThread.style.top = (pr.top - sr.top) + 'px';
+        procesosThread.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        procesosThread.setAttribute('width', W);
+        procesosThread.setAttribute('height', H);
+        procesosThread.style.width = W + 'px';
+        procesosThread.style.height = H + 'px';
+        var centerY = H * 0.5;
+        var amp = Math.min(H * 0.22, 26);
+        var count = Math.max(8, Math.round(W / 90));
+        var pts = [];
+        for(var i=0;i<=count;i++){
+          var t = i/count, x = t*W;
+          var y = centerY
+            + Math.sin(i*0.9 + 0.5) * amp * (0.4 + 0.6*Math.sin(Math.PI*t))
+            + Math.sin(i*2.4 + 1.1) * amp * 0.2;
+          pts.push({x:x, y:y});
+        }
+        procesosThreadPath.setAttribute('d', crToBezier(pts));
+      };
+      drawProcesosThread();
+      window.addEventListener('load', drawProcesosThread);
+      setTimeout(drawProcesosThread, 400);
+      var procesosResizeTimer;
+      window.addEventListener('resize', function(){
+        clearTimeout(procesosResizeTimer);
+        procesosResizeTimer = setTimeout(drawProcesosThread, 150);
+      });
+    }
+  })();
+  (function(){
+    var nodes=document.querySelectorAll('.comoint-node');
+    var track=document.querySelector('.comoint-track');
+    var panel=document.querySelector('.comoint-panel');
+    if(!nodes.length||!panel||!track) return;
+    var tEl=panel.querySelector('.comoint-panel-title');
+    var dEl=panel.querySelector('.comoint-panel-desc');
+    var setProgress=function(node){
+      var idx=Array.prototype.indexOf.call(nodes,node);
+      var pct=nodes.length>1?(idx/(nodes.length-1))*100:0;
+      track.style.setProperty('--comoint-progress',pct+'%');
+    };
+    setProgress(nodes[0]);
+    nodes.forEach(function(node){
+      node.addEventListener('click',function(){
+        if(node.classList.contains('active')) return;
+        nodes.forEach(function(n){n.classList.remove('active');n.setAttribute('aria-selected','false');});
+        node.classList.add('active');node.setAttribute('aria-selected','true');
+        setProgress(node);
+        panel.classList.add('fade-out');
+        setTimeout(function(){
+          if(tEl) tEl.textContent=node.dataset.title;
+          if(dEl) dEl.textContent=node.dataset.desc||'';
+          panel.classList.remove('fade-out');
+        },160);
+      });
+    });
+  })();
+</script>
+
+<script>
+(function(){
+  function target(){
+    var h=(location.hash||'').replace('#','');
+    if(!h){var m=(location.search||'').match(/[?&](?:s|seccion)=([\w-]+)/);if(m)h=m[1];}
+    return h?document.getElementById(h):null;
+  }
+  function go(){var el=target();if(el){var y=el.getBoundingClientRect().top+window.pageYOffset-70;window.scrollTo(0,y<0?0:y);}}
+  var tries=0;
+  function run(){go();if(++tries<8)setTimeout(run,250);}
+  if(target()){
+    if(document.readyState==='complete')run();else window.addEventListener('load',run);
+    window.addEventListener('hashchange',go);
+  }
+})();
+</script>
+
+
+<script>
+/* llegada desde un botón "Volver": bajar directo a la sección de origen */
+(function(){
+  var id='';
+  try{
+    if(location.hash && location.hash.length>1) id=decodeURIComponent(location.hash.slice(1));
+    var n=window.name||'';
+    if(n==='pm-historias'){ id=id||'historias'; window.name=''; }
+    else if(n.indexOf('pm-goto:')===0){ id=id||n.slice(8); window.name=''; }
+  }catch(e){}
+  if(!id) return;
+  function jump(){
+    var el=document.getElementById(id); if(!el) return;
+    var h=document.querySelector('header.site'); var off=h?h.offsetHeight:0;
+    var y=el.getBoundingClientRect().top + window.pageYOffset - off;
+    var html=document.documentElement, prev=html.style.scrollBehavior;
+    html.style.scrollBehavior='auto'; window.scrollTo(0,Math.max(0,y)); html.style.scrollBehavior=prev;
+  }
+  if(document.readyState==='complete'){ jump(); } else { window.addEventListener('load', jump); }
+  setTimeout(jump, 400);
+})();
+</script>
+
+<script>
+(function(){
+  var grid=document.getElementById('dim3Tiles'); if(!grid) return;
+  var touch=window.matchMedia('(hover:none)');
+  grid.querySelectorAll('.camino-tile').forEach(function(tile){
+    tile.addEventListener('click',function(e){
+      if(e.target.closest('.camino-arrow-btn')) return;   /* la flechita abre la sección */
+      if(e.detail===0 && !e.target.closest('.camino-arch-wrap')) return; /* teclado */
+      if(tile.tagName==='A') e.preventDefault();
+      if(e.target.closest('.camino-arch-wrap') && touch.matches){ tile.classList.toggle('is-flipped'); }
+    });
+  });
+})();
+</script>
+
+
+
+
+<style id="eyebrow-boost">
+/* etiquetas de sección un poco más grandes y con más presencia (no aplica al hero) */
+section:not(.hero) .eyebrow{font-size:.9rem;letter-spacing:.14em;font-weight:600;color:var(--ink);}
+.tone-verde .eyebrow{color:var(--on-accent);}
+@media (max-width:600px){section:not(.hero) .eyebrow{font-size:.82rem;}}
+</style>
+
+</body>
+</html>

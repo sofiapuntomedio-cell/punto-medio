@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Paisajes de Aprendizaje — Punto Medio</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body>
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --bg:#F9F9F6;
+    --surface:#D9C9A6;
+    --surface-2:#EAE2CC;
+    --ink:#252A28;
+    --ink-soft:#5B6259;
+    --line:#D3C6A3;
+    --verde:#596447;
+    --terracota:#C96342;
+    --rosa:#D98FA0;
+    --amarillo:#F5DFA3;
+    --azul:#829CAE;
+    --lavanda:#A89AB9;
+    --on-accent:#F7F4EE;
+    --shadow: 0 1px 2px rgba(37,42,40,.06);
+    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-body: "Jost", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1E1A;
+      --surface:#2C2A1E;
+      --surface-2:#242319;
+      --ink:#F1ECE1;
+      --ink-soft:#B7BDAF;
+      --line:#403D2C;
+      --verde:#8AA073;
+      --terracota:#E08862;
+      --rosa:#E7AEBC;
+      --amarillo:#E8CD8A;
+      --azul:#9FB7C7;
+      --lavanda:#C1B4CF;
+      --on-accent:#1B1E1A;
+      --shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1E1A;
+    --surface:#2C2A1E;
+    --surface-2:#242319;
+    --ink:#F1ECE1;
+    --ink-soft:#B7BDAF;
+    --line:#403D2C;
+    --verde:#8AA073;
+    --terracota:#E08862;
+    --rosa:#E7AEBC;
+    --amarillo:#E8CD8A;
+    --azul:#9FB7C7;
+    --lavanda:#C1B4CF;
+    --on-accent:#1B1E1A;
+    --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .container{max-width:1180px;margin:0 auto;padding:0 6vw;}
+  @media (min-width:1400px){.container{padding:0 120px;}}
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    line-height:1.12;
+    margin:0;
+    text-wrap:balance;
+    color:var(--ink);
+  }
+  h1{font-size:clamp(2.3rem,5.2vw,3.8rem);}
+  h2{font-size:clamp(1.6rem,3vw,2.2rem);}
+  h3{font-size:clamp(1.3rem,2vw,1.6rem);}
+  p{margin:0 0 1em;max-width:62ch;}
+  p:last-child{margin-bottom:0;}
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin:0 0 1.1rem;
+    display:flex;align-items:center;gap:.6em;
+    text-decoration:none;
+  }
+  a.eyebrow:hover{color:var(--verde);}
+  .lede{font-size:1.1rem;color:var(--ink-soft);max-width:56ch;}
+  em, .italic{font-family:var(--font-display);font-style:italic;color:var(--ink);}
+  .tagline{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:clamp(1.3rem,2.4vw,1.7rem);
+    color:var(--verde);
+  }
+
+  /* ---------- symbol (circle + heart) ---------- */
+  .sym{display:inline-block;color:currentColor;overflow:visible;}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.82rem;
+    letter-spacing:.05em;text-transform:uppercase;
+    padding:.95em 1.8em;border-radius:2px;border:1px solid transparent;
+    text-decoration:none;cursor:pointer;transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+    background:none;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--verde);color:var(--on-accent);}
+  .btn-primary:hover{background:var(--ink);}
+  .btn-primary .sym{width:14px;height:14px;}
+  .btn-ghost{color:var(--verde);padding:.4em 0;border-bottom:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--verde);}
+  .btn:hover .sym{transform:rotate(90deg);}
+  .btn .sym{transition:transform .4s ease;}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 0 .8rem;}
+  .wm{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink);
+    font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:.13em;text-transform:uppercase;}
+  .wm-o{display:inline-flex;width:.82em;height:.82em;margin:0 .02em;position:relative;top:.06em;}
+  .wm-o .sym{width:100%;height:100%;color:var(--verde);}
+
+  .brand-lockup{position:relative;display:inline-block;font-family:var(--font-display);text-transform:uppercase;
+    font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;letter-spacing:.04em;line-height:1.02;color:var(--ink);
+    text-decoration:none;}
+  .brand-lockup .wm-o{width:.88em;height:.88em;top:.07em;margin:0 .01em;}
+  .brand-lockup .wm-o .sym{color:var(--ink);}
+  nav.main-nav{display:flex;flex-wrap:wrap;align-items:center;column-gap:1.15rem;row-gap:.7rem;padding:.75rem 0 1.05rem;border-top:1px solid var(--line);}
+  nav.main-nav a{
+    font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;
+    text-decoration:none;color:var(--ink-soft);font-weight:600;
+    padding-bottom:2px;border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  nav.main-nav a:hover, nav.main-nav a.current{color:var(--ink);border-color:var(--verde);}
+  .nav-cta-link{
+    display:inline-flex;align-items:center;gap:.5em;margin-left:auto;white-space:nowrap;
+    font-family:var(--font-body);font-style:normal;font-weight:600;font-size:.92rem;
+    letter-spacing:.01em;text-transform:none;color:var(--terracota);
+    text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;
+    transition:border-color .2s ease,color .2s ease;
+  }
+  .nav-cta-link:hover{border-color:var(--terracota);color:var(--terracota);}
+  .nav-cta-link .sym{width:15px;height:15px;transition:transform .4s ease;}
+  .nav-cta-link:hover .sym{transform:rotate(90deg);}
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:.5em .7em;color:var(--ink);}
+  @media (max-width:900px){
+    nav.main-nav{position:fixed;inset:64px 0 0 0;background:var(--bg);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:2.2rem 6vw;gap:1.6rem;transform:translateX(100%);transition:transform .35s ease;overflow-y:auto;border-top:none;}
+    nav.main-nav.open{transform:translateX(0);}
+    nav.main-nav a{font-size:1rem;}
+    .nav-cta-link{margin-left:0;margin-top:.6rem;font-size:1.2rem;}
+    .menu-toggle{display:inline-flex;}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(3.6rem,7vw,6rem) 0;position:relative;}
+  .divider-row{display:flex;align-items:center;gap:1rem;margin:0 auto;max-width:1180px;padding:0 6vw;}
+  .divider-row .rule{flex:1;height:1px;background:var(--line);}
+  .divider-row .sym{width:20px;height:20px;color:var(--verde);flex:none;}
+  .section-divider{padding:0;background:#fff;position:relative;z-index:1;}
+  .section-divider .divider-row{padding:clamp(2rem,4.4vw,3rem) 6vw;}
+
+  /* placeholder image block — same convention used across the site: "photo pending" */
+  .placeholder-img{
+    background:
+      repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink) 10%, transparent) 0 10px, transparent 10px 20px),
+      color-mix(in srgb, var(--ink) 9%, var(--surface));
+    border:1px solid color-mix(in srgb, var(--ink) 28%, var(--line));
+    display:flex;align-items:flex-end;justify-content:flex-start;
+    padding:.7rem;
+  }
+  .placeholder-img span{
+    font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--ink-soft);background:var(--bg);padding:.35em .6em;border:1px solid var(--line);
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{transform:translateY(14px);transition:transform .7s ease;}
+    .reveal.in-view{transform:translateY(0);}
+  }
+
+  .proto-tag{
+    position:fixed;left:14px;bottom:14px;z-index:50;
+    background:var(--ink);color:var(--bg);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:.55em .9em;border-radius:2px;opacity:.82;font-weight:600;
+  }
+  @media (max-width:700px){.proto-tag{display:none;}}
+
+  /* ---------- proyecto: hero ---------- */
+  .proyecto-hero{padding-bottom:clamp(1.6rem,3.2vw,2.2rem);}
+  .proyecto-hero-inner{max-width:760px;}
+  .proyecto-meta-row{display:flex;align-items:center;gap:.7rem;margin-top:1.1rem;}
+  .proyecto-cat-icon{
+    width:30px;height:30px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);background:#fff;
+  }
+  .proyecto-cat-icon svg{width:15px;height:15px;color:var(--ink);}
+  .proyecto-cat-label{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+  /* futuro: si se proporciona, agregar aquí "Ubicación · Año" como segundo dato en .proyecto-meta-row */
+
+  /* ---------- proyecto: galería ---------- */
+  .galeria-tight{padding-top:0;padding-bottom:clamp(2rem,4vw,3rem);background:#fff;}
+  .galeria-principal{position:relative;aspect-ratio:16/10;border-radius:3px;margin-bottom:1rem;overflow:hidden;background:#fff;}
+  .galeria-tiras-wrap{position:relative;}
+  .galeria-tiras{
+    display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-bottom:.4rem;-webkit-overflow-scrolling:touch;scrollbar-width:thin;
+  }
+  .galeria-tiras::-webkit-scrollbar{height:5px;}
+  .galeria-tiras::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+  .galeria-slide{
+    flex:0 0 auto;width:min(220px,58vw);aspect-ratio:4/3;
+    scroll-snap-align:start;border-radius:3px;overflow:hidden;background:#fff;
+    border:2px solid transparent;cursor:pointer;transition:border-color .25s ease,transform .25s ease;
+    padding:0;
+  }
+  .galeria-slide img{width:100%;height:100%;object-fit:contain;display:block;}
+  .galeria-slide:hover{transform:translateY(-2px);}
+  .galeria-slide.active{border-color:var(--verde);}
+  .galeria-nav{display:flex;align-items:center;justify-content:center;margin-top:1rem;}
+  .galeria-dots{display:flex;gap:.5rem;}
+  .galeria-dot{width:6px;height:6px;border-radius:50%;background:var(--line);border:none;padding:0;cursor:pointer;transition:background .25s ease,transform .25s ease;}
+  .galeria-dot.active{background:var(--verde);transform:scale(1.3);}
+  .galeria-arrow{
+    width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .25s ease,color .25s ease,background .25s ease;
+  }
+  .galeria-arrow:hover{border-color:var(--verde);color:var(--verde);}
+  .galeria-arrow svg{width:16px;height:16px;}
+  .galeria-principal .galeria-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:color-mix(in srgb, #fff 88%, transparent);
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+    box-shadow:0 6px 18px -8px rgba(37,42,40,.35);
+    z-index:2;
+  }
+  .galeria-principal #galeriaPrev{left:14px;}
+  .galeria-principal #galeriaNext{right:14px;}
+  @media (max-width:620px){
+    .galeria-principal .galeria-arrow{width:34px;height:34px;}
+    .galeria-principal #galeriaPrev{left:8px;}
+    .galeria-principal #galeriaNext{right:8px;}
+  }
+
+  /* miniaturas más chicas en celular (en compu se mantienen) */
+  @media (max-width:620px){
+    .galeria-tiras{gap:.5rem;}
+    .galeria-slide{width:26vw;border-width:1.5px;}
+    .galeria-slide .antes-tag{font-size:.56rem;padding:.15em .45em;top:4px;left:4px;}
+  }
+
+  /* ---------- proyecto: la historia ---------- */
+  .historia-tight{padding-top:clamp(2.6rem,4.6vw,3.6rem);}
+  .historia-head{max-width:640px;margin:0 auto 2.6rem;text-align:center;}
+  .historia-head .eyebrow{justify-content:center;margin:0 auto 1.1rem;}
+  .historia-partes{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem 3.2rem;max-width:960px;margin:0 auto;}
+  .historia-parte h3{margin-bottom:.85rem;font-size:clamp(1.15rem,1.8vw,1.4rem);}
+  .historia-parte p{color:var(--ink-soft);max-width:none;}
+  @media (max-width:760px){
+    .historia-partes{grid-template-columns:1fr;gap:2rem;}
+  }
+
+  /* futuro: módulos que se incorporarán más adelante (ver comentarios HTML junto a "LA HISTORIA") —
+     .proceso-tight, .antes-despues-grid, .ficha-tecnica, .testimonios-tight — no implementados todavía a pedido explícito. */
+
+  /* ---------- cierre ---------- */
+  .proyecto-cierre{text-align:center;padding-top:clamp(1.4rem,3vw,2.2rem);}
+
+  /* ---------- footer ---------- */
+  footer.site{background:var(--surface-2);border-top:1px solid var(--line);padding:clamp(3rem,6vw,4.5rem) 0 1.6rem;}
+  .footer-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2.4rem;padding-bottom:2.4rem;border-bottom:1px solid var(--line);}
+  .footer-cols{display:flex;gap:clamp(2.4rem,6vw,5rem);flex-wrap:wrap;}
+  .footer-col{display:flex;flex-direction:column;gap:.6rem;min-width:170px;}
+  .footer-col h4{font-family:var(--font-body);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .3rem;font-weight:700;}
+  .footer-col a{font-size:.9rem;text-decoration:none;color:var(--ink);transition:color .2s ease;}
+  .footer-col a:hover{color:var(--verde);}
+  .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem;padding-top:1.4rem;font-size:.78rem;color:var(--ink-soft);}
+
+  /* ---------- la propuesta en planta ---------- */
+  .planta-wrap{margin-top:clamp(3rem,6vw,4.5rem);}
+  .planta-head{max-width:620px;margin:0 auto 2.4rem;text-align:center;}
+  .planta-head .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .planta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem;align-items:start;}
+  .planta-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:clamp(1.1rem,2.4vw,1.6rem);display:flex;flex-direction:column;gap:1.2rem;min-width:0;}
+  .planta-card h3{font-size:1.15rem;margin:0;}
+  .planta-img{background:#fff;border-radius:8px;overflow:hidden;}
+  .planta-img img{width:100%;height:auto;display:block;}
+  .sector-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1rem;}
+  .sector-list li{display:grid;grid-template-columns:14px 1fr;gap:.75rem;align-items:start;}
+  .sector-dot{width:14px;height:14px;border-radius:50%;margin-top:.3em;}
+  .sector-list h4{margin:0 0 .25rem;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);}
+  .sector-list p{margin:0;font-size:.9rem;color:var(--ink-soft);max-width:none;}
+  .refs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem 1.2rem;list-style:none;margin:0;padding:0;font-size:.88rem;color:var(--ink-soft);}
+  .refs li{display:flex;gap:.5em;}
+  .refs b{color:var(--terracota);font-variant-numeric:tabular-nums;min-width:1.4em;}
+  .reubicar{background:var(--surface-2);border-radius:10px;padding:1rem 1.2rem;}
+  .reubicar h4{margin:0 0 .5rem;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);}
+  .reubicar p{margin:0;font-size:.88rem;color:var(--ink-soft);max-width:none;}
+  .planta-card .sub{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:0;}
+  @media(max-width:860px){.planta-grid{grid-template-columns:1fr;}}
+  @media(max-width:420px){.refs{grid-template-columns:1fr;}}
+
+
+  /* ---------- etiqueta "Antes" en la galería ---------- */
+  .galeria-principal{position:relative;}
+  .galeria-slide{position:relative;}
+  .antes-tag{position:absolute;top:.55rem;left:.55rem;z-index:2;background:color-mix(in srgb,#fff 90%,transparent);color:var(--ink);font-family:var(--font-body);font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.35em .8em;border-radius:999px;pointer-events:none;}
+  .antes-tag-main{top:1rem;left:1rem;font-size:.76rem;padding:.45em 1em;}
+  .espacios-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem 2rem;}
+  @media(max-width:760px){.espacios-list{grid-template-columns:1fr;}}
+
+  /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
+  :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
+  body .btn, body .btn-ghost{
+    display:inline-flex !important;align-items:center;justify-content:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.8rem;line-height:1.2;
+    letter-spacing:.06em;text-transform:uppercase;text-align:center;
+    padding:.95em 2em !important;border-radius:999px !important;
+    background:var(--btn-bg) !important;border:1.5px solid var(--btn-bg) !important;color:var(--btn-ink) !important;
+    text-decoration:none !important;cursor:pointer;
+    box-shadow:0 8px 18px -12px rgba(37,42,40,.55);
+    transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  body .btn:hover, body .btn-ghost:hover{
+    background:var(--btn-hover) !important;border-color:var(--btn-hover) !important;color:var(--btn-hover-ink,#fff) !important;transform:translateY(-1px);
+  }
+
+  /* colores de botón de esta página */
+  .historia-tight{--btn-bg:#596447;}
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="simbolo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M12 15.2 C9.8 13.6 8.3 12.2 8.3 10.6 C8.3 9.4 9.2 8.5 10.4 8.5 C11.1 8.5 11.7 8.9 12 9.5 C12.3 8.9 12.9 8.5 13.6 8.5 C14.8 8.5 15.7 9.4 15.7 10.6 C15.7 12.2 14.2 13.6 12 15.2 Z" fill="var(--terracota)"></path>
+  </symbol>
+  <!-- categoría · Arquitectura Integral -->
+  <symbol id="icon-arquitectura" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M8.3 16V11.2C8.3 8.3 9.9 6.2 12 6.2C14.1 6.2 15.7 8.3 15.7 11.2V16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"></path>
+    <line x1="8" y1="16.2" x2="16" y2="16.2" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+  </symbol>
+  <!-- categoría · Diseño de Interiores Holístico -->
+  <symbol id="icon-interiores" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M9.6 9.2H14.4L12.8 13.1H11.2Z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"></path>
+    <line x1="12" y1="13.1" x2="12" y2="16.3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="10" y1="16.3" x2="14" y2="16.3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+  </symbol>
+  <!-- categoría · Paisajismo -->
+  <symbol id="icon-paisajismo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M12 16.6C12 16.6 7.6 14.3 7.6 9.7C7.6 9.7 12 7.4 12 7.4C12 7.4 16.4 9.7 16.4 9.7C16.4 14.3 12 16.6 12 16.6Z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"></path>
+    <line x1="12" y1="7.4" x2="12" y2="16.6" stroke="currentColor" stroke-width="1.1"></line>
+  </symbol>
+  <!-- categoría · Bienestar Empresarial -->
+  <symbol id="icon-bienestar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <circle cx="10.3" cy="12" r="3.3" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <circle cx="13.9" cy="12" r="3.3" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+  </symbol>
+  <!-- categoría · Limpieza y Armonización Energética -->
+  <symbol id="icon-limpieza" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"></circle>
+    <line x1="12" y1="6.6" x2="12" y2="8.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="12" y1="15.6" x2="12" y2="17.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="6.6" y1="12" x2="8.4" y2="12" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="15.6" y1="12" x2="17.4" y2="12" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="8.5" y1="8.5" x2="9.7" y2="9.7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="14.3" y1="14.3" x2="15.5" y2="15.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="15.5" y1="8.5" x2="14.3" y2="9.7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+    <line x1="9.7" y1="14.3" x2="8.5" y2="15.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></line>
+  </symbol>
+</svg>
+
+<header class="site">
+  <div class="container">
+    <div class="nav-row">
+      <a href="/" class="wm">PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span>MEDIO</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="/">Inicio</a>
+      <a href="/espacio-exterior/" class="current">Espacio Exterior</a>
+      <a href="/espacio-interior/">Espacio Interior</a>
+      <a href="/espacio-exterior/bienestar-empresarial/">Bienestar Empresarial</a>
+      <a href="/universo/">Universo Punto Medio</a>
+      <a href="/sobre-mi/">Sobre mí</a>
+      <a href="#datos-contacto">Contacto</a>
+      <a class="nav-cta-link" href="/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Comenzar un proceso</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO DEL PROYECTO -->
+  <section class="proyecto-hero">
+    <div class="container">
+      <div class="proyecto-hero-inner reveal">
+        <a class="eyebrow" href="/espacio-exterior/#historias">← Volver a Conocé otras historias</a>
+        <h1>Paisajes de Aprendizaje</h1>
+        <div class="proyecto-meta-row">
+          <span class="proyecto-cat-icon"><svg class="sym" viewBox="0 0 24 24"><use href="#icon-arquitectura"/></svg></span>
+          <span class="proyecto-cat-label">Arquitectura Integral</span>
+        </div>
+        <p class="ie-meta">Concurso IE Creativity Spaces · Madrid, España · 2021 · Segundo premio</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section class="galeria-tight">
+    <div class="container">
+      <div class="galeria-principal reveal">
+        <span class="antes-tag antes-tag-main" id="galeriaAntesTag" hidden>Antes</span>
+        <svg class="ax-labels" id="axLabels" viewBox="0 0 2010 1256" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g class="ax-lbl"><path d="M304,150 L364,150 L930,350"/><circle cx="930" cy="350" r="9"/><rect x="60" y="123" width="244" height="54" rx="27"/><text x="182.0" y="159">ÁREA RELAX</text></g><g class="ax-lbl"><path d="M448,300 L508,300 L1068,440"/><circle cx="1068" cy="440" r="9"/><rect x="60" y="273" width="388" height="54" rx="27"/><text x="254.0" y="309">ÁREA CONCENTRACIÓN</text></g><g class="ax-lbl"><path d="M502,450 L562,450 L633,460"/><circle cx="633" cy="460" r="9"/><rect x="60" y="423" width="442" height="54" rx="27"/><text x="281.0" y="459">SECTOR ADMINISTRATIVO</text></g><g class="ax-lbl"><path d="M1634,200 L1574,200 L1391,270"/><circle cx="1391" cy="270" r="9"/><rect x="1634" y="173" width="316" height="54" rx="27"/><text x="1792.0" y="209">ÁREA EXPRESIÓN</text></g><g class="ax-lbl"><path d="M1634,780 L1574,780 L1081,673"/><circle cx="1081" cy="673" r="9"/><rect x="1634" y="753" width="316" height="54" rx="27"/><text x="1792.0" y="789">PATIO EXTERIOR</text></g></svg>
+        <img id="galeriaMain" src="/img/11ad4380af4c.webp" alt="Axonométrica de la guardería: el edificio, el patio con huerta y las áreas de juego" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <button class="galeria-arrow" id="galeriaPrev" aria-label="Foto anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="galeria-arrow" id="galeriaNext" aria-label="Foto siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="galeria-tiras-wrap reveal">
+        <div class="galeria-tiras" id="galeriaTiras">
+          <div class="galeria-slide active" data-i="0" tabindex="0" role="button" aria-label="Ver Axonométrica de la guardería: el edificio, el patio con huerta y las áreas de juego en tamaño grande"><img src="/img/1e75f34d7f82.webp" data-full="/img/11ad4380af4c.webp" alt="Axonométrica de la guardería: el edificio, el patio con huerta y las áreas de juego" loading="lazy"></div>
+          <div class="galeria-slide" data-i="1" tabindex="0" role="button" aria-label="Ver El área central de movimiento con el entrepiso, las mesas de trabajo y el escenario en tamaño grande"><img src="/img/6624051d07c8.webp" data-full="/img/9a9a2b9a8184.webp" alt="El área central de movimiento con el entrepiso, las mesas de trabajo y el escenario" loading="lazy"></div>
+          <div class="galeria-slide" data-i="2" tabindex="0" role="button" aria-label="Ver Escenario, tobogán y pelotero frente al mural del bosque en tamaño grande"><img src="/img/c19b96827ec9.webp" data-full="/img/6d58ffe9926d.webp" alt="Escenario, tobogán y pelotero frente al mural del bosque" loading="lazy"></div>
+          <div class="galeria-slide" data-i="3" tabindex="0" role="button" aria-label="Ver Área de trabajo bajo el entrepiso y recorrido hacia el sector de juego en tamaño grande"><img src="/img/19d9c601d9f4.webp" data-full="/img/71f2313188ba.webp" alt="Área de trabajo bajo el entrepiso y recorrido hacia el sector de juego" loading="lazy"></div>
+          <div class="galeria-slide" data-i="4" tabindex="0" role="button" aria-label="Ver Expresión y Energía: áreas y circuitos que favorecen la actividad física y son un escenario para actividades artísticas en tamaño grande"><img src="/img/099765d215b9.webp" data-full="/img/4a8681c73cf0.webp" alt="Expresión y Energía: áreas y circuitos que favorecen la actividad física y son un escenario para actividades artísticas" loading="lazy"></div>
+          <div class="galeria-slide" data-i="5" tabindex="0" role="button" aria-label="Ver Foco: área con altura reducida que favorece la concentración para realizar tareas específicas en tamaño grande"><img src="/img/3c0f5dbebbca.webp" data-full="/img/33435877ab5b.webp" alt="Foco: área con altura reducida que favorece la concentración para realizar tareas específicas" loading="lazy"></div>
+          <div class="galeria-slide" data-i="6" tabindex="0" role="button" aria-label="Ver Relax: área tranquila y privada para el descanso o actividades de concentración en tamaño grande"><img src="/img/af42a983664c.webp" data-full="/img/9cbc26e1689b.webp" alt="Relax: área tranquila y privada para el descanso o actividades de concentración" loading="lazy"></div>
+          <div class="galeria-slide" data-i="7" tabindex="0" role="button" aria-label="Ver Lámina original del concurso en tamaño grande"><img src="/img/9e8af9492248.webp" data-full="/img/61374b17b996.webp" alt="Lámina original del concurso" loading="lazy"></div>
+        </div>
+        <div class="galeria-nav">
+          <div class="galeria-dots" id="galeriaDots" aria-hidden="true">
+            <button class="galeria-dot active" data-i="0"></button>
+            <button class="galeria-dot" data-i="1"></button>
+            <button class="galeria-dot" data-i="2"></button>
+            <button class="galeria-dot" data-i="3"></button>
+            <button class="galeria-dot" data-i="4"></button>
+            <button class="galeria-dot" data-i="5"></button>
+            <button class="galeria-dot" data-i="6"></button>
+            <button class="galeria-dot" data-i="7"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <div class="divider-row reveal" aria-hidden="true">
+      <span class="rule"></span>
+      <svg class="sym"><use href="#simbolo"/></svg>
+      <span class="rule"></span>
+    </div>
+  </div>
+
+  <!-- LA HISTORIA -->
+  <section class="historia-tight">
+    <div class="container">
+      <div class="historia-head reveal">
+        <p class="eyebrow">La historia</p>
+      </div>
+      <div class="historia-partes reveal">
+        <div class="historia-parte">
+          <h3>La idea</h3>
+          <p>Para fomentar la creatividad en los niños y formar individuos independientes, capaces de relacionarse consigo mismos y con la sociedad, no alcanza con poner en práctica las nuevas teorías de enseñanza y aprendizaje: también es necesario crear espacios que acompañen estas actividades. Estos dejan de ser un mero espacio de contención de actividades para convertirse en una herramienta de cambio, creando espacios lúdicos que fomentan la creatividad, la imaginación y la innovación, estimulando los distintos sentidos a través de diferentes colores, texturas, materiales y espacialidades.</p>
+          <p>Está comprobado que los niños mejoran sus habilidades creativas cuando los espacios son flexibles y lúdicos; espacios que permiten libertad de movimiento, exploración y apropiación. Para esto deben diseñarse de forma segura, a la escala de los más pequeños, permitiendo que los niños se involucren en su propio aprendizaje.</p>
+        </div>
+        <div class="historia-parte">
+          <h3>La propuesta</h3>
+          <p>Partiendo de la idea de que el entorno físico tiene un impacto muy fuerte en cómo nos sentimos, cómo nos comunicamos e interactuamos con los demás, desaparecen los espacios tradicionales fragmentados y aparecen espacios abiertos, flexibles y cómodos. Estos proyectan las distintas escalas a las que pueden enfrentarse los niños: desde áreas más pequeñas y personales, a espacios de grupo e interacción, todavía dentro de un espacio contenido, hasta encontrarse finalmente con un gran área que permite libertad de movimiento, exploración y apropiación.</p>
+          <p>El proyecto presenta un área de menor altura, destinada a tareas de concentración, resolución de problemas y experimentación, y un área de tableros lúdicos que promueven el desarrollo de ciertas habilidades. Sobre esta área, un entrepiso tranquilo para leer y descansar cuando sea necesario. Por fuera de estas áreas encontramos un área central que promueve el movimiento y la liberación de energía, activando y desarrollando otras habilidades en los más pequeños.</p>
+          <p class="ie-escalas">Rincón → Casa → Ciudad<br>Individual → Familia → Comunidad</p>
+        </div>
+        <div class="historia-parte">
+          <h3>El juego y la naturaleza</h3>
+          <p>Cuando empecé el proyecto, les pregunté a varios niños cuál era su momento favorito en el jardín, y la mayoría respondió el recreo o los juegos en el patio. Esto sucede porque es el momento en que pueden moverse con mayor libertad. Por eso, el espacio público y la naturaleza toman gran relevancia en el proyecto, ya que permiten a los niños moverse más libremente, dando lugar a la imaginación y la creatividad. Para los niños, el juego es su primer lenguaje y su forma de relacionarse con el mundo. Debemos valorar y promover el juego, también como parte del proceso de aprendizaje.</p>
+          <p>La conexión con la naturaleza (directa o indirecta) se considera muy beneficiosa para la salud psicoemocional de los niños. La conexión con la naturaleza, la iluminación natural y el uso del color se relacionan directamente con la importancia del aspecto sensorial en el desarrollo humano. En conjunto, pueden crear un entorno físico de aprendizaje seguro y capaz de aprovechar al máximo el potencial creativo de los niños.</p>
+        </div>
+      </div>
+
+      <div class="planta-wrap" id="planta">
+        <div class="planta-head reveal"><p class="eyebrow">La propuesta en planta</p></div>
+        <div class="planta-card reveal" style="margin-bottom:1.6rem;">
+          <p class="sub">Planta de arquitectura</p>
+          <div class="planta-img"><img src="/img/e994ec135eb1.webp" alt="Planta de arquitectura de la guardería con sus diez sectores" loading="lazy"></div>
+          <ul class="sector-list ie-sectores"><li><span class="sector-dot" style="background:var(--terracota)"></span><div><h4>1. Hall de acceso</h4></div></li><li><span class="sector-dot" style="background:var(--azul)"></span><div><h4>2. Oficina</h4></div></li><li><span class="sector-dot" style="background:var(--lavanda)"></span><div><h4>3. Baños</h4></div></li><li><span class="sector-dot" style="background:var(--amarillo)"></span><div><h4>4. Cocinita / experimentos</h4></div></li><li><span class="sector-dot" style="background:var(--rosa)"></span><div><h4>5. Área de trabajo, juegos de mesa y dibujo</h4></div></li><li><span class="sector-dot" style="background:var(--verde)"></span><div><h4>6. Patio interno</h4></div></li><li><span class="sector-dot" style="background:var(--verde)"></span><div><h4>7. Patio externo</h4></div></li><li><span class="sector-dot" style="background:var(--rosa)"></span><div><h4>8. Pelotero</h4></div></li><li><span class="sector-dot" style="background:var(--amarillo)"></span><div><h4>9. Escenario / artes</h4></div></li><li><span class="sector-dot" style="background:var(--verde)"></span><div><h4>10. Huerta</h4></div></li></ul>
+        </div>
+        <div class="planta-head reveal" style="margin-top:2.4rem;"><p class="eyebrow">Distintas áreas</p></div>
+        <div class="planta-card reveal">
+          <ul class="sector-list">
+            <li><span class="sector-dot" style="background:var(--lavanda)"></span><div><h4>Relax</h4><p>Área tranquila y privada para el descanso o actividades de concentración.</p></div></li>
+            <li><span class="sector-dot" style="background:var(--azul)"></span><div><h4>Foco</h4><p>Área con altura reducida que favorece la concentración para realizar tareas específicas.</p></div></li>
+            <li><span class="sector-dot" style="background:var(--terracota)"></span><div><h4>Energía</h4><p>Áreas y circuitos que favorecen la actividad física.</p></div></li>
+            <li><span class="sector-dot" style="background:var(--amarillo)"></span><div><h4>Expresión</h4><p>Escenario para actividades artísticas como la danza, el teatro, la música y la expresión.</p></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="proyecto-cierre reveal">
+        <a class="btn-ghost" href="/espacio-exterior/#historias">← Conocer otras historias</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+<footer class="site" id="datos-contacto">
+  <div class="container">
+    <div class="footer-top">
+      <a href="/" class="brand-lockup">
+        PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span><br>MEDIO
+      </a>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Recorrer</h4>
+          <a href="/espacio-exterior/">Espacio Exterior</a>
+          <a href="/espacio-interior/">Espacio Interior</a>
+          <a href="/universo/">Universo Punto Medio</a>
+          <a href="/sobre-mi/">Sobre mí</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="mailto:sofia.puntomedio@gmail.com">sofia.puntomedio@gmail.com</a>
+          <a href="tel:+541150601481">+54 11 50601481</a>
+          <a href="https://wa.me/5491150601481" target="_blank" rel="noopener">Escribime por WhatsApp →</a>
+          <p style="color:var(--ink-soft);">Bahía Blanca, Argentina</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Punto Medio</span>
+      <span>Diseñar espacios para habitar(se).</span>
+    </div>
+  </div>
+</footer>
+
+<div class="proto-tag">Prototipo · Proyecto M.C.</div>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var nav = document.getElementById('mainNav');
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true':'false');
+      });
+      nav.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+      });
+    }
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && 'IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+    }
+
+    /* galería: click a thumbnail to see it large up top; strip stays as a preview row */
+    var tiras = document.getElementById('galeriaTiras');
+    var dotsWrap = document.getElementById('galeriaDots');
+    var prevBtn = document.getElementById('galeriaPrev');
+    var nextBtn = document.getElementById('galeriaNext');
+    var mainImg = document.getElementById('galeriaMain');
+    if(tiras && dotsWrap){
+      var slides = Array.prototype.slice.call(tiras.children);
+      var dots = Array.prototype.slice.call(dotsWrap.children);
+      var current = 0;
+
+      function select(i, scroll){
+        i = Math.max(0, Math.min(slides.length-1, i));
+        current = i;
+        dots.forEach(function(d,idx){ d.classList.toggle('active', idx===i); });
+        slides.forEach(function(s,idx){ s.classList.toggle('active', idx===i); });
+        if(mainImg){
+          var img = slides[i].querySelector('img');
+          mainImg.src = img.getAttribute('data-full');
+          mainImg.alt = img.getAttribute('alt');
+          var tag=document.getElementById('galeriaAntesTag'); if(tag) tag.hidden = !slides[i].classList.contains('is-antes');
+        }
+        if(scroll){ var tr=tiras.getBoundingClientRect(), sr=slides[i].getBoundingClientRect(); tiras.scrollTo({left: tiras.scrollLeft + (sr.left - tr.left) - (tr.width - sr.width)/2, behavior:'smooth'}); }
+      }
+
+      slides.forEach(function(s, idx){
+        s.addEventListener('click', function(){ select(idx, false); });
+        s.addEventListener('keydown', function(ev){
+          if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); select(idx, false); }
+        });
+      });
+      dots.forEach(function(d, idx){
+        d.addEventListener('click', function(){ select(idx, true); });
+      });
+      if(prevBtn) prevBtn.addEventListener('click', function(){ select(current-1, true); });
+      if(nextBtn) nextBtn.addEventListener('click', function(){ select(current+1, true); });
+    }
+  })();
+</script>
+
+
+<script>
+/* "Volver a Conocé otras historias": regresa a la página anterior (manteniendo la posición en la sección); si se abrió directo, usa el link */
+(function(){
+  document.querySelectorAll('a[href*="#historias"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      try{ window.name = 'pm-historias'; }catch(e){}
+    });
+  });
+})();
+</script>
+<style>.historia-pendiente{max-width:640px;margin:0 auto;border:1px dashed var(--line);border-radius:12px;padding:1.4rem;text-align:center;background:#fff;}.historia-pendiente span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}</style>
+<style>
+  /* ---------- plantas ampliables ---------- */
+  .planta-img img{cursor:zoom-in;}
+  .planta-img{position:relative;}
+  .planta-zoom-hint{position:absolute;right:.6rem;bottom:.6rem;width:34px;height:34px;border-radius:50%;background:color-mix(in srgb,#fff 90%,transparent);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);pointer-events:none;box-shadow:0 4px 12px -6px rgba(37,42,40,.35);}
+  .planta-zoom-hint svg{width:16px;height:16px;}
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(27,30,26,.88);display:none;}
+  .lb.open{display:block;}
+  .lb-scroll{position:absolute;inset:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:56px 16px 16px;}
+  .lb-scroll img{max-width:100%;max-height:100%;background:#fff;border-radius:6px;cursor:zoom-in;display:block;margin:auto;}
+  .lb.zoomed .lb-scroll{display:block;}
+  .lb.zoomed .lb-scroll img{max-width:none;max-height:none;width:240%;cursor:zoom-out;}
+  .lb-close{position:absolute;top:12px;right:12px;z-index:2;width:40px;height:40px;border-radius:50%;border:none;background:#fff;color:#252A28;font-size:22px;line-height:1;cursor:pointer;}
+  .lb-tip{position:absolute;top:20px;left:16px;z-index:2;color:#F7F4EE;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;font-family:var(--font-body);}
+  @media (max-width:620px){ .lb.zoomed .lb-scroll img{width:400%;} }
+/* galería: imagen principal + etiquetas de la axonometría */
+#galeriaMain{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
+.ax-labels{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible;transition:opacity .3s ease;}
+.ax-labels.off{opacity:0;}
+.ax-lbl path{fill:none;stroke:var(--ink);stroke-width:2.5;}
+.ax-lbl circle{fill:var(--terracota);stroke:#fff;stroke-width:3;}
+.ax-lbl rect{fill:#fff;stroke:var(--ink);stroke-width:2;}
+.ax-lbl text{fill:var(--ink);font-family:var(--font-body);font-size:24px;font-weight:600;letter-spacing:.1em;text-anchor:middle;}
+@media (max-width:620px){.ax-lbl text{font-size:30px;}.ax-lbl rect{stroke-width:3;}}
+/* nav fix: vertical mobile menu */
+header.site{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:-1;pointer-events:none;}
+@media (max-width:900px){nav.main-nav{flex-wrap:nowrap !important;}}
+</style>
+<div class="lb" id="plantaLb" role="dialog" aria-modal="true" aria-label="Planta ampliada">
+  <span class="lb-tip">Tocá la planta para acercar</span>
+  <button class="lb-close" type="button" aria-label="Cerrar">×</button>
+  <div class="lb-scroll"><img alt=""></div>
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('plantaLb'); if(!lb) return;
+  var big=lb.querySelector('img'), sc=lb.querySelector('.lb-scroll');
+  var hint='<span class="planta-zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M11 8.5v5M8.5 11h5"/></svg></span>';
+  function close(){ lb.classList.remove('open','zoomed'); document.body.style.overflow=''; }
+  document.querySelectorAll('.planta-img img').forEach(function(img){
+    img.parentNode.insertAdjacentHTML('beforeend', hint);
+    img.setAttribute('tabindex','0'); img.setAttribute('role','button');
+    function open(){ big.src=img.src; big.alt=img.alt; lb.classList.add('open'); lb.classList.remove('zoomed'); document.body.style.overflow='hidden'; }
+    img.addEventListener('click', open);
+    img.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+  });
+  big.addEventListener('click', function(e){
+    e.stopPropagation();
+    var r=big.getBoundingClientRect(), fx=(e.clientX-r.left)/r.width, fy=(e.clientY-r.top)/r.height;
+    var z=lb.classList.toggle('zoomed');
+    if(z){ requestAnimationFrame(function(){ sc.scrollLeft=fx*big.offsetWidth - sc.clientWidth/2; sc.scrollTop=fy*big.offsetHeight - sc.clientHeight/2; }); }
+  });
+  lb.querySelector('.lb-close').addEventListener('click', close);
+  sc.addEventListener('click', function(e){ if(e.target===sc) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('open')) close(); });
+})();
+</script>
+
+<script>(function(){var m=document.getElementById('galeriaMain'),l=document.getElementById('axLabels'),f=document.querySelector('.galeria-slide[data-i="0"] img');if(!m||!l||!f)return;var first=f.getAttribute('data-full');function u(){l.classList.toggle('off',m.getAttribute('src')!==first);}new MutationObserver(u).observe(m,{attributes:true,attributeFilter:['src']});u();})();</script>
+
+
+
+</body>
+</html>
