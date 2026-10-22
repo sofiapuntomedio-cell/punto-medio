@@ -27,3 +27,14 @@ sofia.puntomedio@gmail.com.
 python3 -m http.server 8000 --directory site
 ```
 y abrir http://localhost:8000 (los formularios solo envían una vez publicados en Netlify).
+
+## Versión en inglés
+
+Las páginas en inglés (`site/en/...`) se generan a partir de las de español, no se editan a mano:
+
+1. Las traducciones están en `i18n/en/*.json` (`"texto en español": "English text"`).
+   Cambios de código puntuales (formato de fechas del calendario, etc.) en `i18n/en/_patches.json`.
+2. `python3 tools/i18n.py extract` lista en `i18n/pendientes/` los textos que todavía no tienen traducción.
+3. `python3 tools/i18n.py build` regenera todo `site/en/`, el selector ES / EN y el sitemap.
+
+Cuando cambia un texto en español, hay que agregar su traducción y volver a correr `build`.

@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hebrew Pendulum — Punto Medio</title>
+<link rel="canonical" href="https://sofia-puntomedio.com.ar/en/espacio-interior/pendulo-hebreo/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Punto Medio">
+<meta property="og:title" content="Hebrew Pendulum — Punto Medio">
+<meta property="og:url" content="https://sofia-puntomedio.com.ar/en/espacio-interior/pendulo-hebreo/">
+<meta property="og:image" content="https://sofia-puntomedio.com.ar/img/c30f51f11f99.webp">
+<link rel="alternate" hreflang="es" href="https://sofia-puntomedio.com.ar/espacio-interior/pendulo-hebreo/">
+<link rel="alternate" hreflang="en" href="https://sofia-puntomedio.com.ar/en/espacio-interior/pendulo-hebreo/">
+<link rel="alternate" hreflang="x-default" href="https://sofia-puntomedio.com.ar/espacio-interior/pendulo-hebreo/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style id="lang-switch-css">
+  .lang-switch{display:inline-flex;align-items:center;gap:.35em;font-family:var(--font-body,inherit);font-size:.74rem;font-weight:600;letter-spacing:.08em;white-space:nowrap;}
+  .lang-switch a,.lang-switch span{text-decoration:none;color:var(--ink-soft,#5B6259);border:none!important;padding:0!important;}
+  .lang-switch a:hover{color:var(--terracota,#C96342);}
+  .lang-switch .on{color:var(--ink,#252A28);}
+  .lang-switch i{font-style:normal;opacity:.45;}
+  @media (max-width:900px){.lang-switch{font-size:.95rem;margin-top:.4rem;}}
+</style>
+</head>
+<body>
+<style>
+  :root{
+    --bg:#F9F9F6; --surface:#D9C9A6; --surface-2:#EAE2CC; --ink:#252A28; --ink-soft:#5B6259;
+    --line:#D3C6A3; --verde:#596447; --terracota:#C96342; --rosa:#D98FA0; --amarillo:#F5DFA3;
+    --azul:#829CAE; --lavanda:#A89AB9; --on-accent:#F7F4EE; --shadow: 0 1px 2px rgba(37,42,40,.06);
+    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-body: "Jost", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1E1A; --surface:#2C2A1E; --surface-2:#242319; --ink:#F1ECE1; --ink-soft:#B7BDAF;
+      --line:#403D2C; --verde:#8AA073; --terracota:#E08862; --rosa:#E7AEBC; --amarillo:#E8CD8A;
+      --azul:#9FB7C7; --lavanda:#C1B4CF; --on-accent:#1B1E1A; --shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1E1A; --surface:#2C2A1E; --surface-2:#242319; --ink:#F1ECE1; --ink-soft:#B7BDAF;
+    --line:#403D2C; --verde:#8AA073; --terracota:#E08862; --rosa:#E7AEBC; --amarillo:#E8CD8A;
+    --azul:#9FB7C7; --lavanda:#C1B4CF; --on-accent:#1B1E1A; --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .container{max-width:1180px;margin:0 auto;padding:0 6vw;}
+  @media (min-width:1400px){.container{padding:0 120px;}}
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.12;margin:0;text-wrap:balance;color:var(--ink);}
+  h1{font-size:clamp(2.6rem,6vw,4.6rem);}
+  h2{font-size:clamp(1.9rem,3.6vw,3rem);}
+  h3{font-size:clamp(1.3rem,2vw,1.6rem);}
+  p{margin:0 0 1em;max-width:62ch;}
+  p:last-child{margin-bottom:0;}
+  .eyebrow{font-family:var(--font-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:0 0 1.1rem;display:flex;align-items:center;gap:.6em;text-decoration:none;}
+  a.eyebrow:hover{color:var(--verde);}
+  .lede{font-size:1.1rem;color:var(--ink-soft);max-width:56ch;}
+  em, .italic{font-family:var(--font-display);font-style:italic;color:var(--ink);}
+  .tagline{font-family:var(--font-display);font-style:italic;font-size:clamp(1.3rem,2.4vw,1.7rem);color:var(--verde);}
+  .sym{display:inline-block;color:currentColor;overflow:visible;}
+  .btn{display:inline-flex;align-items:center;gap:.55em;font-family:var(--font-body);font-weight:600;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;padding:.95em 1.8em;border-radius:2px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;background:none;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--verde);color:var(--on-accent);}
+  .btn-primary:hover{background:var(--ink);}
+  .btn-primary .sym{width:14px;height:14px;}
+  .btn-secondary{border-color:var(--ink);color:var(--ink);}
+  .btn-secondary:hover{background:var(--ink);color:var(--bg);}
+  .btn-ghost{color:var(--verde);padding:.4em 0;border-bottom:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--verde);}
+  .btn:hover .sym{transform:rotate(90deg);}
+  .btn .sym{transition:transform .4s ease;}
+  header.site{position:sticky;top:0;z-index:40;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 0 .8rem;}
+  .brand{display:flex;align-items:center;gap:.6em;font-family:var(--font-display);font-size:1.25rem;font-weight:600;text-decoration:none;color:var(--ink);}
+  .brand .sym{width:22px;height:22px;color:var(--verde);}
+  .wm{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:.13em;text-transform:uppercase;}
+  .wm-o{display:inline-flex;width:.82em;height:.82em;margin:0 .02em;position:relative;top:.06em;}
+  .wm-o .sym{width:100%;height:100%;color:var(--verde);}
+  .brand-lockup{position:relative;display:inline-block;font-family:var(--font-display);text-transform:uppercase;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;letter-spacing:.04em;line-height:1.02;color:var(--ink);text-decoration:none;}
+  .brand-lockup .wm-o{width:.88em;height:.88em;top:.07em;margin:0 .01em;}
+  .brand-lockup .wm-o .sym{color:var(--ink);}
+  nav.main-nav{display:flex;flex-wrap:wrap;align-items:center;column-gap:1.15rem;row-gap:.7rem;padding:.75rem 0 1.05rem;border-top:1px solid var(--line);}
+  nav.main-nav a{font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;text-decoration:none;color:var(--ink-soft);font-weight:600;padding-bottom:2px;border-bottom:1px solid transparent;transition:color .2s ease, border-color .2s ease;}
+  nav.main-nav a:hover, nav.main-nav a.current{color:var(--ink);border-color:var(--verde);}
+  .nav-cta-link{display:inline-flex;align-items:center;gap:.5em;margin-left:auto;white-space:nowrap;font-family:var(--font-body);font-style:normal;font-weight:600;font-size:.92rem;letter-spacing:.01em;text-transform:none;color:var(--terracota);text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease;}
+  .nav-cta-link:hover{border-color:var(--terracota);color:var(--terracota);}
+  .nav-cta-link .sym{width:15px;height:15px;transition:transform .4s ease;}
+  .nav-cta-link:hover .sym{transform:rotate(90deg);}
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:.5em .7em;color:var(--ink);}
+  @media (max-width:900px){
+    nav.main-nav{position:fixed;inset:64px 0 0 0;background:var(--bg);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:2.2rem 6vw;gap:1.6rem;transform:translateX(100%);transition:transform .35s ease;overflow-y:auto;border-top:none;}
+    nav.main-nav.open{transform:translateX(0);}
+    nav.main-nav a{font-size:1rem;}
+    .nav-cta-link{margin-left:0;margin-top:.6rem;font-size:1.2rem;}
+    .menu-toggle{display:inline-flex;}
+  }
+  section{padding:clamp(4.5rem,9vw,8rem) 0;position:relative;}
+  section.pause{padding:clamp(4rem,8vw,6.5rem) 0;}
+  .tone-verde{background:var(--verde);color:var(--on-accent);}
+  .tone-verde h2,.tone-verde h3{color:var(--on-accent);}
+  .tone-verde .eyebrow{color:color-mix(in srgb, var(--on-accent) 70%, transparent);}
+  .tone-verde .tagline{color:var(--on-accent);}
+  .tone-arena{background:var(--surface);}
+  .hero{padding-top:clamp(3.5rem,8vw,5.5rem);overflow:hidden;}
+  .hero-tight{padding-bottom:clamp(1.8rem,3.5vw,2.6rem);}
+  .intro-tight{padding-top:clamp(2.2rem,4vw,3rem);padding-bottom:clamp(2.2rem,4vw,3rem);}
+  .hero-inner{position:relative;text-align:center;}
+  .hero-copy{max-width:760px;margin:0 auto;}
+  .hero-copy .eyebrow{justify-content:center;margin-bottom:1.6rem;}
+  .hero-copy h1{margin-bottom:1rem;}
+  .hero-copy .tagline{display:block;margin:0 auto;}
+  .hero-photo-badge{width:min(300px,56vw);aspect-ratio:1/1;margin:2.6rem auto 0;border-radius:50%;overflow:hidden;}
+  .hero-photo-badge img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface-2);}
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+  .intro-copy{max-width:640px;margin:0 auto;}
+  .intro-copy p{color:var(--ink-soft);}
+  .cta-final{text-align:center;}
+  .cta-final .container{max-width:760px;}
+  .cta-final .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .cta-final h2{margin-bottom:1.2rem;}
+  .cta-final .lede{margin:0 auto 2.2rem;}
+  footer.site{border-top:1px solid var(--line);padding:3.5rem 0 2.4rem;}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.4rem;}
+  .footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap;}
+  .footer-col h4{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 .9rem;color:var(--ink-soft);}
+  .footer-col a, .footer-col p{display:block;font-size:.88rem;text-decoration:none;color:var(--ink);margin-bottom:.5rem;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.6rem;border-top:1px solid var(--line);font-size:.76rem;color:var(--ink-soft);}
+  .reveal{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:no-preference){.reveal{transform:translateY(14px);transition:transform .7s ease;} .reveal.in-view{transform:translateY(0);}}
+  .proto-tag{position:fixed;left:14px;bottom:14px;z-index:50;background:var(--ink);color:var(--bg);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.55em .9em;border-radius:2px;opacity:.82;font-weight:600;}
+  @media (max-width:700px){.proto-tag{display:none;}}
+
+  .section-head{max-width:680px;margin:0 auto 1rem;text-align:center;}
+  .section-head .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+  .section-head p{color:var(--ink-soft);margin-left:auto;margin-right:auto;}
+  .includes-note{max-width:640px;margin:2rem auto 0;text-align:center;font-size:.88rem;color:var(--ink-soft);font-style:italic;}
+  .tagline-block{font-family:var(--font-display);font-style:italic;font-size:clamp(1.05rem,2vw,1.25rem);color:var(--verde);max-width:620px;margin:1.6rem auto;display:block;line-height:1.5;text-align:center;}
+
+  .cuando-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 2.2rem;margin-top:2.8rem;max-width:900px;margin-left:auto;margin-right:auto;}
+  .cuando-item{border-top:1px solid var(--line);padding-top:1rem;}
+  .cuando-item h4{font-family:var(--font-body);font-weight:700;font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--terracota);margin:0 0 .5rem;}
+  .cuando-item p{margin:0;color:var(--ink-soft);font-size:.92rem;max-width:none;}
+  @media(max-width:700px){.cuando-grid{grid-template-columns:1fr;}}
+
+  .process-steps{counter-reset:step;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.9rem;}
+  .process-step{position:relative;padding-top:2.5rem;}
+  .process-step::before{counter-increment:step;content:counter(step,decimal-leading-zero);position:absolute;top:0;left:0;font-family:var(--font-display);font-size:1.25rem;color:var(--line);font-weight:600;}
+  .process-step h4{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 .5rem;}
+  .process-step p{margin:0;font-size:.86rem;color:var(--ink-soft);max-width:none;}
+  @media(max-width:900px){.process-steps{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.process-steps{grid-template-columns:1fr;}}
+
+  /* ---------- intro con fondo ---------- */
+  .intro-grid{background-color:#9fb3c8;background-image:url("/img/c30f51f11f99.webp");background-size:cover;background-position:center;overflow:hidden;padding-top:clamp(3rem,6vw,4.5rem);padding-bottom:clamp(3rem,6vw,4.5rem);}
+  .intro-grid .intro-copy{max-width:700px;background:color-mix(in srgb, #fff 90%, transparent);border-radius:14px;padding:clamp(1.4rem,3vw,2.2rem) clamp(1.2rem,3.4vw,2.2rem);}
+  .intro-grid .intro-copy p{color:var(--ink);}
+  .intro-grid .intro-copy p:first-child{margin-top:0;}
+  .intro-grid .intro-copy p:last-child{margin-bottom:0;}
+  /* ---------- cierre ---------- */
+  .cierre-grid{background:#9DBAD8;text-align:left;}
+  .cierre-grid .container{max-width:1020px;}
+  .cierre-grid .cierre-card{background:#FFFBF4;border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden;align-items:stretch;}
+  .cierre-grid .cierre-body{padding:clamp(1.8rem,4vw,3rem) clamp(1.2rem,3.4vw,2.6rem);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;}
+  .cierre-grid h2{color:var(--ink);margin-bottom:1.4rem;font-size:clamp(1.7rem,3vw,2.4rem);}
+  .cierre-grid .btn-secondary{border-color:var(--ink);color:var(--ink);background:transparent;margin-top:.4rem;}
+  .cierre-grid .btn-secondary:hover{background:var(--ink);color:var(--on-accent);}
+  .cierre-grid .cierre-photo{position:relative;min-height:560px;}
+  .cierre-grid .cierre-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 78%;display:block;}
+  @media(max-width:760px){.cierre-grid .cierre-card{grid-template-columns:1fr;}.cierre-grid .cierre-photo{height:380px;min-height:0;order:-1;}}
+
+  /* ---------- como es una sesion ---------- */
+  .sesion-sec{background:#DDD3EC;}
+  .sesion-sec .section-head .eyebrow{padding-left:.16em;font-size:clamp(1rem,1.9vw,1.3rem);letter-spacing:.18em;color:var(--ink);margin-bottom:1.2rem;}
+  .sesion-sec .ses-online{text-align:center;margin:1.6rem auto 0;color:var(--ink);font-size:.95rem;max-width:none;}
+  .sesion-sec .process-steps{max-width:900px;margin-left:auto;margin-right:auto;gap:1.1rem;}
+  .sesion-sec .process-step{text-align:center;background:#fff;border-radius:18px;padding:3.3rem 1.5rem 1.7rem;}
+  .sesion-sec .process-step::before{top:1.2rem;left:50%;transform:translateX(-50%);color:#8C7AAE;}
+  .sesion-sec .process-step p{margin-left:auto;margin-right:auto;max-width:30ch;}
+
+  /* ---------- como se trabaja ---------- */
+  .trabaja-sec{background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;padding:clamp(3rem,6vw,4.5rem) 0;}
+  .trabaja-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(1.2rem,3vw,2rem);align-items:center;max-width:1020px;margin:0 auto;}
+  .trabaja-photo{border-radius:14px;overflow:hidden;position:relative;aspect-ratio:1086/1448;}
+  .trabaja-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
+  .trabaja-text{background:color-mix(in srgb, #fff 93%, transparent);border-radius:14px;padding:clamp(1.6rem,3.4vw,2.6rem) clamp(1.3rem,3.2vw,2.4rem);display:flex;flex-direction:column;justify-content:center;}
+  .trabaja-text .eyebrow{margin-bottom:1.2rem;font-size:clamp(.85rem,1.4vw,1rem);}
+  .trabaja-text p{max-width:none;color:var(--ink);}
+  .trabaja-text .trabaja-quote{font-family:var(--font-display);font-style:italic;color:var(--verde);font-size:1.1rem;}
+  .trabaja-esperar{margin-top:1.6rem;padding-top:1.6rem;border-top:1px solid var(--line);}
+  .trabaja-esperar .eyebrow{margin-bottom:.9rem;font-size:clamp(.85rem,1.4vw,1rem);}
+  .trabaja-esperar .trabaja-lead{font-family:var(--font-display);font-style:italic;color:var(--verde);font-size:1.1rem;}
+  .trabaja-text .explorar-cta-wrap{display:flex;justify-content:flex-start;max-width:none;margin:1.4rem 0 0;}
+  .explorar-cta{display:inline-flex;align-items:center;gap:.8rem;padding:.75rem 1.9rem;border-radius:999px;background:color-mix(in srgb, var(--terracota) 90%, var(--surface));color:var(--on-accent);font-family:var(--font-body);font-weight:600;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background .3s ease,transform .3s ease;}
+  .explorar-cta:hover,.explorar-cta:focus-visible{background:var(--terracota);transform:translateY(-2px);}
+  @media(max-width:760px){.trabaja-grid{grid-template-columns:1fr;}.trabaja-photo{height:auto;max-width:460px;margin:0 auto;width:100%;}}
+
+  /* ---------- en que situaciones ---------- */
+  .tone-arena.explorar-sec{background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;}
+  .explorar-sec{overflow:hidden;padding:clamp(2.4rem,5vw,3.6rem) 0 clamp(2.4rem,5vw,3.4rem);}
+  .explorar-sec .container{position:relative;z-index:1;}
+  .explorar-head{text-align:center;display:flex;flex-direction:column;align-items:center;}
+  .explorar-title{font-family:var(--font-display);font-weight:500;font-size:clamp(1.15rem,2.1vw,1.5rem);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0;line-height:1.2;text-wrap:balance;display:inline-block;background:#fff;border-radius:14px;padding:.75rem 1.8rem .75rem calc(1.8rem + .14em);}
+  .explorar-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem .8rem;max-width:860px;margin:2rem auto 0;align-items:start;}
+  .explorar-col{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem;}
+  .explorar-card{display:flex;align-items:center;gap:.9rem;padding:.8rem 1rem;min-height:84px;background:color-mix(in srgb, var(--surface) 30%, #fff);border-radius:14px;}
+  .explorar-ico{flex:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:color-mix(in srgb, var(--ink) 70%, var(--terracota));}
+  .explorar-ico svg{width:22px;height:22px;stroke-width:1.4;}
+  .c-rosa{background:color-mix(in srgb, var(--rosa) 38%, #fff);}
+  .c-lavanda{background:color-mix(in srgb, var(--lavanda) 38%, #fff);}
+  .c-salvia{background:color-mix(in srgb, var(--verde) 24%, #fff);}
+  .c-beige{background:color-mix(in srgb, var(--amarillo) 42%, #fff);}
+  .c-terra{background:color-mix(in srgb, var(--terracota) 26%, #fff);}
+  .explorar-txt{display:flex;flex-direction:column;gap:.2rem;font-size:.82rem;line-height:1.4;color:var(--ink-soft);}
+  .explorar-txt strong{font-size:.92rem;font-weight:600;color:var(--ink);line-height:1.3;}
+  @media(max-width:760px){.explorar-grid{grid-template-columns:1fr;gap:.5rem;}.explorar-col{gap:.5rem;}.explorar-title{padding:.65rem 1.2rem .65rem calc(1.2rem + .14em);}}
+
+  /* CTA del menú: arriba, a la altura del logo (escritorio) */
+  @media (min-width:901px){
+    nav.main-nav .nav-cta-link{display:none;}
+    .nav-cta-top{margin-left:auto;}
+  }
+  @media (max-width:900px){.nav-cta-top{display:none;}}
+
+  .volver-link{display:flex;width:fit-content;align-items:center;gap:.7em;margin:0 auto 1.6rem;font-family:var(--font-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);text-decoration:none;transition:color .25s ease;}
+  .volver-link svg{width:1.5em;height:1.5em;transition:transform .3s ease;}
+  .volver-link:hover,.volver-link:focus-visible{color:var(--verde);}
+  .volver-link:hover svg{transform:translateX(-4px);}
+
+.trabaja-grid{grid-template-columns:minmax(0,.58fr) minmax(0,1.42fr);}
+@media(max-width:760px){.trabaja-grid{grid-template-columns:1fr;}.trabaja-photo{max-width:260px;}}
+/* nav fix: vertical mobile menu */
+header.site{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:-1;pointer-events:none;}
+@media (max-width:900px){nav.main-nav{flex-wrap:nowrap !important;}}
+
+  /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
+  :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
+  body .btn, body .btn-ghost{
+    display:inline-flex !important;align-items:center;justify-content:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.8rem;line-height:1.2;
+    letter-spacing:.06em;text-transform:uppercase;text-align:center;
+    padding:.95em 2em !important;border-radius:999px !important;
+    background:var(--btn-bg) !important;border:1.5px solid var(--btn-bg) !important;color:var(--btn-ink) !important;
+    text-decoration:none !important;cursor:pointer;
+    box-shadow:0 8px 18px -12px rgba(37,42,40,.55);
+    transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  body .btn:hover, body .btn-ghost:hover{
+    background:var(--btn-hover) !important;border-color:var(--btn-hover) !important;color:var(--btn-hover-ink,#fff) !important;transform:translateY(-1px);
+  }
+
+  /* colores de botón de esta página */
+  .cierre-grid{--btn-bg:#6F8DA6;--btn-hover:#4B6478;}
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="simbolo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M12 15.2 C9.8 13.6 8.3 12.2 8.3 10.6 C8.3 9.4 9.2 8.5 10.4 8.5 C11.1 8.5 11.7 8.9 12 9.5 C12.3 8.9 12.9 8.5 13.6 8.5 C14.8 8.5 15.7 9.4 15.7 10.6 C15.7 12.2 14.2 13.6 12 15.2 Z" fill="var(--terracota)"></path>
+  </symbol>
+</svg>
+
+<header class="site">
+  <div class="container">
+    <div class="nav-row">
+      <a href="/en/" class="wm">PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span>MEDIO</a>
+      <a class="nav-cta-link nav-cta-top" href="/en/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Begin a process</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="/en/">Home</a>
+      <a href="/en/espacio-exterior/">Outer Space</a>
+      <a href="/en/espacio-interior/" class="current">Inner Space</a>
+      <a href="/en/espacio-exterior/bienestar-empresarial/">Corporate Wellbeing</a>
+      <a href="/en/universo/">Punto Medio Universe</a>
+      <a href="/en/sobre-mi/">About me</a>
+      <a href="#datos-contacto">Contact</a>
+      <a class="nav-cta-link" href="/en/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Begin a process</span></a>
+    <span class="lang-switch" aria-label="Language"><a href="/en/espacio-interior/pendulo-hebreo/" hreflang="es" lang="es">ES</a><i>/</i><span class="on" aria-current="true">EN</span></span></nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero hero-tight">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-copy reveal">
+          <a class="volver-link" href="/en/espacio-interior/#servicios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to Inner Space</a>
+          <h1>Hebrew Pendulum</h1>
+          <span class="tagline">A tool to explore and harmonize our energy field.</span>
+        </div>
+        <div class="hero-photo-badge reveal">
+          <img src="/img/bc8398479f4c.webp" alt="Hebrew Pendulum session">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-tight intro-grid">
+    <div class="container">
+      <div class="intro-copy reveal" style="text-align:center;">
+        <p>The Hebrew Pendulum is an energy practice that seeks to identify and work with different imbalances in the energy field, using the pendulum and the symbolism of the Hebrew alphabet as tools.</p>
+        <p>This practice works with different words and codes that help direct, organize and balance energy, addressing aspects related to emotions, relationships, personal growth and the space we inhabit.</p>
+        <p>It starts from the idea that our energy is constantly in motion, and that certain experiences can create disharmonies that we can observe and work with from an energetic perspective.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tone-arena explorar-sec">
+    <div class="container">
+      <div class="explorar-head reveal">
+        <h2 class="explorar-title">When can it support you?</h2>
+      </div>
+      <div class="explorar-grid reveal">
+        <ul class="explorar-col">
+          <li class="explorar-card"><span class="explorar-ico c-lavanda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M7 20h10M5 8h14"/><path d="M5 8l-2.5 6a3 3 0 0 0 5 0L5 8zM19 8l-2.5 6a3 3 0 0 0 5 0L19 8z"/></svg></span><span class="explorar-txt"><strong>When you feel imbalanced or energetically weighed down</strong><span>Feelings of heaviness, disharmony or a need for energy cleansing.</span></span></li>
+          <li class="explorar-card"><span class="explorar-ico c-salvia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.6-1A4.5 4.5 0 0 1 17 18z"/></svg></span><span class="explorar-txt"><strong>When you're going through intense emotions</strong><span>Exploring and working on emotional aspects.</span></span></li>
+          <li class="explorar-card"><span class="explorar-ico c-terra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v-9"/><path d="M12 12C12 8 9 6 5 6c0 4 2.5 6 7 6z"/><path d="M12 14c0-3 2-5 6-5 0 3.5-2 5-6 5z"/></svg></span><span class="explorar-txt"><strong>In processes of personal growth</strong><span>Self-knowledge, transformation and reflection.</span></span></li>
+        </ul>
+        <ul class="explorar-col">
+          <li class="explorar-card"><span class="explorar-ico c-rosa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="5.4"/><circle cx="15" cy="12" r="5.4"/></svg></span><span class="explorar-txt"><strong>In situations involving relationships</strong><span>Exploring the energetic side of relationships.</span></span></li>
+          <li class="explorar-card"><span class="explorar-ico c-beige"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5"/><path d="M6 10v9.5h12V10"/><path d="M10 19.5v-5h4v5"/></svg></span><span class="explorar-txt"><strong>In relation to the spaces we inhabit</strong><span>Energy cleansing and harmonization of your surroundings.</span></span></li>
+          <li class="explorar-card"><span class="explorar-ico c-lavanda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c.8 4.6 3.9 7.7 8.5 8.5-4.6.8-7.7 3.9-8.5 8.5-.8-4.6-3.9-7.7-8.5-8.5 4.6-.8 7.7-3.9 8.5-8.5z"/></svg></span><span class="explorar-txt"><strong>When you need to pause and regroup</strong><span>When something needs to change, be cleared or find balance.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sesion-sec">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">What is a session like?</p>
+      </div>
+      <div class="process-steps reveal">
+        <div class="process-step"><h4>Get to know each other</h4><p>A conversation to find out how you are and what you'd like to explore.</p></div>
+        <div class="process-step"><h4>Explore</h4><p>We define the focus of the session and work on whatever you'd like to look at.</p></div>
+        <div class="process-step"><h4>Integrate</h4><p>We close with time to take in the experience and talk about what came up.</p></div>
+      </div>
+      <p class="ses-online reveal">Sessions are held online.</p>
+    </div>
+  </section>
+
+  <section class="trabaja-sec">
+    <div class="container">
+      <div class="trabaja-grid">
+        <div class="trabaja-photo reveal"><img src="/img/193a2dfe2ba7.webp" alt="Hebrew Pendulum session with cards and a chakra map"></div>
+        <div class="trabaja-text reveal">
+          <p class="eyebrow">How does it work?</p>
+          <p>During the session, specific words or codes are chosen according to what is being explored.</p>
+          <p>The pendulum is used in rotating movements over specific areas of the energy field, to direct the information on the cards and encourage a process of reorganization and balance within the framework of this practice.</p>
+          <p class="trabaja-quote">The session calls for presence, focus and intuition.</p>
+          <p class="explorar-cta-wrap"><a class="explorar-cta" href="/en/consultar/pendulo-hebreo/">Begin a process <span aria-hidden="true">→</span></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="cta-final cierre-grid">
+    <div class="container">
+      <div class="cierre-card">
+        <div class="cierre-body">
+          <h2 class="reveal">A space to observe, cleanse, rebalance and open ourselves to new possibilities.</h2>
+          <a class="btn btn-secondary reveal" href="/en/consultar/pendulo-hebreo/">I'd like to ask about a session</a>
+        </div>
+        <div class="cierre-photo"><img src="/img/3e0249cb188c.webp" alt="Hands opening curtains toward the light of the sky"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site" id="datos-contacto">
+  <div class="container">
+    <div class="footer-top">
+      <a href="/en/" class="brand-lockup">
+        PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span><br>MEDIO
+      </a>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="/en/espacio-exterior/">Outer Space</a>
+          <a href="/en/espacio-interior/">Inner Space</a>
+          <a href="/en/universo/">Punto Medio Universe</a>
+          <a href="/en/sobre-mi/">About me</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:sofia.puntomedio@gmail.com">sofia.puntomedio@gmail.com</a>
+          <a href="tel:+541150601481">+54 11 50601481</a>
+          <a href="https://wa.me/5491150601481" target="_blank" rel="noopener">Message me on WhatsApp →</a>
+          <p style="color:var(--ink-soft);">Bahía Blanca, Argentina</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Punto Medio</span>
+      <span>Designing spaces to dwell in, and to dwell within.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var nav = document.getElementById('mainNav');
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true':'false');
+      });
+      nav.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+      });
+    }
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && 'IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+    }
+  })();
+</script>
+
+
+<script>
+/* botones "Volver": recordar a qué sección volver (funciona aunque la app no pase el #) */
+(function(){
+  document.querySelectorAll('a.volver-link[href*="#"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      try{ window.name='pm-goto:'+a.getAttribute('href').split('#')[1]; }catch(e){}
+    });
+  });
+})();
+</script>
+
+
+
+
+
+</body>
+</html>

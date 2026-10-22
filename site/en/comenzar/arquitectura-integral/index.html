@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Begin Integral Architecture — Punto Medio</title>
+<link rel="canonical" href="https://sofia-puntomedio.com.ar/en/comenzar/arquitectura-integral/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Punto Medio">
+<meta property="og:title" content="Begin Integral Architecture — Punto Medio">
+<meta property="og:url" content="https://sofia-puntomedio.com.ar/en/comenzar/arquitectura-integral/">
+<meta name="description" content="You don&#x27;t need to have all the answers. With this information I&#x27;ll be able to reply in the most helpful way.">
+<meta property="og:description" content="You don&#x27;t need to have all the answers. With this information I&#x27;ll be able to reply in the most helpful way.">
+<link rel="alternate" hreflang="es" href="https://sofia-puntomedio.com.ar/comenzar/arquitectura-integral/">
+<link rel="alternate" hreflang="en" href="https://sofia-puntomedio.com.ar/en/comenzar/arquitectura-integral/">
+<link rel="alternate" hreflang="x-default" href="https://sofia-puntomedio.com.ar/comenzar/arquitectura-integral/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style id="lang-switch-css">
+  .lang-switch{display:inline-flex;align-items:center;gap:.35em;font-family:var(--font-body,inherit);font-size:.74rem;font-weight:600;letter-spacing:.08em;white-space:nowrap;}
+  .lang-switch a,.lang-switch span{text-decoration:none;color:var(--ink-soft,#5B6259);border:none!important;padding:0!important;}
+  .lang-switch a:hover{color:var(--terracota,#C96342);}
+  .lang-switch .on{color:var(--ink,#252A28);}
+  .lang-switch i{font-style:normal;opacity:.45;}
+  @media (max-width:900px){.lang-switch{font-size:.95rem;margin-top:.4rem;}}
+</style>
+</head>
+<body>
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --bg:#F9F9F6;
+    --surface:#DED0BC;
+    --surface-2:#EFE9DD;
+    --verde-pastel:#E3EAD8;
+    --ink:#252A28;
+    --ink-soft:#5B6259;
+    --line:#D9CFBC;
+    --verde:#596447;
+    --terracota:#C96342;
+    --rosa:#D98FA0;
+    --amarillo:#F5DFA3;
+    --azul:#829CAE;
+    --lavanda:#A89AB9;
+    --on-accent:#F7F4EE;
+    --shadow: 0 1px 2px rgba(37,42,40,.06);
+    --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-body: "Jost", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1E1A; --surface:#262B24; --surface-2:#20241F; --verde-pastel:#2C3628;
+      --ink:#F1ECE1; --ink-soft:#B7BDAF; --line:#3A4038; --verde:#8AA073;
+      --terracota:#E08862; --rosa:#E7AEBC; --amarillo:#E8CD8A; --azul:#9FB7C7;
+      --lavanda:#C1B4CF; --on-accent:#1B1E1A; --shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1E1A; --surface:#262B24; --surface-2:#20241F; --verde-pastel:#2C3628;
+    --ink:#F1ECE1; --ink-soft:#B7BDAF; --line:#3A4038; --verde:#8AA073;
+    --terracota:#E08862; --rosa:#E7AEBC; --amarillo:#E8CD8A; --azul:#9FB7C7;
+    --lavanda:#C1B4CF; --on-accent:#1B1E1A; --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .container{max-width:1180px;margin:0 auto;padding:0 6vw;}
+  @media (min-width:1400px){.container{padding:0 120px;}}
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.12;margin:0;text-wrap:balance;color:var(--ink);}
+  h1{font-size:clamp(2.2rem,4.6vw,3.4rem);}
+  h2{font-size:clamp(1.6rem,3vw,2.1rem);}
+  p{margin:0 0 1em;max-width:62ch;}
+  p:last-child{margin-bottom:0;}
+
+  .eyebrow{font-family:var(--font-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:0 0 1.1rem;display:flex;align-items:center;gap:.6em;}
+  .lede{font-size:1.05rem;color:var(--ink-soft);max-width:56ch;}
+  .sym{display:inline-block;color:currentColor;overflow:visible;}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:.55em;font-family:var(--font-body);font-weight:600;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;padding:.95em 1.8em;border-radius:2px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;background:none;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--verde);color:var(--on-accent);}
+  .btn-primary:hover{background:var(--ink);}
+  .btn-primary:disabled{opacity:.6;cursor:default;transform:none;}
+  .btn-secondary{border-color:var(--ink);color:var(--ink);}
+  .btn-secondary:hover{background:var(--ink);color:var(--bg);}
+
+  /* ---------- header ---------- */
+  header.site{position:sticky;top:0;z-index:40;background:color-mix(in srgb, var(--bg) 88%, transparent);border-bottom:1px solid var(--line);}
+  header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);z-index:-1;pointer-events:none;}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 0 .8rem;}
+  .wm{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:.13em;text-transform:uppercase;}
+  .wm-o{display:inline-flex;width:.82em;height:.82em;margin:0 .02em;position:relative;top:.06em;}
+  .wm-o .sym{width:100%;height:100%;color:var(--verde);}
+  .brand-lockup{position:relative;display:inline-block;font-family:var(--font-display);text-transform:uppercase;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;letter-spacing:.04em;line-height:1.02;color:var(--ink);text-decoration:none;}
+  .brand-lockup .wm-o{width:.88em;height:.88em;top:.07em;margin:0 .01em;}
+  .brand-lockup .wm-o .sym{color:var(--ink);}
+  nav.main-nav{display:flex;flex-wrap:wrap;align-items:center;column-gap:1.15rem;row-gap:.7rem;padding:.75rem 0 1.05rem;border-top:1px solid var(--line);}
+  nav.main-nav a{font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;text-decoration:none;color:var(--ink-soft);font-weight:600;padding-bottom:2px;border-bottom:1px solid transparent;transition:color .2s ease, border-color .2s ease;}
+  nav.main-nav a:hover, nav.main-nav a.current{color:var(--ink);border-color:var(--verde);}
+  .nav-cta-link{display:inline-flex;align-items:center;gap:.5em;margin-left:auto;white-space:nowrap;font-family:var(--font-body);font-style:normal;font-weight:600;font-size:.92rem;letter-spacing:.01em;text-transform:none;color:var(--terracota);text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease;}
+  .nav-cta-link:hover{border-color:var(--terracota);color:var(--terracota);}
+  .nav-cta-link .sym{width:15px;height:15px;transition:transform .4s ease;}
+  .nav-cta-link:hover .sym{transform:rotate(90deg);}
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:.5em .7em;color:var(--ink);}
+  @media (max-width:900px){
+    nav.main-nav{position:fixed;inset:64px 0 0 0;background:var(--bg);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:2.2rem 6vw;gap:1.6rem;transform:translateX(100%);transition:transform .35s ease;overflow-y:auto;border-top:none;}
+    nav.main-nav.open{transform:translateX(0);}
+    nav.main-nav a{font-size:1rem;}
+    .nav-cta-link{margin-left:0;margin-top:.6rem;font-size:1.2rem;}
+    .menu-toggle{display:inline-flex;}
+  }
+
+  /* ---------- page ---------- */
+  main{padding:clamp(3rem,7vw,5rem) 0 clamp(4rem,8vw,6rem);}
+  .form-head{max-width:640px;margin:0 auto 3rem;text-align:center;}
+  .form-head .eyebrow{justify-content:center;margin-left:auto;margin-right:auto;}
+
+  .proceso-form{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:1.6rem;}
+  .field{display:flex;flex-direction:column;gap:.5rem;}
+  .field label{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);}
+  .field input[type=text],
+  .field input[type=email],
+  .field input[type=tel],
+  .field textarea{
+    font-family:var(--font-body);font-size:1rem;color:var(--ink);
+    background:var(--surface-2);border:1px solid var(--line);border-radius:4px;
+    padding:.85em 1em;width:100%;transition:border-color .2s ease;
+  }
+  .field input:focus, .field textarea:focus{outline:none;border-color:var(--verde);}
+  .field textarea{resize:vertical;min-height:120px;font-family:var(--font-body);}
+
+  .opciones-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;}
+  @media (max-width:560px){.opciones-grid{grid-template-columns:1fr;}}
+  .opcion{position:relative;}
+  .opcion input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0;}
+  .opcion span{
+    display:flex;align-items:center;gap:.7em;
+    border:1px solid var(--line);border-radius:6px;padding:.9em 1.1em;
+    font-size:.92rem;color:var(--ink);background:var(--surface-2);
+    transition:border-color .2s ease,background .2s ease;
+  }
+  .opcion span::before{content:"";width:16px;height:16px;flex:none;border-radius:50%;border:1px solid var(--ink-soft);transition:border-color .2s ease,background .2s ease;}
+  .opcion input:checked + span{border-color:var(--verde);background:color-mix(in srgb, var(--verde) 10%, var(--surface-2));}
+  .opcion input:checked + span::before{border-color:var(--verde);background:var(--verde);box-shadow:inset 0 0 0 3px var(--surface-2);}
+  .opcion input:focus-visible + span{border-color:var(--terracota);}
+
+  .form-submit{display:flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:.6rem;}
+  .form-note{font-size:.78rem;color:var(--ink-soft);text-align:center;max-width:46ch;}
+  .form-error{font-size:.85rem;color:var(--terracota);text-align:center;display:none;}
+  .form-error.show{display:block;}
+
+  .gracias{max-width:520px;margin:0 auto;text-align:center;display:none;}
+  .gracias.show{display:block;}
+  .gracias .sym{width:34px;height:34px;color:var(--verde);margin:0 auto 1.4rem;}
+  .proceso-form.hide{display:none;}
+
+  /* ---------- footer ---------- */
+  footer.site{border-top:1px solid var(--line);padding:3.5rem 0 2.4rem;}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.4rem;}
+  .footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap;}
+  .footer-col h4{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 .9rem;color:var(--ink-soft);}
+  .footer-col a, .footer-col p{display:block;font-size:.88rem;text-decoration:none;color:var(--ink);margin-bottom:.5rem;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.6rem;border-top:1px solid var(--line);font-size:.76rem;color:var(--ink-soft);}
+
+  @media (min-width:901px){
+    nav.main-nav .nav-cta-link{display:none;}
+    .nav-cta-top{margin-left:auto;}
+  }
+  @media (max-width:900px){.nav-cta-top{display:none;}}
+  .volver-link{display:flex;width:fit-content;align-items:center;gap:.7em;margin:0 auto 1.6rem;font-family:var(--font-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);text-decoration:none;transition:color .25s ease;}
+  .volver-link svg{width:1.5em;height:1.5em;transition:transform .3s ease;}
+  .volver-link:hover,.volver-link:focus-visible{color:var(--verde);}
+  .volver-link:hover svg{transform:translateX(-4px);}
+
+  .field[hidden]{display:none;}
+
+  .field select{font-family:var(--font-body);font-size:1rem;color:var(--ink);background-color:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:.85em 2.6em .85em 1em;width:100%;appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235B6259' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1em center;transition:border-color .2s ease;}
+  .field select:focus{outline:none;border-color:var(--verde);}
+  .field select:invalid{color:var(--ink-soft);}
+
+  /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
+  :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
+  body .btn, body .btn-ghost{
+    display:inline-flex !important;align-items:center;justify-content:center;gap:.55em;
+    font-family:var(--font-body);font-weight:600;font-size:.8rem;line-height:1.2;
+    letter-spacing:.06em;text-transform:uppercase;text-align:center;
+    padding:.95em 2em !important;border-radius:999px !important;
+    background:var(--btn-bg) !important;border:1.5px solid var(--btn-bg) !important;color:var(--btn-ink) !important;
+    text-decoration:none !important;cursor:pointer;
+    box-shadow:0 8px 18px -12px rgba(37,42,40,.55);
+    transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  body .btn:hover, body .btn-ghost:hover{
+    background:var(--btn-hover) !important;border-color:var(--btn-hover) !important;color:var(--btn-hover-ink,#fff) !important;transform:translateY(-1px);
+  }
+
+  /* colores de botón de esta página */
+  .form-submit,.gracias{--btn-bg:var(--terracota);--btn-hover:#9A4A30;}
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="simbolo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+    <path d="M12 15.2 C9.8 13.6 8.3 12.2 8.3 10.6 C8.3 9.4 9.2 8.5 10.4 8.5 C11.1 8.5 11.7 8.9 12 9.5 C12.3 8.9 12.9 8.5 13.6 8.5 C14.8 8.5 15.7 9.4 15.7 10.6 C15.7 12.2 14.2 13.6 12 15.2 Z" fill="var(--terracota)"></path>
+  </symbol>
+</svg>
+
+<header class="site">
+  <div class="container">
+    <div class="nav-row">
+      <a href="/en/" class="wm">PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span>MEDIO</a>
+      <a class="nav-cta-link nav-cta-top current" href="#"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Begin a process</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="/en/">Home</a>
+      <a href="/en/espacio-exterior/">Outer Space</a>
+      <a href="/en/espacio-interior/">Inner Space</a>
+      <a href="/en/espacio-exterior/bienestar-empresarial/">Corporate Wellbeing</a>
+      <a href="/en/universo/">Punto Medio Universe</a>
+      <a href="/en/sobre-mi/">About me</a>
+      <a href="#datos-contacto">Contact</a>
+      <a class="nav-cta-link current" href="#"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Begin a process</span></a>
+    <span class="lang-switch" aria-label="Language"><a href="/en/comenzar/arquitectura-integral/" hreflang="es" lang="es">ES</a><i>/</i><span class="on" aria-current="true">EN</span></span></nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="form-head reveal">
+      <a class="volver-link" href="/en/espacio-exterior/arquitectura-integral/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to Integral Architecture</a>
+      <h1>Tell me a little about the space you want to transform.</h1>
+      <p class="lede" style="margin:1.1rem auto 0;">You don't need to have all the answers. With this information I'll be able to reply in the most helpful way.</p>
+    </div>
+
+    <form class="proceso-form" id="procesoForm" name="comenzar-arquitectura-integral" method="POST" data-netlify="true" netlify-honeypot="_honey">
+      <input type="hidden" name="form-name" value="comenzar-arquitectura-integral">
+      <div class="field">
+        <label for="f-nombre">Name</label>
+        <input type="text" id="f-nombre" name="Nombre" required autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label for="f-contacto">Email or phone</label>
+        <input type="text" id="f-contacto" name="Email o teléfono" required autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="f-residencia">Where do you live?</label>
+        <select id="f-residencia" name="Residencia" required>
+          <option value="" selected disabled>Choose an option</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Latinoamérica">Latin America</option>
+          <option value="Estados Unidos">United States</option>
+          <option value="Europa">Europe</option>
+          <option value="Otro país">Another country</option>
+        </select>
+      </div>
+
+      <div class="field" id="paisField" hidden>
+        <label for="f-pais">Which country?</label>
+        <input type="text" id="f-pais" name="País" disabled autocomplete="country-name" placeholder="Country (and time zone, if you know it)">
+      </div>
+
+      <div class="field">
+        <label>What kind of project do you have in mind?</label>
+        <div class="opciones-grid">
+          <label class="opcion">
+            <input type="radio" name="Alcance" value="Obra nueva" required>
+            <span>New build</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="Alcance" value="Remodelación">
+            <span>Renovation</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="Alcance" value="Ampliación">
+            <span>Extension</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="Alcance" value="Todavía no sé cuál">
+            <span>I'm not sure yet</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-mensaje">Tell me more (optional)</label>
+        <textarea id="f-mensaje" name="Mensaje" placeholder="Tell us about the place, your needs and what you imagine for your project."></textarea>
+      </div>
+
+      <input type="hidden" name="_subject" value="Nueva consulta: Arquitectura Integral">
+      <input type="hidden" name="Servicio" value="Arquitectura Integral">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-submit">
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          <svg class="sym" style="width:14px;height:14px;"><use href="#simbolo"/></svg>
+          Send
+        </button>
+        <p class="form-note">When you send this, the information comes straight to my email so I can reply to you.</p>
+        <p class="form-error" id="formError">There was a problem sending your message. Please try again or write to me directly at sofia.puntomedio@gmail.com.</p>
+      </div>
+    </form>
+
+    <div class="gracias" id="graciasMsg">
+      <svg class="sym"><use href="#simbolo"/></svg>
+      <h2>Thank you!</h2>
+      <p class="lede" style="margin:1rem auto 2rem;">I've received your message and will get back to you soon.</p>
+      <a class="btn btn-secondary" href="/en/">Back to home</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site" id="datos-contacto">
+  <div class="container">
+    <div class="footer-top">
+      <a href="/en/" class="brand-lockup">
+        PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span><br>MEDIO
+      </a>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="/en/espacio-exterior/">Outer Space</a>
+          <a href="/en/espacio-interior/">Inner Space</a>
+          <a href="/en/universo/">Punto Medio Universe</a>
+          <a href="/en/sobre-mi/">About me</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:sofia.puntomedio@gmail.com">sofia.puntomedio@gmail.com</a>
+          <a href="tel:+541150601481">+54 11 50601481</a>
+          <a href="https://wa.me/5491150601481" target="_blank" rel="noopener">Message me on WhatsApp →</a>
+          <p style="color:var(--ink-soft);">Bahía Blanca, Argentina</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Punto Medio</span>
+      <span>Designing spaces to dwell in, and to dwell within.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var nav = document.getElementById('mainNav');
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true':'false');
+      });
+    }
+
+    var pais=document.getElementById('paisField'),paisIn=document.getElementById('f-pais');
+    var resSel=document.getElementById('f-residencia');
+    resSel.addEventListener('change',function(){
+      var v=resSel.value;
+      var pedir=(v==='Latinoamérica'||v==='Europa'||v==='Otro país');
+      pais.hidden=!pedir;paisIn.disabled=!pedir;paisIn.required=pedir;
+    });
+
+    var form = document.getElementById('procesoForm');
+    var gracias = document.getElementById('graciasMsg');
+    var errorMsg = document.getElementById('formError');
+    var submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      errorMsg.classList.remove('show');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      var data = new FormData(form);
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() }).then(function(res){
+        if(!res.ok) throw new Error('bad response');
+        return res;
+      }).then(function(){
+        form.classList.add('hide');
+        gracias.classList.add('show');
+      }).catch(function(){
+        errorMsg.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<svg class="sym" style="width:14px;height:14px;"><use href="#simbolo"/></svg> Enviar';
+      });
+    });
+  })();
+</script>
+
+
+<script>
+(function(){
+  var map={'obra-nueva':'Obra nueva','remodelacion':'Remodelación','ampliacion':'Ampliación'};
+  var k='';
+  try{
+    if(location.hash.length>1) k=decodeURIComponent(location.hash.slice(1));
+    var n=window.name||'';
+    if(n.indexOf('pm-alcance:')===0){ k=k||n.slice(11); window.name=''; }
+  }catch(e){}
+  var v=map[k]; if(!v) return;
+  var r=document.querySelector('input[name="Alcance"][value="'+v+'"]'); if(r) r.checked=true;
+})();
+</script>
+
+
+</body>
+</html>

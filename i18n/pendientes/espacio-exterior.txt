@@ -1,0 +1,3 @@
+[js] .arc-dots span
+[js] .historia-card use[href="#icon-
+[js] 2px solid var(--terracota)

@@ -1,0 +1,16 @@
+[js] (link al formulario de inscripción, opcional)
+[js] mié
+[js] sáb
+[js]  de 
+[js]  al 
+[js]  hoy
+[js]  has
+[js]  sel
+[js] " data-k="
+[js] " aria-label="
+[js]  eventos
+[js]  evento
+[js] " aria-pressed="
+[js] Talleres elegidos
+[js] (no dejó email)
+[js] Nuevo voto: talleres Universo Punto Medio

@@ -1,0 +1,44 @@
+{
+  "/universo/": [
+    [
+      "var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];",
+      "var MESES = ['January','February','March','April','May','June','July','August','September','October','November','December'];"
+    ],
+    [
+      "var DIAS = ['dom','lun','mar','mié','jue','vie','sáb'];",
+      "var DIAS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];"
+    ],
+    [
+      "t = DIAS[a.getDay()]+' '+a.getDate()+' de '+MESES[a.getMonth()];",
+      "t = DIAS[a.getDay()]+', '+MESES[a.getMonth()]+' '+a.getDate();"
+    ],
+    [
+      "t += ' al '+b.getDate()+' de '+MESES[b.getMonth()];",
+      "t += ' – '+MESES[b.getMonth()]+' '+b.getDate();"
+    ],
+    [
+      "aria-label=\"'+d+' de '+MESES[f.getMonth()]+': '+evs.length+(evs.length>1?' eventos':' evento')+'\"",
+      "aria-label=\"'+MESES[f.getMonth()]+' '+d+': '+evs.length+(evs.length>1?' events':' event')+'\""
+    ],
+    [
+      "tituloLista.textContent = parse(sel).getDate()+' de '+MESES[parse(sel).getMonth()];",
+      "tituloLista.textContent = MESES[parse(sel).getMonth()]+' '+parse(sel).getDate();"
+    ],
+    [
+      ">Anotarme</a>",
+      ">Sign me up</a>"
+    ],
+    [
+      ">Más información →</a>",
+      ">More information →</a>"
+    ],
+    [
+      "<div class=\"cal-dow\" aria-hidden=\"true\"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>",
+      "<div class=\"cal-dow\" aria-hidden=\"true\"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>"
+    ],
+    [
+      "Por ahora no hay fechas confirmadas. Próximamente se informará cuando haya talleres y actividades.</p>",
+      "There are no confirmed dates yet. Workshops and activities will be announced here soon.</p>"
+    ]
+  ]
+}

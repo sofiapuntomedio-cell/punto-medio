@@ -1,0 +1,4 @@
+[attr] width=device-width,initial-scale=1,viewport-fit=cover
+[attr] website
+[js] (prefers-reduced-motion: reduce)
+[js] 0px 0px -8% 0px
