@@ -248,12 +248,12 @@ def build():
 
         en = translate_page(es, d, missing)
         en = apply_patches(en, route, patches)
+        en = localize_links(en)  # antes del selector: su link a español no se toca
         en = add_switch(en, route, 'en')
         en = en.replace('<html lang="es">', '<html lang="en">', 1)
         en = re.sub(r'(rel="canonical" href="' + re.escape(DOMAIN) + r')(/[^"]*)"', lambda m: f'{m.group(1)}/en{m.group(2)}"', en, count=1)
         en = re.sub(r'(property="og:url" content="' + re.escape(DOMAIN) + r')(/[^"]*)"', lambda m: f'{m.group(1)}/en{m.group(2)}"', en, count=1)
         en = en.replace('<meta property="og:type"', '<meta property="og:locale" content="en_US">\n<meta property="og:type"', 1)
-        en = localize_links(en)
         out = os.path.join(SITE, 'en', rel)
         os.makedirs(out, exist_ok=True)
         open(os.path.join(out, 'index.html'), 'w', encoding='utf8').write(en)
