@@ -596,7 +596,7 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
             <input type="email" name="Email" placeholder="Your email (optional, so I can let you know)" autocomplete="email" aria-label="Your email, optional">
             <button type="submit" class="voto-btn" id="votoBtn">Send my vote</button>
           </div>
-          <input type="hidden" name="_subject" value="Nuevo voto: talleres Universo Punto Medio">
+          <input type="hidden" name="subject" value="Nuevo voto: talleres Universo Punto Medio">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <p class="voto-msg" id="votoMsg" aria-live="polite"></p>
         </form>
@@ -807,7 +807,7 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
     data.append('form-name', 'voto-talleres');
     data.append('Talleres elegidos', elegidos.join(' · '));
     data.append('Email', form.Email.value || '(no dejó email)');
-    data.append('_subject', 'Nuevo voto: talleres Universo Punto Medio');
+    data.append('subject', 'Nuevo voto: talleres Universo Punto Medio');
     data.append('_honey', form._honey.value);
     btn.disabled=true; btn.textContent='Sending…'; msg.textContent='';
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() })
