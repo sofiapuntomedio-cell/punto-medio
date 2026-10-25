@@ -2,6 +2,18 @@
 <html lang="es" data-theme="light">
 <head>
 <meta charset="utf-8">
+<script>/* el link compartido abre siempre en el inicio de la página (no en Contacto), y el botón Contacto no cambia la dirección */
+(function(){try{
+  var ref=document.referrer||'', inside=ref.indexOf(location.origin)===0;
+  var nav=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
+  if(location.hash==='#datos-contacto' && !inside && nav.type!=='back_forward'){ history.replaceState(null,'',location.pathname+location.search); }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href="#datos-contacto"]'); if(!a) return;
+    var el=document.getElementById('datos-contacto'); if(!el) return;
+    e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}catch(e){}})();
+</script>
 <meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Comenzar Arquitectura Integral — Punto Medio</title>
