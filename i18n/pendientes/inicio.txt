@@ -1,4 +1,11 @@
+[attr] light only
 [attr] width=device-width,initial-scale=1,viewport-fit=cover
 [attr] website
+[attr] image/jpeg
+[attr] Punto Medio — Diseñar espacios para habitar(se)
+[attr] summary_large_image
+[attr] Idioma
+[text] ES
+[text] EN
 [js] (prefers-reduced-motion: reduce)
 [js] 0px 0px -8% 0px
