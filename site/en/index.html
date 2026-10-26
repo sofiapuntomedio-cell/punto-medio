@@ -13,6 +13,12 @@
     history.scrollRestoration='manual';
     var top=function(){ if(!location.hash) window.scrollTo(0,0); };
     top(); document.addEventListener('DOMContentLoaded',top); window.addEventListener('load',top);
+    /* algunos navegadores (p. ej. el de WhatsApp) vuelven a bajar la página después de cargarla: reintentar mientras la persona no haya tocado nada */
+    var touched=false, mark=function(){touched=true;};
+    ['touchstart','wheel','keydown','mousedown'].forEach(function(ev){window.addEventListener(ev,mark,{passive:true,once:true});});
+    var again=function(){ if(touched||location.hash) return; window.scrollTo(0,0);
+      var t=document.getElementById('dim3Tiles'); if(t) t.scrollLeft=0; };
+    window.addEventListener('load',function(){ [150,500,1000,1800].forEach(function(ms){setTimeout(again,ms);}); });
     window.addEventListener('pagehide',function(){ history.scrollRestoration='auto'; });
   }
   document.addEventListener('click',function(e){
