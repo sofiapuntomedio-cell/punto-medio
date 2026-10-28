@@ -406,6 +406,12 @@
 
   /* colores de botón de esta página */
   .historia-tight{--btn-bg:#596447;}
+  /* CTA del menú: arriba, a la altura del logo (escritorio) */
+  @media (min-width:901px){
+    nav.main-nav .nav-cta-link{display:none;}
+    .nav-cta-top{margin-left:auto;}
+  }
+  @media (max-width:900px){.nav-cta-top{display:none;}}
 </style>
 
 <svg width="0" height="0" style="position:absolute">
@@ -457,6 +463,7 @@
   <div class="container">
     <div class="nav-row">
       <a href="/en/" class="wm">PUNT<span class="wm-o"><svg class="sym"><use href="#simbolo"/></svg></span>MEDIO</a>
+      <a class="nav-cta-link nav-cta-top" href="/en/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Begin a process</span></a>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
     <nav class="main-nav" id="mainNav">
