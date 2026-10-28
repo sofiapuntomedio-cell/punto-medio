@@ -193,5 +193,7 @@
   "Por favor, escribí tu testimonio sin links.": "Please write your testimonial without links.",
   "Este testimonio ya está publicado.": "This testimonial is already published.",
   "No se pudo publicar. Revisá los datos e intentá de nuevo.": "It couldn't be published. Please check the details and try again.",
-  "No se pudo publicar. Revisá tu conexión e intentá de nuevo.": "It couldn't be published. Please check your connection and try again."
+  "No se pudo publicar. Revisá tu conexión e intentá de nuevo.": "It couldn't be published. Please check your connection and try again.",
+  "Testimonio anterior": "Previous testimonial",
+  "Testimonio siguiente": "Next testimonial"
 }

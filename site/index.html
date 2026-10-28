@@ -648,7 +648,13 @@
   @media (min-width:1400px){
     .huella-side-photo{width:min(260px, calc((100vw - 1180px)/2 + 120px - 24px));}
   }
-  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.8rem;}
+  .testi-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.2rem;margin-top:2.8rem;align-items:stretch;}
+  .testi-slider{position:relative;min-width:0;}
+  .testi-track{display:flex;gap:1.2rem;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .testi-track::-webkit-scrollbar{display:none;}
+  .testi-track .testi-card{flex:0 0 calc((100% - 1.2rem)/2);scroll-snap-align:start;box-sizing:border-box;justify-content:center;}
+  .testi-slider .slide-arrow-prev{left:-19px;}
+  .testi-slider .slide-arrow-next{right:-19px;}
   .testi-card{border:1px dashed var(--line);padding:2rem 1.6rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.9rem;color:var(--ink-soft);}
   .testi-card .sym{width:20px;height:20px;color:var(--line);}
   .testi-card p{font-size:.85rem;margin:0;}
@@ -658,7 +664,12 @@
   .testi-card .testi-author{display:flex;flex-direction:column;gap:.2rem;margin-top:-.2rem;}
   .testi-card .testi-name{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--ink);}
   .testi-card .testi-service{font-size:.7rem;color:var(--ink-soft);}
-  @media (max-width:760px){.testi-grid{grid-template-columns:1fr;}}
+  @media (max-width:760px){
+    .testi-grid{grid-template-columns:1fr;}
+    .testi-track{flex-direction:column;overflow:visible;height:auto;}
+    .testi-track .testi-card{flex:none;}
+    .testi-slider .slide-arrow{display:none !important;}
+  }
 
   /* ---------- por donde comenzar ---------- */
   /* ---------- procesos: línea de opciones ---------- */
@@ -1371,6 +1382,8 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
       <div class="huella-head reveal"><p class="eyebrow">Testimonios</p><h2>Experiencias que dejan huella.</h2>
       <p class="lede" style="margin-top:1rem;">Palabras de quienes ya transitaron un proceso.</p></div>
       <div class="testi-grid reveal" id="testiGrid">
+        <div class="testi-slider">
+        <div class="testi-track" id="testiTrack">
         <div class="testi-card is-real" style="--testi-tint:var(--rosa);">
           <svg class="sym"><use href="#simbolo"/></svg>
           <p class="testi-quote">"Me encontraba emocionalmente frágil y desanimada cuando acudí por las sesiones de Reiki y lo recomiendo porque salí aliviada y con energía renovada!!"</p>
@@ -1386,6 +1399,14 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
             <span class="testi-name">Juan y Gime</span>
             <span class="testi-service">Diseño de Interiores Holístico</span>
           </div>
+        </div>
+        </div>
+        <button class="slide-arrow slide-arrow-prev" id="testiPrev" aria-label="Testimonio anterior" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="slide-arrow slide-arrow-next" id="testiNext" aria-label="Testimonio siguiente" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
         </div>
         <div class="testi-card testi-cta">
           <svg class="sym"><use href="#simbolo"/></svg>
@@ -1662,7 +1683,13 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
     (function(){
       var open=document.getElementById('testiOpen'), panel=document.getElementById('testiPanel');
       if(!open||!panel) return;
-      var form=document.getElementById('testiForm'), grid=document.getElementById('testiGrid'), cta=grid.querySelector('.testi-cta');
+      var form=document.getElementById('testiForm'), grid=document.getElementById('testiGrid'), track=document.getElementById('testiTrack');
+      var tPrev=document.getElementById('testiPrev'), tNext=document.getElementById('testiNext');
+      function flechas(){ var ov=track.scrollWidth>track.clientWidth+4; tPrev.hidden=!ov||track.scrollLeft<8; tNext.hidden=!ov||track.scrollLeft+track.clientWidth>track.scrollWidth-8; }
+      function paso(){ var c=track.querySelector('.testi-card'); return c?c.getBoundingClientRect().width+18:300; }
+      tPrev.addEventListener('click',function(){ track.scrollBy({left:-paso(),behavior:'smooth'}); });
+      tNext.addEventListener('click',function(){ track.scrollBy({left:paso(),behavior:'smooth'}); });
+      track.addEventListener('scroll',flechas,{passive:true}); window.addEventListener('resize',flechas); setTimeout(flechas,300);
       var nombre=document.getElementById('tfNombre'), serv=document.getElementById('tfServicio'), texto=document.getElementById('tfTexto'), ok=document.getElementById('tfOk');
       var honey=document.getElementById('tfHoney'), err=document.getElementById('tfError'), enviar=document.getElementById('tfEnviar'), gracias=document.getElementById('testiGracias');
       var tintes=['var(--verde)','var(--lavanda)','var(--rosa)','var(--azul)','var(--terracota)'], n=0;
@@ -1679,7 +1706,7 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
         c.querySelector('.testi-quote').textContent='"'+r.texto+'"';
         c.querySelector('.testi-name').textContent=r.nombre;
         c.querySelector('.testi-service').textContent=r.servicio||'';
-        grid.insertBefore(c, cta);
+        track.appendChild(c); flechas();
       }
       fetch('/api/resenas').then(function(res){ return res.ok ? res.json() : {resenas:[]}; })
         .then(function(d){ (d.resenas||[]).slice().reverse().forEach(function(r){ tarjeta(r,false); }); })
@@ -1705,7 +1732,7 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
             }
             form.reset(); form.hidden=true; gracias.hidden=false;
             open.setAttribute('aria-expanded','false');
-            setTimeout(function(){ var c=grid.querySelector('.is-nuevo'); (c||gracias).scrollIntoView({behavior:'smooth',block:'center'}); },200);
+            setTimeout(function(){ var c=track.querySelector('.is-nuevo:last-child'); if(c){ track.scrollTo({left:track.scrollWidth,behavior:'smooth'}); } (c||gracias).scrollIntoView({behavior:'smooth',block:'center'}); },200);
           })
           .catch(function(){ error('No se pudo publicar. Revisá tu conexión e intentá de nuevo.'); })
           .then(function(){ enviar.disabled=false; enviar.textContent=label; });
