@@ -52,6 +52,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="stylesheet" href="/menu.css">
 <style id="lang-switch-css">
   .lang-switch{display:inline-flex;align-items:center;gap:.35em;font-family:var(--font-body,inherit);font-size:.74rem;font-weight:600;letter-spacing:.08em;white-space:nowrap;}
   .lang-switch a,.lang-switch span{text-decoration:none;color:var(--ink-soft,#5B6259);border:none!important;padding:0!important;}
@@ -977,6 +978,14 @@
     .procesos-row{gap:clamp(1.6rem,3vw,2.6rem);}
   }
 
+  /* ---------- barra proyectos (debajo de Tres dimensiones) ---------- */
+  section.proyectos-barra{background:var(--surface);padding:clamp(1.8rem,4vw,2.6rem) 0;--btn-bg:var(--terracota);--btn-hover:#9A4A30;}
+  .proyectos-barra-inner{display:flex;align-items:center;justify-content:space-between;gap:1.2rem 2.4rem;flex-wrap:wrap;}
+  .proyectos-barra-copy h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,2.8vw,2.1rem);line-height:1.15;margin:0;color:var(--ink);}
+  .proyectos-barra-copy p{margin:.35rem 0 0;font-size:.98rem;color:var(--ink-soft);}
+  @media (max-width:700px){
+    .proyectos-barra-inner{flex-direction:column;text-align:center;}
+  }
   /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
   :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
   body .btn, body .btn-ghost{
@@ -1037,11 +1046,52 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
     </div>
     <nav class="main-nav" id="mainNav">
       <a href="#inicio" class="current">Inicio</a>
-      <a href="/espacio-exterior/">Espacio Exterior</a>
-      <a href="/espacio-interior/">Espacio Interior</a>
-      <a href="/espacio-exterior/bienestar-empresarial/">Bienestar Empresarial</a>
-      <a href="/universo/">Universo Punto Medio</a>
-      <a href="/sobre-mi/">Sobre mí</a>
+      <div class="nav-item has-sub">
+        <a href="/espacio-exterior/">Espacio Exterior</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Opciones de Espacio Exterior"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/espacio-exterior/arquitectura-integral/">Arquitectura Integral</a>
+          <a href="/espacio-exterior/paisajismo/">Paisajismo</a>
+          <a href="/espacio-exterior/diseno-de-interiores-holistico/">Diseño de Interiores Holístico</a>
+          <a href="/espacio-exterior/limpieza-y-armonizacion-energetica/">Limpieza y Armonización Energética</a>
+          <a href="/espacio-exterior/#historias">Proyectos</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="/espacio-interior/">Espacio Interior</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Opciones de Espacio Interior"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/espacio-interior/reiki/">Reiki</a>
+          <a href="/espacio-interior/registros-akashicos/">Registros Akáshicos</a>
+          <a href="/espacio-interior/pendulo-hebreo/">Péndulo Hebreo</a>
+          <a href="/espacio-interior/#recomendaciones">Recomendaciones antes de tu sesión</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="/espacio-exterior/bienestar-empresarial/">Bienestar Empresarial</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Opciones de Bienestar Empresarial"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/espacio-exterior/bienestar-empresarial/#que-podemos-trabajar">¿Qué podemos trabajar?</a>
+          <a href="/espacio-exterior/bienestar-empresarial/#niveles">Tres niveles de acompañamiento</a>
+          <a href="/espacio-exterior/bienestar-empresarial/#como-trabajamos">¿Cómo trabajamos?</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="/universo/">Universo Punto Medio</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Opciones de Universo Punto Medio"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/universo/#calendario-uv">Calendario</a>
+          <a href="/universo/#experiencias">Experiencias Universo Punto Medio</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="/sobre-mi/">Sobre mí</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Opciones de Sobre mí"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/sobre-mi/">Mi historia</a>
+          <a href="/sobre-mi/#mi-recorrido">Mi recorrido</a>
+        </div>
+      </div>
       <a href="#datos-contacto">Contacto</a>
       <a class="nav-cta-link" href="/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Comenzar un proceso</span></a>
     <span class="lang-switch" aria-label="Idioma"><span class="on" aria-current="true">ES</span><i>/</i><a href="/en/" hreflang="en" lang="en">EN</a></span></nav>
@@ -1174,6 +1224,17 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
 
     </div>
 
+  </section>
+
+  <!-- BARRA PROYECTOS -->
+  <section class="proyectos-barra" aria-label="Proyectos">
+    <div class="container proyectos-barra-inner reveal">
+      <div class="proyectos-barra-copy">
+        <h2>Conocé otras historias</h2>
+        <p>Cada proyecto cuenta una historia.</p>
+      </div>
+      <a class="btn" href="/espacio-exterior/#historias">Ver proyectos <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
   </section>
 
   <div class="divider-row divider-on-pink"><span class="rule"></span><svg class="sym" width="25" height="25"><use href="#simbolo"/></svg><span class="rule"></span></div>
@@ -1859,5 +1920,6 @@ section:not(.hero) .eyebrow{font-size:.9rem;letter-spacing:.14em;font-weight:600
 @media (max-width:600px){section:not(.hero) .eyebrow{font-size:.82rem;}}
 </style>
 
+<script src="/menu.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+/* Menú: opciones desplegables dentro de cada sección (todas las páginas) */
+nav.main-nav .nav-item{position:relative;display:inline-flex;align-items:center;gap:.15rem;}
+nav.main-nav .nav-sub-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:none;border:0;padding:1px;margin:0;cursor:pointer;color:var(--ink-soft,#5B6259);
+  border-radius:4px;
+}
+nav.main-nav .nav-sub-toggle svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease;}
+nav.main-nav .nav-item.open .nav-sub-toggle svg{transform:rotate(180deg);}
+nav.main-nav .nav-sub-toggle:focus-visible{outline:1px solid var(--verde,#596447);outline-offset:2px;}
+
+nav.main-nav .nav-sub{display:flex;flex-direction:column;}
+nav.main-nav .nav-sub a{
+  display:block;text-transform:none;letter-spacing:.01em;white-space:nowrap;
+  font-family:var(--font-body,"Jost",sans-serif);font-weight:500;font-size:.9rem;
+  color:var(--ink-soft,#5B6259);border:0;padding:0;
+  transition:color .2s ease, background .2s ease;
+}
+nav.main-nav .nav-sub a:hover{color:var(--terracota,#C96342);}
+
+/* escritorio: se despliega al pasar el mouse (o al tocar la flechita) */
+@media (min-width:901px){
+  header.site nav.main-nav{column-gap:.95rem;}
+  nav.main-nav .nav-sub{
+    position:absolute;top:100%;left:-1.1rem;z-index:60;
+    min-width:250px;margin-top:.7rem;padding:.55rem 0;
+    background:#fff;border:1px solid var(--line,#D9CFBC);border-radius:12px;
+    box-shadow:0 14px 30px -18px rgba(37,42,40,.45);
+    opacity:0;visibility:hidden;transform:translateY(6px);
+    transition:opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+  }
+  /* puente invisible para que no se cierre al bajar el mouse */
+  nav.main-nav .nav-sub::before{content:"";position:absolute;left:0;right:0;top:-.8rem;height:.8rem;}
+  nav.main-nav .nav-sub a{padding:.55rem 1.2rem;}
+  nav.main-nav .nav-sub a:hover{background:var(--bg,#F9F9F6);}
+  nav.main-nav .nav-item.open .nav-sub,
+  nav.main-nav .nav-item:focus-within .nav-sub{
+    opacity:1;visibility:visible;transform:none;transition:opacity .2s ease, transform .2s ease, visibility 0s;
+  }
+}
+@media (min-width:901px) and (hover:hover){
+  nav.main-nav .nav-item:hover .nav-sub{
+    opacity:1;visibility:visible;transform:none;transition:opacity .2s ease, transform .2s ease, visibility 0s;
+  }
+  nav.main-nav .nav-item:hover .nav-sub-toggle svg{transform:rotate(180deg);}
+}
+
+/* celular / tablet: menú vertical, la flechita abre las opciones debajo */
+@media (max-width:900px){
+  nav.main-nav .nav-item{display:flex;flex-wrap:wrap;width:100%;gap:.5rem;}
+  nav.main-nav .nav-sub-toggle{width:34px;height:34px;margin:-8px 0;}
+  nav.main-nav .nav-sub-toggle svg{width:13px;height:13px;}
+  nav.main-nav .nav-sub{
+    display:none;width:100%;gap:1rem;
+    margin-top:.5rem;padding:.3rem 0 .3rem 1.1rem;border-left:1px solid var(--line,#D9CFBC);
+  }
+  nav.main-nav .nav-item.open .nav-sub{display:flex;}
+  nav.main-nav .nav-sub a{font-size:.95rem;}
+}
+
+/* al llegar a una sección desde el menú, que no quede tapada por el menú fijo */
+section[id]{scroll-margin-top:120px;}
+@media (max-width:900px){section[id]{scroll-margin-top:72px;}}

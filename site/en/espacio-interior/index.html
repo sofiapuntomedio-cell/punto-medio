@@ -45,6 +45,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="stylesheet" href="/menu.css">
 <style id="lang-switch-css">
   .lang-switch{display:inline-flex;align-items:center;gap:.35em;font-family:var(--font-body,inherit);font-size:.74rem;font-weight:600;letter-spacing:.08em;white-space:nowrap;}
   .lang-switch a,.lang-switch span{text-decoration:none;color:var(--ink-soft,#5B6259);border:none!important;padding:0!important;}
@@ -573,11 +574,52 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
     </div>
     <nav class="main-nav" id="mainNav">
       <a href="/en/">Home</a>
-      <a href="/en/espacio-exterior/">Outer Space</a>
-      <a href="#inicio" class="current">Inner Space</a>
-      <a href="/en/espacio-exterior/bienestar-empresarial/">Corporate Wellbeing</a>
-      <a href="/en/universo/">Punto Medio Universe</a>
-      <a href="/en/sobre-mi/">About me</a>
+      <div class="nav-item has-sub">
+        <a href="/en/espacio-exterior/">Outer Space</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Outer Space options"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/en/espacio-exterior/arquitectura-integral/">Integral Architecture</a>
+          <a href="/en/espacio-exterior/paisajismo/">Landscape Design</a>
+          <a href="/en/espacio-exterior/diseno-de-interiores-holistico/">Holistic Interior Design</a>
+          <a href="/en/espacio-exterior/limpieza-y-armonizacion-energetica/">Energy Cleansing and Harmonization</a>
+          <a href="/en/espacio-exterior/#historias">Projects</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="#inicio" class="current">Inner Space</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Inner Space options"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/en/espacio-interior/reiki/">Reiki</a>
+          <a href="/en/espacio-interior/registros-akashicos/">Akashic Records</a>
+          <a href="/en/espacio-interior/pendulo-hebreo/">Hebrew Pendulum</a>
+          <a href="/en/espacio-interior/#recomendaciones">Recommendations before your session</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="/en/espacio-exterior/bienestar-empresarial/">Corporate Wellbeing</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Corporate Wellbeing options"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/en/espacio-exterior/bienestar-empresarial/#que-podemos-trabajar">What can we work on?</a>
+          <a href="/en/espacio-exterior/bienestar-empresarial/#niveles">Three levels of support</a>
+          <a href="/en/espacio-exterior/bienestar-empresarial/#como-trabajamos">How do we work?</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="/en/universo/">Punto Medio Universe</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="Punto Medio Universe options"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/en/universo/#calendario-uv">Calendar</a>
+          <a href="/en/universo/#experiencias">Punto Medio Universe Experiences</a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a href="/en/sobre-mi/">About me</a>
+        <button class="nav-sub-toggle" type="button" aria-expanded="false" aria-label="About me options"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-sub">
+          <a href="/en/sobre-mi/">My story</a>
+          <a href="/en/sobre-mi/#mi-recorrido">My path</a>
+        </div>
+      </div>
       <a href="#datos-contacto">Contact</a>
       <a class="nav-cta-link" href="/en/comenzar/"><svg class="sym"><use href="#simbolo"/></svg><span class="label">Begin a process</span></a>
     <span class="lang-switch" aria-label="Language"><a href="/espacio-interior/" hreflang="es" lang="es">ES</a><i>/</i><span class="on" aria-current="true">EN</span></span></nav>
@@ -833,5 +875,6 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
 
 
 
+<script src="/menu.js" defer></script>
 </body>
 </html>
