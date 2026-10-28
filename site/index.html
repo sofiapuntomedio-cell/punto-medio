@@ -978,18 +978,10 @@
     .procesos-row{gap:clamp(1.6rem,3vw,2.6rem);}
   }
 
-  /* ---------- barra proyectos (al final de Tres dimensiones) ---------- */
-  .proyectos-barra{
-    display:flex;align-items:center;justify-content:space-between;gap:1rem 2.4rem;flex-wrap:wrap;
-    margin-top:clamp(2.4rem,5vw,3.4rem);padding:clamp(1.4rem,3vw,1.9rem) clamp(1.4rem,3.5vw,2.6rem);
-    background:var(--surface);border-radius:14px;
-    --btn-bg:var(--terracota);--btn-hover:#9A4A30;
-  }
-  .proyectos-barra-copy h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,2.4vw,1.85rem);line-height:1.15;margin:0;color:var(--ink);}
-  .proyectos-barra-copy p{margin:.3rem 0 0;font-size:.95rem;color:var(--ink-soft);}
-  @media (max-width:700px){
-    .proyectos-barra{flex-direction:column;text-align:center;}
-  }
+  /* ---------- botón "Ver proyectos" debajo de la tarjeta Espacio Exterior ---------- */
+  .dim3-tiles-grid .camino-tile{position:relative;}
+  .dim3-tiles-grid{padding-bottom:5.6rem;}
+  .dim3-proyectos-btn{position:absolute;top:calc(100% + 1.9rem);left:0;right:0;margin:0 auto;width:max-content;white-space:nowrap;--btn-bg:var(--verde);--btn-hover:var(--ink);}
   /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
   :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
   body .btn, body .btn-ghost{
@@ -1175,6 +1167,7 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
           <a class="camino-arrow-btn" href="/espacio-exterior/" aria-label="Explorar Espacio Exterior" style="text-decoration:none;">
             <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
+          <a class="btn dim3-proyectos-btn" href="/espacio-exterior/#historias">Ver proyectos <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
 
         <div class="camino-tile">
@@ -1224,15 +1217,6 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
         <button class="slide-arrow slide-arrow-next" id="dim3Next" aria-label="Siguiente dimensión" hidden>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg>
         </button>
-      </div>
-
-      <!-- BARRA PROYECTOS -->
-      <div class="proyectos-barra reveal" id="proyectos">
-        <div class="proyectos-barra-copy">
-          <h2>Conocé otras historias</h2>
-          <p>Cada proyecto cuenta una historia.</p>
-        </div>
-        <a class="btn" href="/espacio-exterior/#historias">Ver proyectos <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
 
     </div>
