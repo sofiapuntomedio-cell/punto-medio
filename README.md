@@ -21,6 +21,14 @@ Todos usan Netlify Forms (`data-netlify="true"`). Cada uno tiene un nombre propi
 *Project configuration → Notifications → Form submission notifications*, destino
 sofia.puntomedio@gmail.com.
 
+## Testimonios
+
+Se publican apenas la persona los envía (Inicio → "Dejar mi testimonio").
+La función `netlify/functions/resenas.mjs` los guarda en Netlify Blobs y los muestra en el sitio.
+De cada testimonio nuevo llega un aviso por mail (formulario `testimonio-publicado` de Netlify Forms)
+con un link "eliminar": al abrirlo y confirmar, el testimonio deja de aparecer en el sitio.
+Los dos primeros testimonios (Edith y Juan y Gime) están escritos en `site/index.html`.
+
 ## Probar en la compu
 
 ```

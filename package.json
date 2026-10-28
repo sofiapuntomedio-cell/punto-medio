@@ -1,0 +1,9 @@
+{
+  "name": "punto-medio",
+  "private": true,
+  "type": "module",
+  "description": "Sitio de Punto Medio. Solo se usa para la función de testimonios (netlify/functions).",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

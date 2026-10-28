@@ -7,5 +7,17 @@
 [attr] Idioma
 [text] ES
 [text] EN
+[text] Tu testimonio se publica en el sitio apenas lo enviás.
+[text] No completar
+[text] Publicar mi testimonio
+[text] ¡Gracias por compartir tu experiencia!
+[text] Tu testimonio ya está publicado.
 [js] (prefers-reduced-motion: reduce)
 [js] 0px 0px -8% 0px
+[js] testi-card is-real
+[js]  is-nuevo
+[js] Publicando…
+[js] Por favor, escribí tu testimonio sin links.
+[js] Este testimonio ya está publicado.
+[js] No se pudo publicar. Revisá los datos e intentá de nuevo.
+[js] No se pudo publicar. Revisá tu conexión e intentá de nuevo.

@@ -1,6 +1,10 @@
 [build]
   publish = "site"
 
+# testimonios: se publican al instante y se pueden eliminar desde el mail (netlify/functions/resenas.mjs)
+[functions]
+  directory = "netlify/functions"
+
 # Las fotos no cambian de nombre (se nombran por su contenido), así que el navegador puede guardarlas mucho tiempo
 [[headers]]
   for = "/img/*"

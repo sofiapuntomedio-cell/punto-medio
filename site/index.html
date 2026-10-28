@@ -867,7 +867,7 @@
   .divider-on-pink{max-width:none;margin:0;padding-left:max(6vw, calc((100% - 1180px)/2 + 6vw));padding-right:max(6vw, calc((100% - 1180px)/2 + 6vw));background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;background-position:0 0;}
 
   /* por que punto medio: todo amarillo, textos en blanco */
-  .porque-section{background-color:var(--verde-pastel);background-image:none;}
+  .porque-section{background-color:color-mix(in srgb, var(--verde) 24%, #fff);background-image:none;}
   .porque-wave-top{display:none;}
   .principios-band{background:transparent;margin-top:2.2rem;}
   .principios{gap:1rem;padding-top:0;padding-bottom:2.6rem;}
@@ -935,6 +935,14 @@
   .testi-check input{margin-top:.2rem;accent-color:var(--terracota);}
   .testi-error{margin:0;color:var(--terracota);font-size:.88rem;}
   .testi-error[hidden]{display:none;}
+  .testi-honey{position:absolute !important;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .testi-gracias{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2rem 1.6rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.6rem;}
+  .testi-gracias[hidden]{display:none;}
+  .testi-gracias .sym{width:24px;height:24px;color:var(--terracota);}
+  .testi-gracias p{margin:0;color:var(--ink-soft);}
+  .testi-gracias p.testi-cta-title{font-family:var(--font-display);font-size:1.3rem;font-style:italic;color:var(--ink);}
+  .testi-card.is-nuevo{animation:testiIn .6s ease both;}
+  @keyframes testiIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
   .testi-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
   .testi-send{border-radius:999px;}
   .testi-send-wa{background:var(--verde);border:1.5px solid var(--verde);color:var(--on-accent);}
@@ -1362,7 +1370,7 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
     <div class="container">
       <div class="huella-head reveal"><p class="eyebrow">Testimonios</p><h2>Experiencias que dejan huella.</h2>
       <p class="lede" style="margin-top:1rem;">Palabras de quienes ya transitaron un proceso.</p></div>
-      <div class="testi-grid reveal">
+      <div class="testi-grid reveal" id="testiGrid">
         <div class="testi-card is-real" style="--testi-tint:var(--rosa);">
           <svg class="sym"><use href="#simbolo"/></svg>
           <p class="testi-quote">"Me encontraba emocionalmente frágil y desanimada cuando acudí por las sesiones de Reiki y lo recomiendo porque salí aliviada y con energía renovada!!"</p>
@@ -1389,7 +1397,8 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
       <div class="testi-panel" id="testiPanel" hidden>
         <form class="testi-form" id="testiForm" novalidate>
           <h3>Compartí tu experiencia</h3>
-          <p class="testi-note">Leo cada testimonio antes de publicarlo. Podés enviarlo por WhatsApp o por email.</p>
+          <p class="testi-note">Tu testimonio se publica en el sitio apenas lo enviás.</p>
+          <label class="testi-honey" aria-hidden="true">No completar<input type="text" id="tfHoney" tabindex="-1" autocomplete="off"></label>
           <div class="testi-row">
             <label>Tu nombre<input type="text" id="tfNombre" autocomplete="given-name" placeholder="Como querés que aparezca"></label>
             <label>Servicio<select id="tfServicio">
@@ -1409,10 +1418,20 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
           <label class="testi-check"><input type="checkbox" id="tfOk"> <span>Autorizo que mi testimonio se publique en el sitio con el nombre que indiqué.</span></label>
           <p class="testi-error" id="tfError" role="alert" hidden></p>
           <div class="testi-actions">
-            <a class="btn testi-send testi-send-wa" id="tfWa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
-            <a class="btn btn-secondary testi-send" id="tfMail" href="#" target="_blank" rel="noopener">Enviar por email</a>
+            <button type="submit" class="btn testi-send testi-send-wa" id="tfEnviar">Publicar mi testimonio</button>
           </div>
         </form>
+        <div class="testi-gracias" id="testiGracias" hidden>
+          <svg class="sym"><use href="#simbolo"/></svg>
+          <p class="testi-cta-title">¡Gracias por compartir tu experiencia!</p>
+          <p>Tu testimonio ya está publicado.</p>
+        </div>
+      </div>
+      <!-- aviso por mail a Sofía de cada testimonio publicado (Netlify Forms) -->
+      <form name="testimonio-publicado" method="POST" data-netlify="true" netlify-honeypot="_honey" hidden>
+        <input type="hidden" name="form-name" value="testimonio-publicado">
+        <input name="_honey"><input name="nombre"><input name="servicio"><textarea name="testimonio"></textarea><input name="eliminar">
+      </form>
       </div>
     </div>
   </section>
@@ -1643,26 +1662,54 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
     (function(){
       var open=document.getElementById('testiOpen'), panel=document.getElementById('testiPanel');
       if(!open||!panel) return;
+      var form=document.getElementById('testiForm'), grid=document.getElementById('testiGrid'), cta=grid.querySelector('.testi-cta');
       var nombre=document.getElementById('tfNombre'), serv=document.getElementById('tfServicio'), texto=document.getElementById('tfTexto'), ok=document.getElementById('tfOk');
-      var err=document.getElementById('tfError'), wa=document.getElementById('tfWa'), mail=document.getElementById('tfMail');
+      var honey=document.getElementById('tfHoney'), err=document.getElementById('tfError'), enviar=document.getElementById('tfEnviar'), gracias=document.getElementById('testiGracias');
+      var tintes=['var(--verde)','var(--lavanda)','var(--rosa)','var(--azul)','var(--terracota)'], n=0;
       open.addEventListener('click',function(){
         var show=panel.hidden; panel.hidden=!show;
         open.setAttribute('aria-expanded',show?'true':'false');
-        if(show){ panel.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){nombre.focus({preventScroll:true});},400); }
+        if(show){ form.hidden=false; gracias.hidden=true; panel.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){nombre.focus({preventScroll:true});},400); }
       });
-      function msg(){
-        return 'Hola Sofía, te dejo mi testimonio para Punto Medio:\n\n"'+texto.value.trim()+'"\n\nNombre: '+nombre.value.trim()+(serv.value?'\nServicio: '+serv.value:'')+'\n\nAutorizo la publicación de mi testimonio en el sitio.';
+      function tarjeta(r, nueva){
+        var c=document.createElement('div');
+        c.className='testi-card is-real'+(nueva?' is-nuevo':'');
+        c.style.setProperty('--testi-tint', tintes[n++ % tintes.length]);
+        c.innerHTML='<svg class="sym"><use href="#simbolo"/></svg><p class="testi-quote"></p><div class="testi-author"><span class="testi-name"></span><span class="testi-service"></span></div>';
+        c.querySelector('.testi-quote').textContent='"'+r.texto+'"';
+        c.querySelector('.testi-name').textContent=r.nombre;
+        c.querySelector('.testi-service').textContent=r.servicio||'';
+        grid.insertBefore(c, cta);
       }
-      function valid(e){
-        var m='';
-        if(!nombre.value.trim()) m='Escribí tu nombre.';
-        else if(texto.value.trim().length<10) m='Escribí tu testimonio.';
-        else if(!ok.checked) m='Marcá la autorización para poder enviarlo.';
-        if(m){ e.preventDefault(); err.textContent=m; err.hidden=false; return false; }
-        err.hidden=true; return true;
-      }
-      wa.addEventListener('click',function(e){ if(valid(e)) wa.href='https://wa.me/5491150601481?text='+encodeURIComponent(msg()); });
-      mail.addEventListener('click',function(e){ if(valid(e)) mail.href='mailto:sofia.puntomedio@gmail.com?subject='+encodeURIComponent('Testimonio para Punto Medio')+'&body='+encodeURIComponent(msg()); });
+      fetch('/api/resenas').then(function(res){ return res.ok ? res.json() : {resenas:[]}; })
+        .then(function(d){ (d.resenas||[]).slice().reverse().forEach(function(r){ tarjeta(r,false); }); })
+        .catch(function(){});
+      function error(m){ err.textContent=m; err.hidden=false; }
+      form.addEventListener('submit',function(e){
+        e.preventDefault();
+        if(!nombre.value.trim()) return error('Escribí tu nombre.');
+        if(texto.value.trim().length<10) return error('Escribí tu testimonio.');
+        if(!ok.checked) return error('Marcá la autorización para poder enviarlo.');
+        err.hidden=true; enviar.disabled=true; var label=enviar.textContent; enviar.textContent='Publicando…';
+        fetch('/api/resenas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nombre:nombre.value,servicio:serv.value,texto:texto.value,autorizo:true,_honey:honey.value})})
+          .then(function(res){ return res.json().then(function(d){ d.status=res.status; return d; }); })
+          .then(function(d){
+            if(!d.ok){
+              error(d.error==='links' ? 'Por favor, escribí tu testimonio sin links.' : d.error==='repetido' ? 'Este testimonio ya está publicado.' : 'No se pudo publicar. Revisá los datos e intentá de nuevo.');
+              return;
+            }
+            if(d.resena){
+              tarjeta(d.resena,true);
+              var aviso={'form-name':'testimonio-publicado',nombre:d.resena.nombre,servicio:d.resena.servicio,testimonio:d.resena.texto,eliminar:d.eliminar};
+              fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(aviso).toString()}).catch(function(){});
+            }
+            form.reset(); form.hidden=true; gracias.hidden=false;
+            open.setAttribute('aria-expanded','false');
+            setTimeout(function(){ var c=grid.querySelector('.is-nuevo'); (c||gracias).scrollIntoView({behavior:'smooth',block:'center'}); },200);
+          })
+          .catch(function(){ error('No se pudo publicar. Revisá tu conexión e intentá de nuevo.'); })
+          .then(function(){ enviar.disabled=false; enviar.textContent=label; });
+      });
     })();
 
     (function(){
