@@ -867,7 +867,7 @@
   .divider-on-pink{max-width:none;margin:0;padding-left:max(6vw, calc((100% - 1180px)/2 + 6vw));padding-right:max(6vw, calc((100% - 1180px)/2 + 6vw));background-color:#fff;background-image:radial-gradient(color-mix(in srgb, var(--line) 85%, transparent) 1.3px, transparent 1.3px);background-size:28px 28px;background-position:0 0;}
 
   /* por que punto medio: todo amarillo, textos en blanco */
-  .porque-section{background-color:var(--amarillo);background-image:none;}
+  .porque-section{background-color:var(--verde-pastel);background-image:none;}
   .porque-wave-top{display:none;}
   .principios-band{background:transparent;margin-top:2.2rem;}
   .principios{gap:1rem;padding-top:0;padding-bottom:2.6rem;}
@@ -978,39 +978,17 @@
     .procesos-row{gap:clamp(1.6rem,3vw,2.6rem);}
   }
 
-  /* ---------- barra proyectos (debajo de Tres dimensiones): miniaturas deslizables ---------- */
-  section.proyectos-barra{background:var(--surface);padding:clamp(2.2rem,5vw,3.4rem) 0 clamp(2rem,4.5vw,3rem);--btn-bg:var(--terracota);--btn-hover:#9A4A30;}
-  .proyectos-barra-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem 2.4rem;flex-wrap:wrap;}
-  .proyectos-barra-copy h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,2.8vw,2.1rem);line-height:1.15;margin:0;color:var(--ink);}
-  .proyectos-barra-copy p{margin:.35rem 0 0;font-size:.98rem;color:var(--ink-soft);}
-  .pb-slider{position:relative;margin-top:clamp(1.4rem,3vw,2rem);}
-  .pb-track{display:flex;gap:clamp(.9rem,1.6vw,1.3rem);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none;padding:.2rem .1rem .6rem;cursor:grab;}
-  .pb-track::-webkit-scrollbar{display:none;}
-  .pb-track.dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;}
-  .pb-card{flex:0 0 clamp(200px,21vw,250px);scroll-snap-align:start;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;}
-  .pb-photo{display:block;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 10px 22px -16px rgba(37,42,40,.6);}
-  .pb-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;-webkit-user-drag:none;user-select:none;}
-  .pb-photo.contain img{object-fit:contain;}
-  .pb-card:hover .pb-photo img{transform:scale(1.05);}
-  .pb-name{margin-top:.75rem;font-family:var(--font-display);font-weight:600;font-size:1.05rem;line-height:1.25;}
-  .pb-cat{margin-top:.2rem;font-size:.82rem;color:var(--ink-soft);}
-  .pb-card:hover .pb-name{color:var(--terracota);}
-  .pb-slider .slide-arrow{top:calc(50% - 1.6rem);}
-  @media (max-width:860px){
-    .pb-slider{margin-left:-6vw;margin-right:-6vw;}
-    .pb-track{padding-left:6vw;padding-right:6vw;scroll-padding-left:6vw;}
-    .pb-card{flex-basis:64vw;}
-    .pb-slider .slide-arrow-prev{left:calc(6vw + 4px);}
-    .pb-slider .slide-arrow-next{right:calc(6vw + 4px);}
+  /* ---------- barra proyectos (al final de Tres dimensiones) ---------- */
+  .proyectos-barra{
+    display:flex;align-items:center;justify-content:space-between;gap:1rem 2.4rem;flex-wrap:wrap;
+    margin-top:clamp(2.4rem,5vw,3.4rem);padding:clamp(1.4rem,3vw,1.9rem) clamp(1.4rem,3.5vw,2.6rem);
+    background:var(--surface);border-radius:14px;
+    --btn-bg:var(--terracota);--btn-hover:#9A4A30;
   }
+  .proyectos-barra-copy h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,2.4vw,1.85rem);line-height:1.15;margin:0;color:var(--ink);}
+  .proyectos-barra-copy p{margin:.3rem 0 0;font-size:.95rem;color:var(--ink-soft);}
   @media (max-width:700px){
-    /* celular: título, miniaturas y el botón abajo */
-    section.proyectos-barra .container{display:flex;flex-direction:column;}
-    .proyectos-barra-head{display:contents;}
-    .proyectos-barra-copy{order:1;text-align:center;}
-    .pb-slider{order:2;}
-    .pb-btn{order:3;align-self:center;margin-top:1.4rem;}
+    .proyectos-barra{flex-direction:column;text-align:center;}
   }
   /* ---------- BOTONES UNIFICADOS (todo el sitio) ---------- */
   :root{--btn-bg:var(--verde);--btn-ink:#fff;--btn-hover:var(--ink);}
@@ -1248,66 +1226,17 @@ header.site::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6p
         </button>
       </div>
 
-    </div>
-
-  </section>
-
-  <!-- BARRA PROYECTOS -->
-  <section class="proyectos-barra" id="proyectos" aria-label="Proyectos">
-    <div class="container">
-      <div class="proyectos-barra-head reveal">
+      <!-- BARRA PROYECTOS -->
+      <div class="proyectos-barra reveal" id="proyectos">
         <div class="proyectos-barra-copy">
           <h2>Conocé otras historias</h2>
           <p>Cada proyecto cuenta una historia.</p>
         </div>
-        <a class="btn pb-btn" href="/espacio-exterior/#historias">Ver proyectos <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn" href="/espacio-exterior/#historias">Ver proyectos <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
-      <div class="pb-slider reveal">
-        <div class="pb-track" id="pbTrack">
-          <a class="pb-card" href="/proyectos/jca-gm/">
-            <span class="pb-photo"><img src="/img/d8a1a558fcb9.webp" alt="" loading="lazy"></span>
-            <span class="pb-name">Proyecto JCA y GM</span>
-            <span class="pb-cat">Diseño de Interiores Holístico</span>
-          </a>
-          <a class="pb-card" href="/proyectos/mc/">
-            <span class="pb-photo"><img src="/img/09f11c0b56a2.webp" alt="" loading="lazy"></span>
-            <span class="pb-name">Proyecto M.C.</span>
-            <span class="pb-cat">Paisajismo</span>
-          </a>
-          <a class="pb-card" href="/proyectos/ubc/">
-            <span class="pb-photo"><img src="/img/b5eabd5afd80.webp" alt="" loading="lazy"></span>
-            <span class="pb-name">Proyecto U.B.C.</span>
-            <span class="pb-cat">Arquitectura Integral</span>
-          </a>
-          <a class="pb-card" href="/proyectos/co/">
-            <span class="pb-photo"><img src="/img/82ef5a3cf1d3.webp" alt="" loading="lazy"></span>
-            <span class="pb-name">Proyecto C.O.</span>
-            <span class="pb-cat">Diseño de Interiores Holístico</span>
-          </a>
-          <a class="pb-card" href="/proyectos/nl/">
-            <span class="pb-photo contain"><img src="/img/afe3495b439d.webp" alt="" loading="lazy"></span>
-            <span class="pb-name">Proyecto N.L.</span>
-            <span class="pb-cat">Arquitectura Integral</span>
-          </a>
-          <a class="pb-card" href="/proyectos/ingreso-parque-de-mayo/">
-            <span class="pb-photo"><img src="/img/7d45281fec97.webp" alt="" loading="lazy"></span>
-            <span class="pb-name">Ingreso Parque de Mayo</span>
-            <span class="pb-cat">Paisajismo</span>
-          </a>
-          <a class="pb-card" href="/proyectos/paisajes-de-aprendizaje/">
-            <span class="pb-photo"><img src="/img/09c1692f0208.webp" alt="" loading="lazy"></span>
-            <span class="pb-name">Paisajes de Aprendizaje</span>
-            <span class="pb-cat">Arquitectura Integral · Concurso</span>
-          </a>
-        </div>
-        <button class="slide-arrow slide-arrow-prev" id="pbPrev" aria-label="Proyecto anterior" hidden>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 5l-7 7 7 7"/></svg>
-        </button>
-        <button class="slide-arrow slide-arrow-next" id="pbNext" aria-label="Proyecto siguiente" hidden>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg>
-        </button>
-      </div>
+
     </div>
+
   </section>
 
   <div class="divider-row divider-on-pink"><span class="rule"></span><svg class="sym" width="25" height="25"><use href="#simbolo"/></svg><span class="rule"></span></div>
@@ -1993,29 +1922,6 @@ section:not(.hero) .eyebrow{font-size:.9rem;letter-spacing:.14em;font-weight:600
 @media (max-width:600px){section:not(.hero) .eyebrow{font-size:.82rem;}}
 </style>
 
-<script>
-/* barra proyectos: flechas, arrastrar con el mouse y deslizar con el dedo */
-(function(){
-  var tr=document.getElementById('pbTrack'), pv=document.getElementById('pbPrev'), nx=document.getElementById('pbNext');
-  if(!tr) return;
-  function step(){ var c=tr.querySelector('.pb-card'); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(tr).columnGap||16) : 260; }
-  function upd(){
-    var ov = tr.scrollWidth > tr.clientWidth + 4;
-    pv.hidden = !ov || tr.scrollLeft < 8;
-    nx.hidden = !ov || tr.scrollLeft + tr.clientWidth > tr.scrollWidth - 8;
-  }
-  pv.addEventListener('click', function(){ tr.scrollBy({left:-step()}); });
-  nx.addEventListener('click', function(){ tr.scrollBy({left:step()}); });
-  tr.addEventListener('scroll', upd, {passive:true});
-  window.addEventListener('resize', upd);
-  upd(); setTimeout(upd, 600);
-  var down=false, sx=0, sl=0, moved=false;
-  tr.addEventListener('pointerdown', function(e){ if(e.pointerType!=='mouse') return; down=true; moved=false; sx=e.clientX; sl=tr.scrollLeft; });
-  window.addEventListener('pointermove', function(e){ if(!down) return; var dx=e.clientX-sx; if(Math.abs(dx)>5){ moved=true; tr.classList.add('dragging'); } if(moved) tr.scrollLeft = sl - dx; });
-  window.addEventListener('pointerup', function(){ if(!down) return; down=false; if(moved){ tr.classList.remove('dragging'); var w=step(); tr.scrollTo({left:Math.round(tr.scrollLeft/w)*w}); } });
-  tr.addEventListener('click', function(e){ if(moved){ e.preventDefault(); moved=false; } }, true);
-})();
-</script>
 <script src="/menu.js" defer></script>
 </body>
 </html>
